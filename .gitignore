@@ -1,6 +1,14 @@
 # Dependencies
 node_modules/
 
+# Next.js build
+.next/
+out/
+build/
+
+# Backups
+*.bak
+
 # Environment and secrets
 .env*
 !.env.example
