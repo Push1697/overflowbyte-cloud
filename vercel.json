@@ -1,0 +1,25 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "headers": [
+    {
+      "source": "/visuals/(.*)",
+      "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "frame-ancestors 'self' https://overflowbyte.cloud https://*.overflowbyte.cloud https://blog.overflowbyte.cloud https://learning.overflowbyte.cloud https://*.hashnode.dev https://*.medium.com"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/visuals/linux-permissions",
+      "destination": "/visuals/linux-permissions-visual.html"
+    }
+  ]
+}

@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Linux Permissions, Visually — ByteByteGo-Style Explainer | OverflowByte</title>
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/assets/logo/overflowbyte_mark_1024.png">
+  <meta property="og:image" content="/assets/logo/overflowbyte_lockup.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
+      --border-dark: #cbd5e1;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      
+      /* Pastel Palette */
+      --pastel-blue-bg: #f0f9ff;
+      --pastel-blue-border: #bae6fd;
+      --pastel-blue-text: #0369a1;
+      
+      --pastel-green-bg: #f0fdf4;
+      --pastel-green-border: #bbf7d0;
+      --pastel-green-text: #15803d;
+
+      --pastel-amber-bg: #fffbeb;
+      --pastel-amber-border: #fde68a;
+      --pastel-amber-text: #b45309;
+
+      --pastel-purple-bg: #faf5ff;
+      --pastel-purple-border: #e9d5ff;
+      --pastel-purple-text: #7e22ce;
+
+      --pastel-rose-bg: #fff1f2;
+      --pastel-rose-border: #fecdd3;
+      --pastel-rose-text: #be123c;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 2rem 1rem 6rem;
+    }
+
+    .container {
+      max-width: 1040px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--pastel-blue-bg);
+      border: 1px solid var(--pastel-blue-border);
+      color: var(--pastel-blue-text);
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.75rem;
+      color: #0f172a;
+    }
+
+    .subtitle {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    /* Section Cards */
+    .section-card {
+      background: var(--card-bg);
+      border: 2px solid var(--border);
+      border-radius: 20px;
+      padding: 2rem;
+      margin-bottom: 2.5rem;
+      box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+      position: relative;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .step-number {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: #0f172a;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .section-desc {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Technical Callout Alert */
+    .callout {
+      background: var(--pastel-amber-bg);
+      border-left: 4px solid var(--pastel-amber-text);
+      padding: 12px 16px;
+      border-radius: 0 10px 10px 0;
+      font-size: 0.9rem;
+      color: #78350f;
+      margin: 1.25rem 0;
+    }
+    .callout strong {
+      color: #451a03;
+    }
+
+    /* Interactive Timeline (Stale Groups) */
+    .timeline-container {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      background: #f8fafc;
+      padding: 1.5rem;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+    }
+
+    .timeline-step {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      opacity: 0.4;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      padding: 12px;
+      border-radius: 10px;
+    }
+
+    .timeline-step.active {
+      opacity: 1;
+      background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      border: 1px solid var(--pastel-blue-border);
+    }
+
+    .timeline-node {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--border-dark);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .timeline-step.active .timeline-node {
+      background: var(--pastel-blue-text);
+    }
+
+    /* Diagram Canvas */
+    .diagram-box {
+      border: 2px dashed var(--border-dark);
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Interactive ID Table */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      padding: 10px 14px;
+      text-align: left;
+      border: 1px solid var(--border);
+    }
+
+    th {
+      background: #f1f5f9;
+      font-weight: 600;
+      color: #334155;
+    }
+
+    td code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      background: #f1f5f9;
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #0f172a;
+    }
+
+    .highlight-cell {
+      background: var(--pastel-green-bg);
+      font-weight: 600;
+      color: var(--pastel-green-text);
+    }
+
+    /* Step Player */
+    .player-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: #f1f5f9;
+      padding: 12px 16px;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+    }
+
+    .btn {
+      background: white;
+      border: 1px solid var(--border-dark);
+      color: #0f172a;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn:hover {
+      background: #0f172a;
+      color: white;
+      border-color: #0f172a;
+    }
+
+    .btn-primary {
+      background: #0284c7;
+      color: white;
+      border-color: #0284c7;
+    }
+
+    .btn-primary:hover {
+      background: #0369a1;
+      border-color: #0369a1;
+    }
+
+    /* i_mode Bit Grid */
+    .bit-grid {
+      display: grid;
+      grid-template-columns: repeat(16, 1fr);
+      gap: 4px;
+      margin: 1.5rem 0 0.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .bit-grid {
+        grid-template-columns: repeat(8, 1fr);
+      }
+    }
+
+    .bit-cell {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: #f8fafc;
+      border: 1px solid var(--border-dark);
+      border-radius: 6px;
+      padding: 8px 2px;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s ease;
+    }
+
+    .bit-cell:hover {
+      border-color: #0284c7;
+      transform: translateY(-2px);
+    }
+
+    .bit-cell.on {
+      background: #e0f2fe;
+      border-color: #0284c7;
+    }
+
+    .bit-cell.on .bit-val {
+      color: #0369a1;
+      font-weight: 800;
+    }
+
+    .bit-name {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .bit-val {
+      font-size: 1.1rem;
+      font-weight: 600;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .bit-result-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 12px;
+      margin-top: 1rem;
+    }
+
+    .bit-stat-box {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      padding: 12px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .bit-stat-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+
+    .bit-stat-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .preset-btns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 1rem 0;
+    }
+
+    /* Flowchart Node */
+    .flow-step {
+      background: white;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin-bottom: 10px;
+      width: 100%;
+      max-width: 600px;
+      transition: all 0.3s ease;
+    }
+
+    .flow-step.passed {
+      border-color: #10b981;
+      background: #f0fdf4;
+    }
+
+    .flow-step.failed {
+      border-color: #f43f5e;
+      background: #fff1f2;
+    }
+
+    .flow-step.active-check {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    }
+
+    /* SGID Demo */
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin: 1.5rem 0;
+    }
+
+    @media (max-width: 700px) {
+      .comparison-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .comp-col {
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      padding: 1.25rem;
+      background: #ffffff;
+    }
+
+    .comp-title {
+      font-weight: 700;
+      font-size: 1.05rem;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Terminal Box */
+    .term-box {
+      background: #0f172a;
+      color: #e2e8f0;
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      overflow-x: auto;
+      margin: 1rem 0;
+      position: relative;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #334155;
+      color: #e2e8f0;
+      border: none;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      cursor: pointer;
+    }
+    .copy-btn:hover {
+      background: #475569;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    
+    <!-- Top Navigation Bar -->
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 2.5rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border); flex-wrap: wrap; gap: 12px;">
+      <a href="/" style="display: inline-flex; align-items: center; text-decoration: none;">
+        <img src="/assets/logo/overflowbyte_lockup.png" alt="OverflowByte" style="height: 34px; width: auto; object-fit: contain;">
+      </a>
+      <div style="display: flex; gap: 10px; align-items: center;">
+        <a href="https://blog.overflowbyte.cloud" target="_blank" rel="noopener" class="btn" style="text-decoration: none; font-size: 0.85rem;">Blog</a>
+        <a href="/" class="btn btn-primary" style="text-decoration: none; font-size: 0.85rem;">← Visual Lab</a>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+      <div class="badge">🎨 ByteByteGo-Style Visual Architecture</div>
+      <h1>Linux Permissions, Visually</h1>
+      <p class="subtitle">An interactive deep dive into kernel process credentials, <code>newgrp</code>, in-memory inodes, and Discretionary Access Control (DAC).</p>
+    </header>
+
+    <!-- SECTION 1: Stale Groups -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="step-number">1</div>
+        <h2 class="section-title">The Stale Groups Dilemma (Why <code>usermod -aG</code> Fails Open Shells)</h2>
+      </div>
+      <p class="section-desc">When a sysadmin adds you to a group, your open terminal does <strong>not</strong> inherit it. Here is the lifecycle timeline:</p>
+
+      <div class="timeline-container">
+        <div class="timeline-step active" id="stale-1" onclick="selectStaleStep(1)">
+          <div class="timeline-node">1</div>
+          <div>
+            <strong>Interactive Shell Spawned (PID 1042)</strong>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">PAM reads <code>/etc/passwd</code> and <code>/etc/group</code> at login. The kernel creates <code>struct cred</code> cached in RAM.</p>
+          </div>
+        </div>
+
+        <div class="timeline-step" id="stale-2" onclick="selectStaleStep(2)">
+          <div class="timeline-node">2</div>
+          <div>
+            <strong>Sysadmin runs <code>usermod -aG developers alice</code></strong>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">The text file <code>/etc/group</code> on disk is updated. But running processes are completely decoupled from disk text files!</p>
+          </div>
+        </div>
+
+        <div class="timeline-step" id="stale-3" onclick="selectStaleStep(3)">
+          <div class="timeline-node">3</div>
+          <div>
+            <strong>Alice runs <code>cd /opt/projects/dev</code> → <code>Permission Denied</code></strong>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">The kernel evaluates PID 1042's existing in-memory <code>struct cred</code>. The group list still contains only her old groups.</p>
+          </div>
+        </div>
+
+        <div class="timeline-step" id="stale-4" onclick="selectStaleStep(4)">
+          <div class="timeline-node">4</div>
+          <div>
+            <strong>The Fix: <code>newgrp developers</code></strong>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">Runs a setuid-root binary that verifies <code>/etc/group</code>, calls <code>setgroups()</code> and <code>setgid()</code>, and spawns a refreshed subshell!</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>💡 Key Insight:</strong> Linux processes never poll <code>/etc/group</code>. Credentials are an immutable, reference-counted in-kernel object.
+      </div>
+    </div>
+
+    <!-- SECTION 2: task_struct -> struct cred -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="step-number">2</div>
+        <h2 class="section-title">Kernel Structure: <code>task_struct</code> → <code>struct cred</code></h2>
+      </div>
+      <p class="section-desc">Every thread has a <code>task_struct</code> pointing to its <code>struct cred</code>. Notice the 4 distinct IDs maintained by the kernel:</p>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Credential Field</th>
+              <th>Name</th>
+              <th>Actual Kernel Role</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>uid</code> / <code>gid</code></td>
+              <td><strong>Real ID</strong></td>
+              <td>Identifies the actual user who spawned the process. Determines signal delivery permissions (who can <code>kill</code> this process).</td>
+            </tr>
+            <tr>
+              <td><code>euid</code> / <code>egid</code></td>
+              <td><strong>Effective ID</strong></td>
+              <td>Used for general authorization, creating IPC primitives, and evaluating privileged capabilities.</td>
+            </tr>
+            <tr>
+              <td><code>suid</code> / <code>sgid</code></td>
+              <td><strong>Saved Set-ID</strong></td>
+              <td>Preserves the prior effective ID when executing setuid binaries, allowing processes to drop and re-elevate privilege safely.</td>
+            </tr>
+            <tr class="highlight-cell">
+              <td><code>fsuid</code> / <code>fsgid</code></td>
+              <td><strong>Filesystem ID</strong></td>
+              <td><strong>The actual ID used for file access!</strong> When the kernel checks inode permissions in VFS, it compares against <code>fsuid</code>, not <code>euid</code>!</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <strong>⚠️ Technical Fix:</strong> NFS servers and userspace file servers historically inspired <code>fsuid</code> so they could impersonate user file access without exposing process signals or non-filesystem capabilities.
+      </div>
+    </div>
+
+    <!-- SECTION 3: newgrp Step Player -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="step-number">3</div>
+        <h2 class="section-title">Interactive <code>newgrp</code> Syscall Player</h2>
+      </div>
+      <p class="section-desc">Step through what happens under the hood when a user executes <code>newgrp developers</code> (GID 1002):</p>
+
+      <div class="player-controls">
+        <button class="btn" onclick="prevNewgrpStep()">◀ Previous</button>
+        <span id="player-indicator" style="font-weight: 700; color: #0f172a;">Step 1 of 6: fork()</span>
+        <button class="btn btn-primary" onclick="nextNewgrpStep()">Next Step ▶</button>
+      </div>
+
+      <div class="diagram-box">
+        <h3 id="step-title" style="margin-bottom: 6px; color: #0284c7;">1. fork()</h3>
+        <p id="step-desc" style="color: var(--text-muted); font-size: 0.92rem; text-align: center; max-width: 600px;">
+          Bash forks a new child process. The child inherits identical copies of all credential pointers from the parent shell.
+        </p>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>ID Type</th>
+              <th>UID (User)</th>
+              <th>GID (Group)</th>
+              <th>Supplementary Groups</th>
+            </tr>
+          </thead>
+          <tbody id="cred-state-table">
+            <!-- Dynamic Credential State -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <strong>⚠️ Technical Fix:</strong> <code>newgrp</code> is a setuid-root executable. Its privileged <code>setgid()</code> call changes <strong>all four GID fields</strong> (real, effective, saved, and filesystem GID), not just egid!
+      </div>
+    </div>
+
+    <!-- SECTION 4: Inodes & Dentry Path Lookup -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="step-number">4</div>
+        <h2 class="section-title">Inodes & Dentry Path Resolution Flow</h2>
+      </div>
+      <p class="section-desc">When a process opens <code>/var/log/app.log</code>, Linux navigates the filesystem cache before touching disk blocks:</p>
+
+      <div class="diagram-box" style="align-items: stretch; gap: 14px;">
+        <div style="background: var(--pastel-blue-bg); border: 2px solid var(--pastel-blue-border); padding: 14px; border-radius: 12px;">
+          <strong style="color: var(--pastel-blue-text);">1. Dentry Cache (RAM)</strong>
+          <p style="font-size: 0.85rem; color: #334155;">Kernel checks hash table of directory entries. Resolves filename string to Inode number in sub-microsecond RAM lookup.</p>
+        </div>
+
+        <div style="text-align: center; color: var(--text-muted); font-size: 1.2rem;">↓ Cache Miss?</div>
+
+        <div style="background: var(--pastel-purple-bg); border: 2px solid var(--pastel-purple-border); padding: 14px; border-radius: 12px;">
+          <strong style="color: var(--pastel-purple-text);">2. Inode Table (Disk → VFS Inode in RAM)</strong>
+          <p style="font-size: 0.85rem; color: #334155;">Reads block group descriptor and inode bitmap from disk. Loads <code>struct inode</code> (128/256 bytes) containing <code>i_mode</code>, <code>i_uid</code>, <code>i_gid</code>, size, and extent tree.</p>
+        </div>
+
+        <div style="text-align: center; color: var(--text-muted); font-size: 1.2rem;">↓ Access Granted?</div>
+
+        <div style="background: var(--pastel-green-bg); border: 2px solid var(--pastel-green-border); padding: 14px; border-radius: 12px;">
+          <strong style="color: var(--pastel-green-text);">3. Page Cache & Data Blocks</strong>
+          <p style="font-size: 0.85rem; color: #334155;">Reads extent pointers from inode and streams 4KB physical disk blocks into system page cache.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 5: i_mode 16-Bit Grid -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="step-number">5</div>
+        <h2 class="section-title">Interactive <code>i_mode</code> 16-Bit Grid</h2>
+      </div>
+      <p class="section-desc">Toggle the bits below or load presets to see how the kernel decodes octal numbers and <code>ls -l</code> strings:</p>
+
+      <div class="preset-btns">
+        <button class="btn" onclick="loadModePreset(0o100755, 'Regular File 0755')">0755 (Exec File)</button>
+        <button class="btn" onclick="loadModePreset(0o100644, 'Regular File 0644')">0644 (Read/Write)</button>
+        <button class="btn" onclick="loadModePreset(0o042770, 'SGID Directory 2770')">2770 (SGID Collab Dir)</button>
+        <button class="btn" onclick="loadModePreset(0o104755, 'SetUID Binary 4755')">4755 (SetUID Root Exec)</button>
+        <button class="btn" onclick="loadModePreset(0o041777, 'Sticky /tmp Dir 1777')">1777 (Sticky /tmp)</button>
+      </div>
+
+      <div class="bit-grid" id="bit-grid">
+        <!-- 16 bits generated dynamically -->
+      </div>
+
+      <div class="bit-result-bar">
+        <div class="bit-stat-box">
+          <div class="bit-stat-label">Octal Mode</div>
+          <div class="bit-stat-val" id="res-octal">0755</div>
+        </div>
+        <div class="bit-stat-box">
+          <div class="bit-stat-label">ls -l String</div>
+          <div class="bit-stat-val" id="res-ls" style="color: #0284c7;">-rwxr-xr-x</div>
+        </div>
+        <div class="bit-stat-box">
+          <div class="bit-stat-label">File Type</div>
+          <div class="bit-stat-val" id="res-type" style="font-size: 1rem; margin-top: 4px;">Regular File</div>
+        </div>
+        <div class="bit-stat-box">
+          <div class="bit-stat-label">Special Flags</div>
+          <div class="bit-stat-val" id="res-special" style="font-size: 0.95rem; margin-top: 4px;">None</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 6: DAC Flowchart -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="step-number">6</div>
+        <h2 class="section-title">Interactive DAC Flowchart (<code>generic_permission</code>)</h2>
+      </div>
+      <p class="section-desc">Select an actor attempting to <strong>Write</strong> to a file owned by <code>alice:developers (0640 / -rw-r-----)</code>:</p>
+
+      <div style="display: flex; gap: 10px; margin-bottom: 1.5rem; flex-wrap: wrap;">
+        <button class="btn btn-primary" id="btn-alice" onclick="testDAC('alice')">👤 Alice (Owner: UID 1000)</button>
+        <button class="btn" id="btn-bob" onclick="testDAC('bob')">👥 Bob (Group: in developers)</button>
+        <button class="btn" id="btn-carol" onclick="testDAC('carol')">👤 Carol (Other: UID 1002)</button>
+        <button class="btn" id="btn-root" onclick="testDAC('root')">⚡ Root (UID 0 / CAP_DAC_OVERRIDE)</button>
+      </div>
+
+      <div class="diagram-box" style="gap: 12px; align-items: center;">
+        <div class="flow-step" id="flow-owner">
+          <strong>1. Check Owner:</strong> Does <code>current->fsuid == inode->i_uid</code>?
+          <div class="flow-status" id="status-owner" style="font-size: 0.85rem; color: var(--text-muted);">Awaiting selection...</div>
+        </div>
+
+        <div class="flow-step" id="flow-group">
+          <strong>2. Check Group:</strong> Does <code>current->fsgid == inode->i_gid</code> or in supplementary groups?
+          <div class="flow-status" id="status-group" style="font-size: 0.85rem; color: var(--text-muted);">Awaiting selection...</div>
+        </div>
+
+        <div class="flow-step" id="flow-other">
+          <strong>3. Check Others:</strong> Fall through to "Other" mode bits (last 3 bits).
+          <div class="flow-status" id="status-other" style="font-size: 0.85rem; color: var(--text-muted);">Awaiting selection...</div>
+        </div>
+
+        <div class="flow-step" id="flow-root">
+          <strong>4. Root Override:</strong> If mode check denied, evaluate <code>capable_wrt_inode_uidgid(CAP_DAC_OVERRIDE)</code>.
+          <div class="flow-status" id="status-root" style="font-size: 0.85rem; color: var(--text-muted);">Awaiting selection...</div>
+        </div>
+
+        <div id="dac-final-verdict" style="margin-top: 10px; font-size: 1.25rem; font-weight: 800;">
+          Select a user above
+        </div>
+      </div>
+
+      <div class="callout">
+        <strong>⚠️ Technical Fix:</strong> Root's override comes <strong>last</strong>! The kernel first checks if the permission bits naturally permit access. Only upon refusal does it test for capabilities like <code>CAP_DAC_OVERRIDE</code>.
+      </div>
+    </div>
+
+    <!-- SECTION 7: SGID Demo -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="step-number">7</div>
+        <h2 class="section-title">SGID Directory Interactive Demo</h2>
+      </div>
+      <p class="section-desc">Observe file creation behavior when the SetGID bit (<code>2xxx</code>) is applied to a directory:</p>
+
+      <div class="comparison-grid">
+        <div class="comp-col">
+          <div class="comp-title">📁 Standard Directory (0775)</div>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">Directory owned by <code>alice:developers</code></p>
+          <div class="term-box">
+$ touch /data/plain/report.txt
+$ ls -l /data/plain/report.txt
+-rw-r--r-- 1 bob <span style="color: #f43f5e; font-weight: 700;">bob</span> 0 Oct 25 10:00 report.txt
+          </div>
+          <p style="font-size: 0.85rem; color: #475569;">❌ File group defaults to Bob's primary group (<code>bob</code>). Team members in <code>developers</code> cannot write to it!</p>
+        </div>
+
+        <div class="comp-col" style="border-color: #38bdf8; background: #f0f9ff;">
+          <div class="comp-title">🚀 SGID Directory (2775 / <code>drwxrwsr-x</code>)</div>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">Directory owned by <code>alice:developers</code> with SGID</p>
+          <div class="term-box">
+$ touch /data/collab/report.txt
+$ ls -l /data/collab/report.txt
+-rw-r--r-- 1 bob <span style="color: #10b981; font-weight: 700;">developers</span> 0 Oct 25 10:00 report.txt
+          </div>
+          <p style="font-size: 0.85rem; color: #0369a1;">✅ The kernel inherits the parent directory's GID (<code>developers</code>). New subdirectories automatically inherit the SGID bit too!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 8: Try It Yourself -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="step-number">8</div>
+        <h2 class="section-title">Try It Yourself: Live Verification Script</h2>
+      </div>
+      <p class="section-desc">Run these commands in any Linux terminal to verify your shell's live kernel credentials and Inode metadata:</p>
+
+      <div class="term-box">
+        <button class="copy-btn" onclick="copyTerm(this)">Copy</button>
+<pre># 1. Inspect all 4 UIDs and GIDs of your current shell process
+grep -E 'Uid|Gid|Groups' /proc/$$/status
+
+# 2. Inspect Inode metadata, permissions, and raw octal
+stat -c "File: %n | Inode: %i | Octal Mode: %a | Access: %A | Owner: %U(%u):%G(%g)" /etc/passwd
+
+# 3. Simulate newgrp and observe subshell GIDs
+newgrp developers
+grep -E 'Gid|Groups' /proc/$$/status
+exit</pre>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // Section 1: Stale Groups Timeline
+    function selectStaleStep(step) {
+      for (let i = 1; i <= 4; i++) {
+        const el = document.getElementById(`stale-${i}`);
+        if (i <= step) el.classList.add('active');
+        else el.classList.remove('active');
+      }
+    }
+
+    // Section 3: newgrp Syscall Player State
+    const newgrpSteps = [
+      {
+        step: 1,
+        title: "1. fork()",
+        desc: "Bash forks child process. Inherits identical copies of parent credentials in RAM.",
+        table: [
+          ["Real", "1000 (alice)", "1000 (alice)"],
+          ["Effective", "1000 (alice)", "1000 (alice)"],
+          ["Saved", "1000 (alice)", "1000 (alice)"],
+          ["Filesystem", "1000 (alice)", "1000 (alice)"],
+        ],
+        groups: "1000 (alice)"
+      },
+      {
+        step: 2,
+        title: "2. execve('/usr/bin/newgrp')",
+        desc: "Executes setuid-root binary. Kernel loads newgrp and elevates Effective UID to 0 (root).",
+        table: [
+          ["Real", "1000 (alice)", "1000 (alice)"],
+          ["Effective", "<span style='color: #ef4444; font-weight:700;'>0 (root)</span>", "1000 (alice)"],
+          ["Saved", "<span style='color: #ef4444; font-weight:700;'>0 (root)</span>", "1000 (alice)"],
+          ["Filesystem", "<span style='color: #ef4444; font-weight:700;'>0 (root)</span>", "1000 (alice)"],
+        ],
+        groups: "1000 (alice)"
+      },
+      {
+        step: 3,
+        title: "3. setgroups(developers)",
+        desc: "newgrp verifies group membership from /etc/group and calls setgroups() to update the supplementary groups list.",
+        table: [
+          ["Real", "1000 (alice)", "1000 (alice)"],
+          ["Effective", "0 (root)", "1000 (alice)"],
+          ["Saved", "0 (root)", "1000 (alice)"],
+          ["Filesystem", "0 (root)", "1000 (alice)"],
+        ],
+        groups: "1000 (alice), <span style='color:#10b981; font-weight:700;'>1002 (developers)</span>"
+      },
+      {
+        step: 4,
+        title: "4. setgid(1002)",
+        desc: "With root privilege, setgid() sets ALL 4 GID fields (real, effective, saved, and filesystem) to developers (1002)!",
+        table: [
+          ["Real", "1000 (alice)", "<span style='color:#10b981; font-weight:700;'>1002 (dev)</span>"],
+          ["Effective", "0 (root)", "<span style='color:#10b981; font-weight:700;'>1002 (dev)</span>"],
+          ["Saved", "0 (root)", "<span style='color:#10b981; font-weight:700;'>1002 (dev)</span>"],
+          ["Filesystem", "0 (root)", "<span style='color:#10b981; font-weight:700;'>1002 (dev)</span>"],
+        ],
+        groups: "1000 (alice), 1002 (developers)"
+      },
+      {
+        step: 5,
+        title: "5. setuid(1000)",
+        desc: "Drops root privilege permanently. Sets Effective and Saved UID back to normal user alice (1000).",
+        table: [
+          ["Real", "1000 (alice)", "1002 (dev)"],
+          ["Effective", "1000 (alice)", "1002 (dev)"],
+          ["Saved", "1000 (alice)", "1002 (dev)"],
+          ["Filesystem", "1000 (alice)", "1002 (dev)"],
+        ],
+        groups: "1000 (alice), 1002 (developers)"
+      },
+      {
+        step: 6,
+        title: "6. execve('/bin/bash')",
+        desc: "Spawns a fresh interactive Bash shell with the new primary GID (1002) and updated supplementary groups active!",
+        table: [
+          ["Real", "1000 (alice)", "1002 (dev)"],
+          ["Effective", "1000 (alice)", "1002 (dev)"],
+          ["Saved", "1000 (alice)", "1002 (dev)"],
+          ["Filesystem", "1000 (alice)", "1002 (dev)"],
+        ],
+        groups: "1000 (alice), 1002 (developers)"
+      }
+    ];
+
+    let currentNewgrpStep = 0;
+
+    function renderNewgrpStep() {
+      const s = newgrpSteps[currentNewgrpStep];
+      document.getElementById('player-indicator').textContent = `Step ${s.step} of 6: ${s.title}`;
+      document.getElementById('step-title').textContent = s.title;
+      document.getElementById('step-desc').innerHTML = s.desc;
+
+      const tbody = document.getElementById('cred-state-table');
+      tbody.innerHTML = s.table.map(([type, uid, gid]) => `
+        <tr>
+          <td><strong>${type}</strong></td>
+          <td><code>${uid}</code></td>
+          <td><code>${gid}</code></td>
+          <td><code>${s.groups}</code></td>
+        </tr>
+      `).join('');
+    }
+
+    function nextNewgrpStep() {
+      if (currentNewgrpStep < newgrpSteps.length - 1) currentNewgrpStep++;
+      renderNewgrpStep();
+    }
+
+    function prevNewgrpStep() {
+      if (currentNewgrpStep > 0) currentNewgrpStep--;
+      renderNewgrpStep();
+    }
+
+    renderNewgrpStep();
+
+    // Section 5: i_mode 16-Bit Grid
+    let currentMode = 0o100755;
+
+    const bitNames = [
+      "FMT3", "FMT2", "FMT1", "FMT0",
+      "SUID", "SGID", "STIK",
+      "UR", "UW", "UX",
+      "GR", "GW", "GX",
+      "OR", "OW", "OX"
+    ];
+
+    function renderBitGrid() {
+      const grid = document.getElementById('bit-grid');
+      grid.innerHTML = '';
+
+      for (let i = 15; i >= 0; i--) {
+        const bitVal = (currentMode >> i) & 1;
+        const cell = document.createElement('div');
+        cell.className = `bit-cell ${bitVal ? 'on' : ''}`;
+        cell.onclick = () => toggleBit(i);
+        cell.innerHTML = `
+          <span class="bit-name">${bitNames[15 - i]}</span>
+          <span class="bit-val">${bitVal}</span>
+        `;
+        grid.appendChild(cell);
+      }
+
+      updateModeDisplays();
+    }
+
+    function toggleBit(bitIndex) {
+      currentMode ^= (1 << bitIndex);
+      renderBitGrid();
+    }
+
+    function loadModePreset(val, name) {
+      currentMode = val;
+      renderBitGrid();
+    }
+
+    function updateModeDisplays() {
+      const octal = (currentMode & 0o7777).toString(8).padStart(4, '0');
+      document.getElementById('res-octal').textContent = octal;
+
+      // File type
+      let typeStr = "Unknown";
+      let typeChar = "-";
+      const fmt = (currentMode & 0o170000);
+      if (fmt === 0o100000) { typeStr = "Regular File"; typeChar = "-"; }
+      else if (fmt === 0o040000) { typeStr = "Directory"; typeChar = "d"; }
+      else if (fmt === 0o120000) { typeStr = "Symlink"; typeChar = "l"; }
+
+      // ls string
+      let ls = typeChar;
+      ls += (currentMode & 0o400) ? 'r' : '-';
+      ls += (currentMode & 0o200) ? 'w' : '-';
+      if (currentMode & 0o4000) {
+        ls += (currentMode & 0o100) ? 's' : 'S';
+      } else {
+        ls += (currentMode & 0o100) ? 'x' : '-';
+      }
+
+      ls += (currentMode & 0o040) ? 'r' : '-';
+      ls += (currentMode & 0o020) ? 'w' : '-';
+      if (currentMode & 0o2000) {
+        ls += (currentMode & 0o010) ? 's' : 'S';
+      } else {
+        ls += (currentMode & 0o010) ? 'x' : '-';
+      }
+
+      ls += (currentMode & 0o004) ? 'r' : '-';
+      ls += (currentMode & 0o002) ? 'w' : '-';
+      if (currentMode & 0o1000) {
+        ls += (currentMode & 0o001) ? 't' : 'T';
+      } else {
+        ls += (currentMode & 0o001) ? 'x' : '-';
+      }
+
+      document.getElementById('res-ls').textContent = ls;
+      document.getElementById('res-type').textContent = typeStr;
+
+      let specials = [];
+      if (currentMode & 0o4000) specials.push("SetUID");
+      if (currentMode & 0o2000) specials.push("SetGID");
+      if (currentMode & 0o1000) specials.push("Sticky");
+      document.getElementById('res-special').textContent = specials.length ? specials.join(', ') : "None";
+    }
+
+    renderBitGrid();
+
+    // Section 6: DAC Flowchart
+    function testDAC(user) {
+      ['alice', 'bob', 'carol', 'root'].forEach(u => {
+        document.getElementById(`btn-${u}`).classList.remove('btn-primary');
+      });
+      document.getElementById(`btn-${user}`).classList.add('btn-primary');
+
+      const sOwner = document.getElementById('flow-owner');
+      const sGroup = document.getElementById('flow-group');
+      const sOther = document.getElementById('flow-other');
+      const sRoot = document.getElementById('flow-root');
+      const verdict = document.getElementById('dac-final-verdict');
+
+      [sOwner, sGroup, sOther, sRoot].forEach(el => el.className = 'flow-step');
+
+      if (user === 'alice') {
+        sOwner.classList.add('passed');
+        document.getElementById('status-owner').textContent = "Match: fsuid (1000) == i_uid (1000). Owner mode bits have 'w' (rw-).";
+        document.getElementById('status-group').textContent = "Skipped (Owner matched).";
+        document.getElementById('status-other').textContent = "Skipped.";
+        document.getElementById('status-root').textContent = "Skipped.";
+        verdict.innerHTML = "<span style='color: #10b981;'>✅ ACCESS GRANTED (Owner Write Permitted)</span>";
+      } else if (user === 'bob') {
+        sOwner.classList.add('failed');
+        document.getElementById('status-owner').textContent = "No match (fsuid 1001 != 1000). Proceeding to Group.";
+        sGroup.classList.add('failed');
+        document.getElementById('status-group').textContent = "Match: fsgid is in developers. BUT Group bits are 'r--' (no write!).";
+        document.getElementById('status-other').textContent = "Skipped (Matched group, cannot fall through to other!).";
+        sRoot.classList.add('failed');
+        document.getElementById('status-root').textContent = "Not root (No CAP_DAC_OVERRIDE).";
+        verdict.innerHTML = "<span style='color: #f43f5e;'>❌ ACCESS DENIED (-EACCES: Group has no Write permission)</span>";
+      } else if (user === 'carol') {
+        sOwner.classList.add('failed');
+        document.getElementById('status-owner').textContent = "No match (fsuid 1002 != 1000).";
+        sGroup.classList.add('failed');
+        document.getElementById('status-group').textContent = "No match (not in developers). Falling through to Others.";
+        sOther.classList.add('failed');
+        document.getElementById('status-other').textContent = "Others bits are '---' (0). Access refused.";
+        sRoot.classList.add('failed');
+        document.getElementById('status-root').textContent = "Not root.";
+        verdict.innerHTML = "<span style='color: #f43f5e;'>❌ ACCESS DENIED (-EACCES: Others bits are 0)</span>";
+      } else if (user === 'root') {
+        sOwner.classList.add('failed');
+        document.getElementById('status-owner').textContent = "No natural owner match.";
+        sGroup.classList.add('failed');
+        document.getElementById('status-group').textContent = "No natural group match.";
+        sOther.classList.add('failed');
+        document.getElementById('status-other').textContent = "Mode bits refuse access. Proceeding to capability check...";
+        sRoot.classList.add('passed');
+        document.getElementById('status-root').textContent = "CAP_DAC_OVERRIDE present! Bypass enforced.";
+        verdict.innerHTML = "<span style='color: #10b981;'>⚡ ACCESS GRANTED via CAP_DAC_OVERRIDE</span>";
+      }
+    }
+
+    testDAC('alice');
+
+    function copyTerm(btn) {
+      const text = btn.nextElementSibling.innerText;
+      navigator.clipboard.writeText(text);
+      btn.textContent = "Copied!";
+      setTimeout(() => btn.textContent = "Copy", 1500);
+    }
+  </script>
+</body>
+</html>
