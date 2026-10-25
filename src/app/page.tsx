@@ -1,335 +1,362 @@
 import Link from 'next/link';
-import { Sparkles, Terminal, Layers, ArrowRight, ExternalLink, ShieldAlert, Cpu, Network, CheckCircle2, User, BookOpen } from 'lucide-react';
+import {
+  ArrowRight,
+  CheckCircle2,
+  ExternalLink,
+  Network,
+  ShieldAlert,
+  Sparkles,
+  User,
+} from 'lucide-react';
+
+const LAB_HREF = '/visuals/linux-permissions';
+
+const LABS = [
+  {
+    status: 'live' as const,
+    badge: 'Live interactive lab',
+    meta: '8 modules',
+    title: 'Linux permissions & inodes, visually',
+    body: 'Step the newgrp syscall player, simulate the DAC flowchart for Alice, Bob, Carol and root, inspect task_struct to struct cred, and toggle the 16-bit i_mode calculator.',
+    href: LAB_HREF,
+    icon: Sparkles,
+  },
+  {
+    status: 'soon' as const,
+    badge: 'Nov 15 · in staging',
+    meta: 'Flagship #2',
+    title: 'Request-to-shell: PHP2Shell & Node2Shell',
+    body: 'Follow an HTTP request as it crosses runtime boundaries, slips past sanitation, and reaches code execution — with the defensive control that stops each hop.',
+    href: null,
+    icon: ShieldAlert,
+  },
+  {
+    status: 'soon' as const,
+    badge: 'Nov 29 · in staging',
+    meta: 'Flagship #3',
+    title: 'AWS packet path: NACL vs security groups',
+    body: 'Trace a packet arriving at a VPC subnet: rule evaluation order, stateful versus stateless return traffic, and where ephemeral ports get dropped.',
+    href: null,
+    icon: Network,
+  },
+];
+
+const SURFACES = [
+  {
+    title: 'Main platform',
+    domain: 'overflowbyte.cloud',
+    body: 'The hub for every interactive visualizer, syscall player and calculator — no iframe limits.',
+    href: null,
+    note: 'You are here',
+  },
+  {
+    title: 'Flagship blog',
+    domain: 'blog.overflowbyte.cloud',
+    body: 'Narrative long-form articles, the subscriber newsletter, RSS, and discussion.',
+    href: 'https://blog.overflowbyte.cloud',
+    note: 'Visit blog',
+  },
+  {
+    title: 'Learning second-brain',
+    domain: 'learning.overflowbyte.cloud',
+    body: 'A searchable vault of 40+ RHCSA and RHCE labs, command cheat sheets and EX294 mocks.',
+    href: 'https://learning.overflowbyte.cloud',
+    note: 'Open vault',
+  },
+  {
+    title: 'Medium syndication',
+    domain: 'overflowbyte.medium.com',
+    body: 'Canonical cross-posts, so search credit still points back to the primary blog.',
+    href: 'https://overflowbyte.medium.com/',
+    note: 'Follow',
+  },
+];
+
+const FOCUS = [
+  {
+    label: 'Linux kernel internals',
+    body: 'Credential management across task_struct, struct cred and fsuid, plus VFS inode resolution.',
+  },
+  {
+    label: 'Red Hat certification track',
+    body: 'A 60-day RHCSA to RHCE lab curriculum with unattended Ansible playbooks.',
+  },
+  {
+    label: 'Cloud networking',
+    body: 'AWS VPC architecture, NACL versus security group packet routing, and perimeter security.',
+  },
+];
 
 export default function HomePage() {
   return (
-    <main style={{ maxWidth: '1240px', margin: '0 auto', padding: '0 1.5rem' }}>
-      
-      {/* Hero Section */}
-      <section style={{
-        textAlign: 'center',
-        padding: '5rem 0 4rem',
-        maxWidth: '960px',
-        margin: '0 auto',
-      }}>
-        <div style={{
-          display: 'inline-flex',
-          alignItems: 'center',
-          gap: '8px',
-          background: 'rgba(56, 189, 248, 0.08)',
-          border: '1px solid rgba(56, 189, 248, 0.25)',
-          padding: '6px 14px',
-          borderRadius: '9999px',
-          fontSize: '0.85rem',
-          color: '#38bdf8',
-          marginBottom: '1.5rem',
-          fontWeight: 600,
-        }}>
-          <Sparkles size={14} /> Systems Engineering, Security & Linux Internals
+    <>
+      <section className="hero">
+        <div className="hero-aura" aria-hidden="true" />
+        <div className="shell hero-copy">
+          <p className="eyebrow">
+            <Sparkles size={14} aria-hidden="true" />
+            Systems engineering · security · Linux internals
+          </p>
+          <h1 className="gradient-text">Complex systems architecture, explained visually.</h1>
+          <p className="lede">
+            An interactive engineering platform of step-by-step kernel visualizers, production
+            incident drills, and hands-on cloud networking breakdowns.
+          </p>
+          <div className="cluster hero-actions">
+            <a className="btn btn-primary btn-lg" href={LAB_HREF}>
+              Launch the visual lab
+              <ArrowRight size={16} aria-hidden="true" />
+            </a>
+            <Link className="btn btn-secondary btn-lg" href="/blog">
+              Explore the flagship series
+            </Link>
+          </div>
         </div>
+      </section>
 
-        <h1 style={{
-          fontSize: '3.6rem',
-          fontWeight: 800,
-          letterSpacing: '-0.04em',
-          lineHeight: 1.15,
-          marginBottom: '1.5rem',
-        }} className="gradient-text">
-          Complex Systems Architecture,<br />Explained Visually.
-        </h1>
-
-        <p style={{
-          fontSize: '1.2rem',
-          color: '#94a3b8',
-          maxWidth: '720px',
-          margin: '0 auto 2.5rem',
-          lineHeight: 1.6,
-        }}>
-          An interactive engineering platform hosting step-by-step kernel visualizers, production incident drills, and hands-on cloud networking breakdowns.
-        </p>
-
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '14px', flexWrap: 'wrap' }}>
-          <Link href="/visuals/linux-permissions" className="btn btn-primary" style={{ padding: '12px 24px', fontSize: '0.96rem' }}>
-            Launch Linux Visual Lab 🚀
-          </Link>
-          <Link href="/blog" className="btn btn-secondary" style={{ padding: '12px 24px', fontSize: '0.96rem' }}>
-            Explore Flagship Series 📚
-          </Link>
-          <a
-            href="https://pushpendra.overflowbyte.cloud"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn btn-secondary"
-            style={{ padding: '12px 24px', fontSize: '0.96rem', borderColor: 'rgba(56, 189, 248, 0.3)' }}
-          >
-            Portfolio Resume <ExternalLink size={14} />
+      <section className="shell section" id="visual-lab">
+        <div className="section-head reveal">
+          <div>
+            <h2>Visual architecture lab</h2>
+            <p>
+              Interactive sandboxes with state machines, syscall players and live bit
+              calculators.
+            </p>
+          </div>
+          <a className="action-link" href={LAB_HREF}>
+            Open flagship sandbox
+            <ArrowRight size={15} aria-hidden="true" />
           </a>
         </div>
+
+        <div className="grid grid-3">
+          {LABS.map(({ status, badge, meta, title, body, href, icon: Icon }) => {
+            const live = status === 'live';
+            const inner = (
+              <>
+                <div
+                  className="cluster"
+                  style={{ justifyContent: 'space-between', marginBottom: '1.1rem' }}
+                >
+                  <span className={live ? 'badge badge-ok' : 'badge badge-warn'}>
+                    {live && <span className="live-dot" aria-hidden="true" />}
+                    {badge}
+                  </span>
+                  <Icon
+                    size={17}
+                    aria-hidden="true"
+                    style={{ color: live ? 'var(--accent)' : 'var(--text-faint)' }}
+                  />
+                </div>
+                <h3 style={{ fontSize: 'var(--step-2)', marginBottom: '0.6rem' }}>{title}</h3>
+                <p className="text-muted" style={{ fontSize: 'var(--step--1)', flexGrow: 1 }}>
+                  {body}
+                </p>
+                <p
+                  className="cluster"
+                  style={{
+                    justifyContent: 'space-between',
+                    marginTop: '1.25rem',
+                    paddingTop: '0.9rem',
+                    borderTop: '1px solid var(--line)',
+                  }}
+                >
+                  <span className="mono">{meta}</span>
+                  {live ? (
+                    <span className="action-link">
+                      Launch
+                      <ArrowRight size={15} aria-hidden="true" />
+                    </span>
+                  ) : (
+                    <span className="mono">Scheduled</span>
+                  )}
+                </p>
+              </>
+            );
+
+            return href ? (
+              <a
+                key={title}
+                href={href}
+                className="card card-pad card-interactive card-feature spotlight reveal"
+              >
+                {inner}
+              </a>
+            ) : (
+              <div key={title} className="card card-pad card-interactive card-muted reveal">
+                {inner}
+              </div>
+            );
+          })}
+        </div>
       </section>
 
-      {/* SECTION 1: Interactive Visual Lab */}
-      <section id="visual-lab" style={{ margin: '4rem 0 6rem' }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2rem', flexWrap: 'wrap', gap: '12px' }}>
+      <section className="shell section">
+        <div className="section-head reveal">
           <div>
-            <h2 style={{ fontSize: '2rem', fontWeight: 800, letterSpacing: '-0.02em', color: '#ffffff' }}>
-              🎮 Visual Architecture Lab
-            </h2>
-            <p style={{ color: '#94a3b8', fontSize: '1rem', marginTop: '4px' }}>
-              ByteByteGo-style interactive sandboxes with state machines, syscall players, and live bit calculators.
+            <h2>Flagship articles</h2>
+            <p>
+              Long-form technical deep-dives, syndicated across Hashnode, Medium and this
+              reader.
             </p>
           </div>
-          <Link href="/visuals/linux-permissions" style={{ color: '#38bdf8', fontSize: '0.92rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px' }}>
-            Open Flagship Sandbox <ArrowRight size={16} />
+          <Link className="action-link" href="/blog">
+            All 10 flagships
+            <ArrowRight size={15} aria-hidden="true" />
           </Link>
         </div>
 
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
-          gap: '24px',
-        }}>
-          {/* Flagship #1 Card */}
-          <Link href="/visuals/linux-permissions" className="glass-card" style={{ padding: '2rem', display: 'flex', flexDirection: 'column' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
-              <span className="badge badge-live">● Live Interactive Lab</span>
-              <span style={{ fontSize: '0.8rem', color: '#64748b', fontFamily: 'JetBrains Mono' }}>8 Modules</span>
-            </div>
-            <h3 style={{ fontSize: '1.4rem', fontWeight: 700, marginBottom: '0.75rem', color: '#ffffff' }}>
-              Linux Permissions & Inodes, Visually
-            </h3>
-            <p style={{ color: '#94a3b8', fontSize: '0.94rem', lineHeight: 1.6, flexGrow: 1, marginBottom: '1.5rem' }}>
-              Interact with the <code>newgrp</code> 6-step syscall player, simulate the DAC flowchart (Alice, Bob, Carol, Root), inspect <code>task_struct → struct cred</code>, and toggle the 16-bit <code>i_mode</code> calculator.
-            </p>
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              color: '#38bdf8',
-              fontWeight: 600,
-              fontSize: '0.9rem',
-              paddingTop: '12px',
-              borderTop: '1px solid rgba(255, 255, 255, 0.06)',
-            }}>
-              Launch Interactive Visualizer <ArrowRight size={16} />
-            </div>
-          </Link>
-
-          {/* Upcoming Flagship #2 */}
-          <div className="glass-card" style={{ padding: '2rem', display: 'flex', flexDirection: 'column', opacity: 0.8 }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
-              <span className="badge badge-amber">Nov 15 · In Staging</span>
-              <ShieldAlert size={18} color="#fbbf24" />
-            </div>
-            <h3 style={{ fontSize: '1.4rem', fontWeight: 700, marginBottom: '0.75rem', color: '#ffffff' }}>
-              Request-to-Shell: PHP2Shell & Node2Shell
-            </h3>
-            <p style={{ color: '#94a3b8', fontSize: '0.94rem', lineHeight: 1.6, flexGrow: 1, marginBottom: '1.5rem' }}>
-              Visual attack flow simulator: follow an HTTP request as it traverses runtime boundaries, bypasses sanitation, and executes shellcode in memory.
-            </p>
-            <div style={{ color: '#fbbf24', fontSize: '0.88rem', fontWeight: 600 }}>
-              Flagship #2 Architecture Tool
-            </div>
+        <article className="card card-pad card-feature spotlight reveal">
+          <div className="cluster" style={{ marginBottom: '1rem' }}>
+            <span className="badge badge-accent">Linux internals</span>
+            <span className="badge badge-ok">
+              <span className="live-dot" aria-hidden="true" />
+              Flagship #1
+            </span>
+            <span className="meta">1 Nov 2026</span>
           </div>
 
-          {/* Upcoming Flagship #3 */}
-          <div className="glass-card" style={{ padding: '2rem', display: 'flex', flexDirection: 'column', opacity: 0.8 }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.25rem' }}>
-              <span className="badge badge-purple">Nov 29 · In Staging</span>
-              <Network size={18} color="#c084fc" />
-            </div>
-            <h3 style={{ fontSize: '1.4rem', fontWeight: 700, marginBottom: '0.75rem', color: '#ffffff' }}>
-              AWS Packet Path: NACL vs Security Groups
-            </h3>
-            <p style={{ color: '#94a3b8', fontSize: '0.94rem', lineHeight: 1.6, flexGrow: 1, marginBottom: '1.5rem' }}>
-              Interactive packet journey simulator: trace traffic arriving at an AWS VPC subnet, rule evaluation order, stateless return traffic, and ephemeral port drop mechanics.
-            </p>
-            <div style={{ color: '#c084fc', fontSize: '0.88rem', fontWeight: 600 }}>
-              Flagship #3 Architecture Tool
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 2: Cross-Platform Articles & Flagships */}
-      <section style={{ margin: '6rem 0' }}>
-        <div style={{ marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '2rem', fontWeight: 800, letterSpacing: '-0.02em', color: '#ffffff' }}>
-            📖 Flagship Articles & Cross-Platform Series
-          </h2>
-          <p style={{ color: '#94a3b8', fontSize: '1rem', marginTop: '4px' }}>
-            Long-form technical deep-dives syndicated across Hashnode, Medium, and our self-hosted reader.
-          </p>
-        </div>
-
-        {/* Featured Post Card */}
-        <div className="glass-card" style={{ padding: '2.5rem', marginBottom: '2rem', border: '1px solid rgba(56, 189, 248, 0.3)' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '1rem', flexWrap: 'wrap' }}>
-            <span className="badge badge-blue">Series: Linux Internals</span>
-            <span className="badge badge-live">Flagship #1</span>
-            <span style={{ color: '#64748b', fontSize: '0.85rem' }}>Scheduled: 1 Nov 2026</span>
-          </div>
-
-          <h3 style={{ fontSize: '1.8rem', fontWeight: 800, marginBottom: '1rem', color: '#ffffff' }}>
-            <Link href="/blog/01-how-linux-decides-who-can-open-a-file" style={{ color: 'inherit' }}>
-              How Linux Decides Who Can Open a File (A Visual Deep Dive)
+          <h3 style={{ fontSize: 'var(--step-4)', marginBottom: '0.9rem' }}>
+            <Link
+              className="title-link"
+              href="/blog/01-how-linux-decides-who-can-open-a-file"
+            >
+              How Linux decides who can open a file
             </Link>
           </h3>
 
-          <p style={{ color: '#94a3b8', fontSize: '1.05rem', lineHeight: 1.6, marginBottom: '1.5rem', maxWidth: '820px' }}>
-            You add a developer to a group with <code>usermod -aG</code>, but their open terminal gets <code>Permission Denied</code>. We trace the internal kernel mechanics of <code>task_struct</code> credentials, the 6-step syscall sequence of <code>newgrp</code>, in-memory Inodes, and the exact order of <code>generic_permission()</code>.
+          <p className="text-soft" style={{ maxWidth: '72ch' }}>
+            You add a developer to a group with <code>usermod -aG</code>, but their open
+            terminal still gets <code>Permission denied</code>. We trace the kernel mechanics:{' '}
+            <code>task_struct</code> credentials, the six-step <code>newgrp</code> syscall
+            sequence, in-memory inodes, and the exact evaluation order inside{' '}
+            <code>generic_permission()</code>.
           </p>
 
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
-            <Link href="/blog/01-how-linux-decides-who-can-open-a-file" className="btn btn-primary" style={{ fontSize: '0.88rem' }}>
-              Read Article & Interactive Guide →
+          <div className="cluster" style={{ marginTop: '1.5rem' }}>
+            <Link
+              className="btn btn-primary"
+              href="/blog/01-how-linux-decides-who-can-open-a-file"
+            >
+              Read the article
+              <ArrowRight size={15} aria-hidden="true" />
             </Link>
+            <a className="btn btn-secondary" href={LAB_HREF}>
+              <Sparkles size={14} aria-hidden="true" />
+              Open the simulator
+            </a>
             <a
+              className="btn btn-ghost"
               href="https://blog.overflowbyte.cloud/how-linux-decides-who-can-open-a-file"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-secondary"
-              style={{ fontSize: '0.88rem' }}
             >
-              Hashnode Blog <ExternalLink size={12} />
+              Hashnode
+              <ExternalLink size={12} aria-hidden="true" />
             </a>
-            <a
-              href="https://overflowbyte.medium.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-secondary"
-              style={{ fontSize: '0.88rem' }}
-            >
-              Medium <ExternalLink size={12} />
-            </a>
-            <Link href="/visuals/linux-permissions" className="btn btn-secondary" style={{ fontSize: '0.88rem', color: '#38bdf8' }}>
-              Open Live Simulator 🎮
-            </Link>
           </div>
-        </div>
+        </article>
       </section>
 
-      {/* SECTION 3: The 3-Pillar Ecosystem */}
-      <section style={{ margin: '6rem 0' }}>
-        <h2 style={{ fontSize: '2rem', fontWeight: 800, letterSpacing: '-0.02em', color: '#ffffff', marginBottom: '0.5rem' }}>
-          🏛️ The OverflowByte Architecture
-        </h2>
-        <p style={{ color: '#94a3b8', fontSize: '1rem', marginBottom: '2.5rem' }}>
-          Four interconnected surfaces engineered to balance interactive learning, deep narrative reading, and reference lookups.
-        </p>
-
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-          gap: '20px',
-        }}>
-          <div className="glass-card" style={{ padding: '1.75rem' }}>
-            <div style={{ fontSize: '2rem', marginBottom: '0.75rem' }}>🌐</div>
-            <h4 style={{ fontSize: '1.15rem', color: '#ffffff', marginBottom: '0.5rem' }}>1. Main Platform</h4>
-            <p style={{ color: '#94a3b8', fontSize: '0.9rem', lineHeight: 1.6, marginBottom: '12px' }}>
-              <strong>overflowbyte.cloud</strong> (Vercel): Central hub hosting all interactive visualizers, syscall players, and tools with zero iframe limits.
-            </p>
-            <span style={{ color: '#38bdf8', fontSize: '0.82rem', fontFamily: 'JetBrains Mono' }}>You are here</span>
-          </div>
-
-          <div className="glass-card" style={{ padding: '1.75rem' }}>
-            <div style={{ fontSize: '2rem', marginBottom: '0.75rem' }}>✍️</div>
-            <h4 style={{ fontSize: '1.15rem', color: '#ffffff', marginBottom: '0.5rem' }}>2. Flagship Blog</h4>
-            <p style={{ color: '#94a3b8', fontSize: '0.9rem', lineHeight: 1.6, marginBottom: '12px' }}>
-              <strong>blog.overflowbyte.cloud</strong> (Hashnode): Narrative articles, subscriber newsletter, RSS feeds, and developer discussions.
-            </p>
-            <a href="https://blog.overflowbyte.cloud" target="_blank" rel="noopener noreferrer" style={{ color: '#38bdf8', fontSize: '0.84rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px' }}>
-              Visit Blog <ExternalLink size={12} />
-            </a>
-          </div>
-
-          <div className="glass-card" style={{ padding: '1.75rem' }}>
-            <div style={{ fontSize: '2rem', marginBottom: '0.75rem' }}>📚</div>
-            <h4 style={{ fontSize: '1.15rem', color: '#ffffff', marginBottom: '0.5rem' }}>3. Learning Second-Brain</h4>
-            <p style={{ color: '#94a3b8', fontSize: '0.9rem', lineHeight: 1.6, marginBottom: '12px' }}>
-              <strong>learning.overflowbyte.cloud</strong> (Quartz): Searchable lookup vault with 40+ RHCSA/RHCE labs, command cheat sheets, and EX294 mock exams.
-            </p>
-            <a href="https://learning.overflowbyte.cloud" target="_blank" rel="noopener noreferrer" style={{ color: '#38bdf8', fontSize: '0.84rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px' }}>
-              Open Learning Vault <ExternalLink size={12} />
-            </a>
-          </div>
-
-          <div className="glass-card" style={{ padding: '1.75rem' }}>
-            <div style={{ fontSize: '2rem', marginBottom: '0.75rem' }}>📰</div>
-            <h4 style={{ fontSize: '1.15rem', color: '#ffffff', marginBottom: '0.5rem' }}>4. Medium Syndication</h4>
-            <p style={{ color: '#94a3b8', fontSize: '0.9rem', lineHeight: 1.6, marginBottom: '12px' }}>
-              <strong>overflowbyte.medium.com</strong>: Canonical cross-posting ensuring full Google SEO credit points to our primary blog.
-            </p>
-            <a href="https://overflowbyte.medium.com/" target="_blank" rel="noopener noreferrer" style={{ color: '#38bdf8', fontSize: '0.84rem', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px' }}>
-              Follow on Medium <ExternalLink size={12} />
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 4: Integrated About & Portfolio Section */}
-      <section style={{
-        margin: '6rem 0',
-        padding: '3rem',
-        borderRadius: '24px',
-        background: 'linear-gradient(135deg, rgba(30, 41, 59, 0.4) 0%, rgba(15, 23, 42, 0.6) 100%)',
-        border: '1px solid rgba(56, 189, 248, 0.25)',
-      }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2.5rem', alignItems: 'center' }}>
+      <section className="shell section">
+        <div className="section-head reveal">
           <div>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: '#38bdf8', fontSize: '0.84rem', fontWeight: 700, marginBottom: '0.75rem', textTransform: 'uppercase' }}>
-              <User size={14} /> Systems Engineer & Author
-            </div>
-            <h2 style={{ fontSize: '2.2rem', fontWeight: 800, color: '#ffffff', marginBottom: '1rem', letterSpacing: '-0.02em' }}>
-              Pushpendra
-            </h2>
-            <p style={{ color: '#cbd5e1', fontSize: '1.02rem', lineHeight: 1.7, marginBottom: '1.5rem' }}>
-              Specialized in Linux kernel internals, systems architecture, automation with Ansible, and cloud infrastructure security. I create visual interactive tools and architectural breakdowns to make low-level systems intuitive.
+            <h2>The OverflowByte architecture</h2>
+            <p>
+              Four surfaces balancing interactive learning, deep narrative reading and quick
+              reference lookups.
             </p>
-            
-            <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-              <a
-                href="https://pushpendra.overflowbyte.cloud"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-primary"
-                style={{ fontSize: '0.9rem' }}
-              >
-                Visit Full Portfolio Resume <ExternalLink size={14} />
-              </a>
-              <Link href="/about" className="btn btn-secondary" style={{ fontSize: '0.9rem' }}>
-                Engineering Philosophy & Focus
-              </Link>
-            </div>
           </div>
+        </div>
 
-          {/* Highlights Box */}
-          <div style={{
-            background: 'rgba(15, 23, 42, 0.75)',
-            border: '1px solid rgba(255, 255, 255, 0.08)',
-            borderRadius: '16px',
-            padding: '1.75rem',
-          }}>
-            <h4 style={{ color: '#ffffff', fontSize: '1.05rem', fontWeight: 700, marginBottom: '1rem' }}>
-              Core Engineering Focus
-            </h4>
-            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '12px', fontSize: '0.92rem', color: '#94a3b8' }}>
-              <li style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
-                <CheckCircle2 size={18} color="#34d399" style={{ flexShrink: 0, marginTop: '2px' }} />
-                <span><strong>Linux Kernel Internals:</strong> Credential management (<code>task_struct</code>, <code>struct cred</code>, <code>fsuid</code>), VFS inode resolution.</span>
-              </li>
-              <li style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
-                <CheckCircle2 size={18} color="#34d399" style={{ flexShrink: 0, marginTop: '2px' }} />
-                <span><strong>Red Hat Certification Track:</strong> 60-day RHCSA to RHCE lab curriculum & unattended Ansible playbooks.</span>
-              </li>
-              <li style={{ display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
-                <CheckCircle2 size={18} color="#34d399" style={{ flexShrink: 0, marginTop: '2px' }} />
-                <span><strong>Cloud Networking:</strong> AWS VPC architecture, NACL vs Security Group packet routing, and perimeter security.</span>
-              </li>
-            </ul>
-          </div>
+        <div className="grid grid-4">
+          {SURFACES.map(({ title, domain, body, href, note }) => (
+            <div key={title} className="card card-pad card-quiet reveal">
+              <h3 style={{ fontSize: 'var(--step-1)', marginBottom: '0.35rem' }}>{title}</h3>
+              <p className="mono" style={{ marginBottom: '0.7rem', wordBreak: 'break-all' }}>
+                {domain}
+              </p>
+              <p
+                className="text-muted"
+                style={{ fontSize: 'var(--step--1)', marginBottom: '0.9rem' }}
+              >
+                {body}
+              </p>
+              {href ? (
+                <a
+                  className="action-link"
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {note}
+                  <ExternalLink size={12} aria-hidden="true" />
+                </a>
+              ) : (
+                <span className="mono" style={{ color: 'var(--accent)' }}>
+                  {note}
+                </span>
+              )}
+            </div>
+          ))}
         </div>
       </section>
 
-    </main>
+      <section className="shell section">
+        <div className="card card-pad card-feature spotlight reveal" style={{ padding: 'clamp(1.5rem, 4vw, 3rem)' }}>
+          <div className="grid grid-split" style={{ alignItems: 'center' }}>
+            <div>
+              <p className="eyebrow">
+                <User size={14} aria-hidden="true" />
+                Systems engineer & author
+              </p>
+              <h2 style={{ fontSize: 'var(--step-4)', margin: '0.7rem 0 0.9rem' }}>
+                Pushpendra
+              </h2>
+              <p className="text-soft" style={{ maxWidth: '54ch' }}>
+                I work on Linux kernel internals, systems architecture, Ansible automation and
+                cloud infrastructure security — and build visual tools that make low-level
+                systems intuitive.
+              </p>
+              <div className="cluster" style={{ marginTop: '1.5rem' }}>
+                <a
+                  className="btn btn-primary"
+                  href="https://pushpendra.overflowbyte.cloud"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Portfolio & resume
+                  <ExternalLink size={14} aria-hidden="true" />
+                </a>
+                <Link className="btn btn-secondary" href="/about">
+                  Engineering philosophy
+                </Link>
+              </div>
+            </div>
+
+            <div className="card card-pad card-quiet">
+              <h3 style={{ fontSize: 'var(--step-1)', marginBottom: '1rem' }}>
+                Core engineering focus
+              </h3>
+              <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.9rem' }}>
+                {FOCUS.map(({ label, body }) => (
+                  <li key={label} style={{ display: 'flex', gap: '0.65rem' }}>
+                    <CheckCircle2
+                      size={17}
+                      aria-hidden="true"
+                      style={{ color: 'var(--ok)', flexShrink: 0, marginTop: '0.2rem' }}
+                    />
+                    <span style={{ fontSize: 'var(--step--1)' }}>
+                      <strong style={{ color: 'var(--text)' }}>{label}:</strong>{' '}
+                      <span className="text-muted">{body}</span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
   );
 }
