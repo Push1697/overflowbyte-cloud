@@ -3,7 +3,17 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ExternalLink, Layers, Menu, Sparkles, User, X } from 'lucide-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faBars,
+  faGraduationCap,
+  faLayerGroup,
+  faUpRightFromSquare,
+  faUser,
+  faWandMagicSparkles,
+  faXmark,
+} from '@fortawesome/free-solid-svg-icons';
+import { faHashnode, faMedium } from '@fortawesome/free-brands-svg-icons';
 
 /* The visual lab is a static HTML file served through a rewrite, so it is
    linked with a plain anchor. A next/link would try an RSC fetch first and
@@ -11,13 +21,14 @@ import { ExternalLink, Layers, Menu, Sparkles, User, X } from 'lucide-react';
 const LAB_HREF = '/visuals/linux-permissions';
 
 const INTERNAL_LINKS = [
-  { href: '/blog', label: 'Articles & Series', icon: Layers },
-  { href: '/about', label: 'About', icon: User },
+  { href: '/blog', label: 'Articles', icon: faLayerGroup },
+  { href: '/learn', label: 'Learn', icon: faGraduationCap },
+  { href: '/about', label: 'About', icon: faUser },
 ];
 
 const EXTERNAL_LINKS = [
-  { href: 'https://blog.overflowbyte.cloud', label: 'Hashnode' },
-  { href: 'https://learning.overflowbyte.cloud', label: 'Learning Vault' },
+  { href: 'https://blog.overflowbyte.cloud', label: 'Hashnode', icon: faHashnode },
+  { href: 'https://overflowbyte.medium.com/', label: 'Medium', icon: faMedium },
 ];
 
 export default function SiteHeader() {
@@ -52,22 +63,28 @@ export default function SiteHeader() {
         <nav className="nav" aria-label="Primary">
           <Link href="/" className="nav-logo" aria-label="OverflowByte home">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/assets/logo/overflowbyte_lockup.png" alt="OverflowByte" />
+            <img
+              className="logo-mark"
+              src="/assets/logo/overflowbyte_mark_alpha.png"
+              alt="OverflowByte"
+              width={512}
+              height={381}
+            />
           </Link>
 
           <div className="nav-links">
-            {INTERNAL_LINKS.map(({ href, label, icon: Icon }) => (
+            {INTERNAL_LINKS.map(({ href, label, icon }) => (
               <Link
                 key={href}
                 href={href}
                 className="nav-link"
                 aria-current={isActive(href) ? 'page' : undefined}
               >
-                <Icon size={15} aria-hidden="true" />
+                <FontAwesomeIcon icon={icon} className="fa-ico" />
                 {label}
               </Link>
             ))}
-            {EXTERNAL_LINKS.map(({ href, label }) => (
+            {EXTERNAL_LINKS.map(({ href, label, icon }) => (
               <a
                 key={href}
                 href={href}
@@ -75,14 +92,14 @@ export default function SiteHeader() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
+                <FontAwesomeIcon icon={icon} className="fa-ico" />
                 {label}
-                <ExternalLink size={12} aria-hidden="true" />
               </a>
             ))}
           </div>
 
           <a className="btn btn-primary btn-sm nav-cta" href={LAB_HREF}>
-            <Sparkles size={14} aria-hidden="true" />
+            <FontAwesomeIcon icon={faWandMagicSparkles} className="fa-ico" />
             Visual Lab
           </a>
 
@@ -94,7 +111,7 @@ export default function SiteHeader() {
             aria-label={open ? 'Close menu' : 'Open menu'}
             onClick={() => setOpen((value) => !value)}
           >
-            {open ? <X size={20} /> : <Menu size={20} />}
+            <FontAwesomeIcon icon={open ? faXmark : faBars} className="fa-ico-lg" />
           </button>
         </nav>
 
@@ -104,18 +121,18 @@ export default function SiteHeader() {
           {/* inert, not hidden: the content stays laid out so the row-height
               collapse can animate, while staying out of the tab order. */}
           <div className="nav-panel-inner" inert={!open}>
-            {INTERNAL_LINKS.map(({ href, label, icon: Icon }) => (
+            {INTERNAL_LINKS.map(({ href, label, icon }) => (
               <Link
                 key={href}
                 href={href}
                 className="nav-link"
                 aria-current={isActive(href) ? 'page' : undefined}
               >
-                <Icon size={16} aria-hidden="true" />
+                <FontAwesomeIcon icon={icon} className="fa-ico" />
                 {label}
               </Link>
             ))}
-            {EXTERNAL_LINKS.map(({ href, label }) => (
+            {EXTERNAL_LINKS.map(({ href, label, icon }) => (
               <a
                 key={href}
                 href={href}
@@ -123,12 +140,13 @@ export default function SiteHeader() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
+                <FontAwesomeIcon icon={icon} className="fa-ico" />
                 {label}
-                <ExternalLink size={13} aria-hidden="true" />
+                <FontAwesomeIcon icon={faUpRightFromSquare} className="fa-ico" />
               </a>
             ))}
             <a className="btn btn-primary" href={LAB_HREF}>
-              <Sparkles size={15} aria-hidden="true" />
+              <FontAwesomeIcon icon={faWandMagicSparkles} className="fa-ico" />
               Launch Visual Lab
             </a>
           </div>

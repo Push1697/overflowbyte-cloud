@@ -1199,3 +1199,553 @@ button {
     align-items: flex-start;
   }
 }
+
+/* ======================================================================
+   Brand mark, deck cards, hero trace console, flashcards
+   ====================================================================== */
+
+/* ------------------------------------------------------------- logos -- */
+/* Background-stripped PNGs, so the glyph sits directly on the page. */
+.logo-mark {
+  height: 34px;
+  width: auto;
+  transition: transform var(--dur-move) var(--ease-spring);
+}
+
+.nav-logo:hover .logo-mark {
+  transform: rotate(-4deg) scale(1.06);
+}
+
+.logo-lockup {
+  height: 38px;
+  width: auto;
+  margin-bottom: 1rem;
+}
+
+/* --------------------------------------------------------- icon sizing -- */
+.fa-ico {
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+}
+
+.fa-ico-lg {
+  width: 1.35em;
+  height: 1.35em;
+}
+
+/* --------------------------------------------------------- deck cards -- */
+/* A card that reads as the top of a stack. The two layers behind it fan
+   out on hover, which also sets up the flashcard metaphor. */
+.deck {
+  position: relative;
+  isolation: isolate;
+}
+
+.deck::before,
+.deck::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  transition:
+    transform var(--dur-move) var(--ease-spring),
+    opacity var(--dur-move) var(--ease-out),
+    border-color var(--dur-move) var(--ease-out);
+}
+
+.deck::before {
+  transform: translateY(7px) scale(0.982);
+  opacity: 0.85;
+}
+
+.deck::after {
+  transform: translateY(13px) scale(0.962);
+  opacity: 0.55;
+}
+
+.deck:hover::before,
+.deck:focus-within::before {
+  transform: translate3d(10px, -9px, 0) rotate(-2.4deg) scale(0.99);
+  border-color: var(--accent-line);
+  opacity: 1;
+}
+
+.deck:hover::after,
+.deck:focus-within::after {
+  transform: translate3d(-11px, -4px, 0) rotate(2.8deg) scale(0.985);
+  opacity: 0.8;
+}
+
+/* The deck needs room to fan without clipping its neighbours. */
+.deck-grid {
+  row-gap: clamp(1.75rem, 4vw, 2.5rem);
+}
+
+/* ------------------------------------------------- hero trace console -- */
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  gap: clamp(2rem, 5vw, 3.5rem);
+  align-items: center;
+}
+
+.trace {
+  border-radius: var(--r-lg);
+  border: 1px solid var(--line-strong);
+  background: linear-gradient(180deg, rgb(18 26 43 / 0.92), rgb(5 7 12 / 0.96));
+  box-shadow: var(--shadow-3);
+  overflow: hidden;
+}
+
+.trace-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.65rem 0.9rem;
+  border-bottom: 1px solid var(--line);
+  background: rgb(255 255 255 / 0.03);
+}
+
+.trace-dots {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.trace-dots i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--surface-3);
+}
+
+.trace-title {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.74rem;
+  color: var(--text-faint);
+  letter-spacing: 0.02em;
+}
+
+.trace-body {
+  margin: 0;
+  padding: 1rem 1.1rem 1.2rem;
+  font-family: var(--font-mono), monospace;
+  font-size: clamp(0.68rem, 0.52rem + 0.48vw, 0.8rem);
+  line-height: 1.75;
+  color: var(--text-soft);
+  overflow-x: auto;
+  white-space: pre;
+}
+
+/* Each line arrives in sequence, once, like a trace being emitted. */
+.trace-line {
+  display: block;
+  opacity: 0;
+  animation: trace-in 420ms var(--ease-out) forwards;
+  animation-delay: calc(var(--i, 0) * 140ms + 200ms);
+}
+
+@keyframes trace-in {
+  from {
+    opacity: 0;
+    transform: translateX(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.trace-dim {
+  color: var(--text-faint);
+}
+
+.trace-key {
+  color: var(--accent);
+}
+
+.trace-ok {
+  color: var(--ok);
+}
+
+.trace-warn {
+  color: var(--warn);
+}
+
+.trace-bad {
+  color: #fb7185;
+}
+
+.trace-verdict {
+  color: #fb7185;
+  font-weight: 700;
+}
+
+/* A caret that keeps blinking after the trace settles. */
+.trace-verdict::after {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 1em;
+  margin-left: 0.4rem;
+  vertical-align: text-bottom;
+  background: currentColor;
+  animation: caret 1.8s steps(2) infinite;
+  animation-delay: 2s;
+  animation-play-state: var(--ambient);
+}
+
+@keyframes caret {
+  50% {
+    opacity: 0;
+  }
+}
+
+.trace-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.1rem;
+  padding: 0.6rem 1.1rem;
+  border-top: 1px solid var(--line);
+  background: rgb(255 255 255 / 0.02);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.7rem;
+  color: var(--text-faint);
+}
+
+.trace-strip span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* ------------------------------------------------------- stat ribbon -- */
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 1px;
+  margin-top: clamp(2rem, 5vw, 3rem);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  background: var(--line);
+}
+
+.stat {
+  padding: 0.9rem 1rem;
+  background: var(--bg);
+}
+
+.stat dt {
+  font-family: var(--font-mono), monospace;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-faint);
+  margin-bottom: 0.2rem;
+}
+
+.stat dd {
+  font-size: var(--step-1);
+  font-weight: 800;
+  color: var(--text);
+}
+
+/* -------------------------------------------------------- flashcards -- */
+.flash-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: clamp(1rem, 2.5vw, 1.5rem);
+}
+
+.flash {
+  position: relative;
+  min-height: 268px;
+  perspective: 1400px;
+  background: none;
+  border: none;
+  padding: 0;
+  text-align: left;
+  width: 100%;
+  cursor: pointer;
+  border-radius: var(--r-lg);
+}
+
+.flash-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  transform-style: preserve-3d;
+  transition: transform 620ms var(--ease-spring);
+}
+
+.flash[data-flipped='true'] .flash-inner {
+  transform: rotateY(180deg);
+}
+
+.flash-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1.1rem, 3vw, 1.6rem);
+  border-radius: var(--r-lg);
+  border: 1px solid var(--line);
+  background: var(--surface-1);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  overflow-y: auto;
+}
+
+.flash-face-back {
+  transform: rotateY(180deg);
+  background:
+    radial-gradient(120% 140% at 100% 0%, var(--accent-wash), transparent 55%),
+    var(--surface-2);
+  border-color: var(--accent-line);
+}
+
+.flash:hover .flash-face-front {
+  border-color: var(--accent-line);
+}
+
+.flash-q {
+  font-size: var(--step-0);
+  font-weight: 650;
+  color: var(--text);
+  margin-bottom: 0.6rem;
+}
+
+.flash-scenario {
+  font-size: var(--step--1);
+  color: var(--text-muted);
+  flex-grow: 1;
+}
+
+.flash-scenario code {
+  color: var(--accent-bright);
+}
+
+.flash-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 0.9rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--line);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.7rem;
+  color: var(--accent);
+}
+
+.flash-a {
+  font-size: var(--step--1);
+  line-height: 1.7;
+  color: var(--text-soft);
+}
+
+.flash-a strong {
+  color: var(--text);
+}
+
+.flash-a code {
+  padding: 0.1em 0.35em;
+  border-radius: var(--r-sm);
+  background: rgb(255 255 255 / 0.08);
+  color: var(--accent-bright);
+  font-size: 0.9em;
+}
+
+.flash-a p + p {
+  margin-top: 0.6rem;
+}
+
+/* ----------------------------------------------------- responsive add -- */
+@media (max-width: 960px) {
+  .hero-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 720px) {
+  .logo-mark {
+    height: 28px;
+  }
+
+  .logo-lockup {
+    height: 32px;
+  }
+
+  /* A fanning deck wastes space on a phone; keep one clean layer. */
+  .deck::before,
+  .deck::after {
+    display: none;
+  }
+
+  .flash {
+    min-height: 320px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .deck::before,
+  .deck::after,
+  .flash-inner,
+  .logo-mark {
+    transition: none !important;
+  }
+
+  .trace-line {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+
+  .trace-verdict::after {
+    animation: none !important;
+  }
+}
+
+/* -------------------------------------------------------------- labs -- */
+/* Scenario-based, hands-on tasks with a solution the reader opts into. */
+.lab {
+  scroll-margin-top: calc(var(--header-h) + 1.5rem);
+}
+
+.lab-split {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1rem, 3vw, 2rem);
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+}
+
+.lab-head {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 0.6rem;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+}
+
+.lab-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: var(--step--1);
+  color: var(--text-soft);
+}
+
+.lab-list > li {
+  position: relative;
+  padding-left: 1.1rem;
+}
+
+.lab-list > li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.lab-list-check > li {
+  display: flex;
+  gap: 0.55rem;
+  padding-left: 0;
+}
+
+.lab-list-check > li::before {
+  display: none;
+}
+
+.lab-list-check svg {
+  color: var(--ok);
+  margin-top: 0.28em;
+}
+
+.lab-list code,
+.lab-why code {
+  padding: 0.1em 0.35em;
+  border-radius: var(--r-sm);
+  background: rgb(255 255 255 / 0.07);
+  color: var(--accent-bright);
+  font-size: 0.9em;
+}
+
+.lab-reveal {
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+  transition: grid-template-rows var(--dur-move) var(--ease-out);
+}
+
+.lab-reveal[data-open='true'] {
+  grid-template-rows: 1fr;
+}
+
+.lab-reveal-inner {
+  min-height: 0;
+}
+
+.lab-reveal[data-open='true'] .lab-reveal-inner {
+  padding-top: 1.25rem;
+}
+
+.lab-code {
+  margin-bottom: 1.1rem;
+  padding: 0.9rem 1rem;
+  border-radius: var(--r-md);
+  background: var(--bg-sunken);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  overflow-x: auto;
+  font-size: 0.82rem;
+  line-height: 1.7;
+  color: var(--text);
+  white-space: pre;
+}
+
+.lab-code-quiet {
+  border-left-color: var(--surface-3);
+  color: var(--text-muted);
+}
+
+.lab-why {
+  margin-bottom: 1.1rem;
+  font-size: var(--step--1);
+  line-height: 1.7;
+  color: var(--text-soft);
+}
+
+.lab-why strong {
+  color: var(--text);
+}
+
+.lab-why p + p {
+  margin-top: 0.55rem;
+}
+
+@media (max-width: 720px) {
+  .lab-split {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lab-reveal {
+    transition: none !important;
+  }
+}

@@ -3,7 +3,13 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { ArrowLeft, ExternalLink, Sparkles } from 'lucide-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faArrowLeft,
+  faGraduationCap,
+  faUpRightFromSquare,
+  faWandMagicSparkles,
+} from '@fortawesome/free-solid-svg-icons';
 import { getPost, getPostSlugs } from '../../lib/posts';
 
 const LAB_HREF = '/visuals/linux-permissions';
@@ -48,7 +54,7 @@ export default async function BlogPostPage({
   return (
     <article className="shell section" style={{ maxWidth: '920px' }}>
       <Link className="action-link" href="/blog" style={{ color: 'var(--text-muted)' }}>
-        <ArrowLeft size={15} aria-hidden="true" />
+        <FontAwesomeIcon icon={faArrowLeft} className="fa-ico" />
         Back to the flagship series
       </Link>
 
@@ -111,7 +117,7 @@ export default async function BlogPostPage({
                 rel="noopener noreferrer"
               >
                 Hashnode
-                <ExternalLink size={12} aria-hidden="true" />
+                <FontAwesomeIcon icon={faUpRightFromSquare} className="fa-ico" />
               </a>
               <a
                 className="btn btn-secondary btn-sm"
@@ -120,7 +126,7 @@ export default async function BlogPostPage({
                 rel="noopener noreferrer"
               >
                 Medium
-                <ExternalLink size={12} aria-hidden="true" />
+                <FontAwesomeIcon icon={faUpRightFromSquare} className="fa-ico" />
               </a>
             </div>
           </div>
@@ -138,7 +144,7 @@ export default async function BlogPostPage({
               </p>
             </div>
             <a className="btn btn-primary btn-sm" href={LAB_HREF}>
-              <Sparkles size={14} aria-hidden="true" />
+              <FontAwesomeIcon icon={faWandMagicSparkles} className="fa-ico" />
               Full screen
             </a>
           </div>
@@ -148,7 +154,7 @@ export default async function BlogPostPage({
               <span className="pane-bar-label">{LAB_HREF}</span>
               <a className="action-link" href={LAB_HREF}>
                 Open
-                <ExternalLink size={12} aria-hidden="true" />
+                <FontAwesomeIcon icon={faUpRightFromSquare} className="fa-ico" />
               </a>
             </div>
             <iframe
@@ -192,15 +198,23 @@ export default async function BlogPostPage({
               Reference notes, EX294 mocks and RHCSA drills live in the learning vault.
             </p>
           </div>
-          <a
-            className="btn btn-secondary"
-            href="https://learning.overflowbyte.cloud"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Open learning notes
-            <ExternalLink size={13} aria-hidden="true" />
-          </a>
+          <div className="cluster">
+            {hasLab && (
+              <Link className="btn btn-primary" href="/learn#linux-permissions">
+                <FontAwesomeIcon icon={faGraduationCap} className="fa-ico" />
+                Test yourself
+              </Link>
+            )}
+            <a
+              className="btn btn-secondary"
+              href="https://learning.overflowbyte.cloud"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Learning notes
+              <FontAwesomeIcon icon={faUpRightFromSquare} className="fa-ico" />
+            </a>
+          </div>
         </div>
       </aside>
     </article>

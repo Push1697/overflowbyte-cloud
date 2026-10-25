@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { ArrowLeft, Sparkles } from 'lucide-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft, faWandMagicSparkles } from '@fortawesome/free-solid-svg-icons';
 
 export default function NotFound() {
   return (
@@ -19,11 +20,11 @@ export default function NotFound() {
       </p>
       <div className="cluster" style={{ justifyContent: 'center' }}>
         <Link className="btn btn-primary" href="/blog">
-          <ArrowLeft size={15} aria-hidden="true" />
+          <FontAwesomeIcon icon={faArrowLeft} className="fa-ico" />
           Browse the series
         </Link>
         <a className="btn btn-secondary" href="/visuals/linux-permissions">
-          <Sparkles size={14} aria-hidden="true" />
+          <FontAwesomeIcon icon={faWandMagicSparkles} className="fa-ico" />
           Visual lab
         </a>
       </div>

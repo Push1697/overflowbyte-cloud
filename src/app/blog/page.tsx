@@ -1,6 +1,14 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowRight, Calendar, ExternalLink, Layers, Sparkles } from 'lucide-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faArrowRight,
+  faCalendar,
+  faGraduationCap,
+  faLayerGroup,
+  faUpRightFromSquare,
+  faWandMagicSparkles,
+} from '@fortawesome/free-solid-svg-icons';
 import { getPostSlugs } from '../lib/posts';
 
 export const metadata: Metadata = {
@@ -22,6 +30,8 @@ type Flagship = {
   hashnodeUrl?: string;
   mediumUrl?: string;
   labHref?: string;
+  /** Flashcard deck on /learn that covers this article. */
+  deckSlug?: string;
 };
 
 const FLAGSHIPS: Flagship[] = [
@@ -36,6 +46,7 @@ const FLAGSHIPS: Flagship[] = [
     hashnodeUrl: 'https://blog.overflowbyte.cloud/how-linux-decides-who-can-open-a-file',
     mediumUrl: 'https://overflowbyte.medium.com/',
     labHref: LAB_HREF,
+    deckSlug: 'linux-permissions',
   },
   {
     num: 2,
@@ -129,7 +140,7 @@ export default function BlogIndexPage() {
     <div className="shell section">
       <header style={{ maxWidth: '56rem', marginBottom: 'clamp(2rem, 5vw, 3rem)' }}>
         <p className="eyebrow">
-          <Layers size={15} aria-hidden="true" />
+          <FontAwesomeIcon icon={faLayerGroup} className="fa-ico" />
           Flagship publications
         </p>
         <h1 className="gradient-text" style={{ fontSize: 'var(--step-5)', margin: '1rem 0' }}>
@@ -141,7 +152,7 @@ export default function BlogIndexPage() {
         </p>
       </header>
 
-      <div className="grid" style={{ gap: '1.25rem' }}>
+      <div className="grid deck-grid" style={{ gap: 'clamp(1.5rem, 3vw, 2rem)' }}>
         {FLAGSHIPS.map((post) => {
           const isLive = published.has(post.slug);
 
@@ -150,7 +161,7 @@ export default function BlogIndexPage() {
               key={post.num}
               className={
                 isLive
-                  ? 'card card-pad card-interactive card-feature spotlight reveal'
+                  ? 'card card-pad card-interactive card-feature deck spotlight reveal'
                   : 'card card-pad card-muted reveal'
               }
             >
@@ -166,7 +177,7 @@ export default function BlogIndexPage() {
                   <span className="badge badge-neutral">{post.series}</span>
                 </div>
                 <span className="meta">
-                  <Calendar size={13} aria-hidden="true" />
+                  <FontAwesomeIcon icon={faCalendar} className="fa-ico" />
                   {post.date}
                 </span>
               </div>
@@ -209,7 +220,7 @@ export default function BlogIndexPage() {
                   <div className="cluster" style={{ ['--cluster-gap' as string]: '0.5rem' }}>
                     <Link className="btn btn-primary btn-sm" href={`/blog/${post.slug}`}>
                       Read article
-                      <ArrowRight size={14} aria-hidden="true" />
+                      <FontAwesomeIcon icon={faArrowRight} className="fa-ico" />
                     </Link>
                     {post.hashnodeUrl && (
                       <a
@@ -219,7 +230,7 @@ export default function BlogIndexPage() {
                         rel="noopener noreferrer"
                       >
                         Hashnode
-                        <ExternalLink size={12} aria-hidden="true" />
+                        <FontAwesomeIcon icon={faUpRightFromSquare} className="fa-ico" />
                       </a>
                     )}
                     {post.mediumUrl && (
@@ -230,8 +241,17 @@ export default function BlogIndexPage() {
                         rel="noopener noreferrer"
                       >
                         Medium
-                        <ExternalLink size={12} aria-hidden="true" />
+                        <FontAwesomeIcon icon={faUpRightFromSquare} className="fa-ico" />
                       </a>
+                    )}
+                    {post.deckSlug && (
+                      <Link
+                        className="btn btn-ghost btn-sm"
+                        href={`/learn#${post.deckSlug}`}
+                      >
+                        <FontAwesomeIcon icon={faGraduationCap} className="fa-ico" />
+                        Test yourself
+                      </Link>
                     )}
                   </div>
                 ) : (
@@ -240,7 +260,7 @@ export default function BlogIndexPage() {
 
                 {post.labHref && (
                   <a className="action-link" href={post.labHref}>
-                    <Sparkles size={14} aria-hidden="true" />
+                    <FontAwesomeIcon icon={faWandMagicSparkles} className="fa-ico" />
                     Interactive lab
                   </a>
                 )}
