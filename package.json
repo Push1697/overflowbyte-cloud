@@ -8,7 +8,10 @@
     "start": "next start",
     "lint": "eslint .",
     "medium:whoami": "node scripts/medium.mjs whoami",
-    "medium:publish": "node scripts/medium.mjs publish"
+    "medium:publish": "node scripts/medium.mjs publish",
+    "hashnode:prep": "node scripts/hashnode-prep.mjs",
+    "hashnode:verify": "node scripts/hashnode-verify.mjs",
+    "hashnode:publish": "node scripts/hashnode-publish.mjs"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^7.3.1",

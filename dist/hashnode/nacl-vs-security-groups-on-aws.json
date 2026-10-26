@@ -1,0 +1,17 @@
+{
+  "slug": "nacl-vs-security-groups-on-aws",
+  "title": "NACL vs Security Groups on AWS: Which Firewall Actually Stops Your Traffic?",
+  "description": "Why a port that's \"open\" in your security group can still time out. How NACLs and security groups differ, where each sits in the packet path, the ephemeral port trap, rule order, and a real three-tier design.",
+  "tags": [
+    "aws",
+    "vpc",
+    "networking",
+    "security",
+    "firewall"
+  ],
+  "created": "2026-10-19",
+  "originalArticleUrl": "https://learning.overflowbyte.cloud/blog/nacl-vs-security-groups-on-aws",
+  "droppedH1": null,
+  "missingImages": [],
+  "chars": 14987
+}

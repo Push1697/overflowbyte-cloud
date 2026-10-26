@@ -1,0 +1,21 @@
+{
+  "nacl-vs-sg-01-title.webp": "https://learning.overflowbyte.cloud/attachments/nacl-vs-sg-01-title.webp",
+  "nacl-vs-sg-02-hook-everything-green.webp": "https://learning.overflowbyte.cloud/attachments/nacl-vs-sg-02-hook-everything-green.webp",
+  "nacl-vs-sg-03-analogy-keycard-and-guard.webp": "https://learning.overflowbyte.cloud/attachments/nacl-vs-sg-03-analogy-keycard-and-guard.webp",
+  "nacl-vs-sg-04-packet-path.webp": "https://learning.overflowbyte.cloud/attachments/nacl-vs-sg-04-packet-path.webp",
+  "nacl-vs-sg-05-reply-dropped-at-nacl.webp": "https://learning.overflowbyte.cloud/attachments/nacl-vs-sg-05-reply-dropped-at-nacl.webp",
+  "nacl-vs-sg-06-stateful-vs-stateless.webp": "https://learning.overflowbyte.cloud/attachments/nacl-vs-sg-06-stateful-vs-stateless.webp",
+  "nacl-vs-sg-07-reply-header.webp": "https://learning.overflowbyte.cloud/attachments/nacl-vs-sg-07-reply-header.webp",
+  "nacl-vs-sg-08-ephemeral-ranges.webp": "https://learning.overflowbyte.cloud/attachments/nacl-vs-sg-08-ephemeral-ranges.webp",
+  "nacl-vs-sg-09-allow-vs-deny.webp": "https://learning.overflowbyte.cloud/attachments/nacl-vs-sg-09-allow-vs-deny.webp",
+  "nacl-vs-sg-12-pro-tip-steps-of-100.webp": "https://learning.overflowbyte.cloud/attachments/nacl-vs-sg-12-pro-tip-steps-of-100.webp",
+  "nacl-vs-sg-13-comparison-table.webp": "https://learning.overflowbyte.cloud/attachments/nacl-vs-sg-13-comparison-table.webp",
+  "nacl-vs-sg-14-three-tier-sg-chain.webp": "https://learning.overflowbyte.cloud/attachments/nacl-vs-sg-14-three-tier-sg-chain.webp",
+  "nacl-vs-sg-15-three-tier-nacl-fence.webp": "https://learning.overflowbyte.cloud/attachments/nacl-vs-sg-15-three-tier-nacl-fence.webp",
+  "nacl-vs-sg-16-five-mistakes.webp": "https://learning.overflowbyte.cloud/attachments/nacl-vs-sg-16-five-mistakes.webp",
+  "nacl-vs-sg-17-troubleshooting.webp": "https://learning.overflowbyte.cloud/attachments/nacl-vs-sg-17-troubleshooting.webp",
+  "nacl-vs-sg-loop-auto-scaling.webp": "https://learning.overflowbyte.cloud/attachments/nacl-vs-sg-loop-auto-scaling.webp",
+  "nacl-vs-sg-loop-first-match-wins.webp": "https://learning.overflowbyte.cloud/attachments/nacl-vs-sg-loop-first-match-wins.webp",
+  "nacl-vs-sg-loop-packet-path.webp": "https://learning.overflowbyte.cloud/attachments/nacl-vs-sg-loop-packet-path.webp",
+  "nacl-vs-sg-loop-stateful-vs-stateless.webp": "https://learning.overflowbyte.cloud/attachments/nacl-vs-sg-loop-stateful-vs-stateless.webp"
+}

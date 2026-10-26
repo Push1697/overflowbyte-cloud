@@ -1,0 +1,19 @@
+{
+  "slug": "php2shell-and-node2shell-runtime-rce",
+  "title": "PHP2Shell and Node2Shell: The Runtime-Level RCE You Can't Code Around",
+  "description": "CVE-2026-109618, CVE-2026-109619 (PHP2Shell) and CVE-2026-111497 (Node2Shell) — unauthenticated RCE in PHP and Node.js runtimes. CVSS 9.2. Interactive animated attack flow, root causes, and step-by-step remediation runbook.",
+  "tags": [
+    "security",
+    "php",
+    "nodejs",
+    "cve",
+    "devops",
+    "incident-response",
+    "runbook"
+  ],
+  "created": "2026-10-23",
+  "originalArticleUrl": "https://learning.overflowbyte.cloud/blog/php2shell-and-node2shell-runtime-rce",
+  "droppedH1": "PHP2Shell and Node2Shell: The Runtime-Level RCE You Can't Code Around",
+  "missingImages": [],
+  "chars": 12080
+}
