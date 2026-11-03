@@ -1918,6 +1918,31 @@ button {
   max-width: var(--measure);
 }
 
+/* ------------------------------------------------------- visual blocks --- */
+/* Wrapper for any generated Visual, so a diagram carries its own title and
+   caption wherever it is dropped — article body, lab page or learn page. */
+.viz-block {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+}
+
+.viz-block-head {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.viz-block-head strong {
+  font-size: var(--step-1);
+  letter-spacing: -0.01em;
+}
+
+.viz-block-head span {
+  color: var(--text-muted);
+  font-size: var(--step--1);
+  max-width: var(--measure);
+}
+
 /* --------------------------------------------------------------- callouts -- */
 .callout {
   margin-top: 1.25rem;

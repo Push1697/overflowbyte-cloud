@@ -281,6 +281,8 @@ export function decodeMode(mode: number): DecodedMode {
 
 /* ------------------------------------------------- 6. DAC flowchart ------ */
 
+/* Typed against the shared Cascade primitive so this renders through the same
+   component as every other ordered-check diagram on the site. */
 export type DacStage = 'owner' | 'group' | 'other' | 'root';
 export type DacState = 'pass' | 'fail' | 'skip';
 
@@ -288,7 +290,7 @@ export type DacActor = {
   id: string;
   label: string;
   detail: string;
-  steps: Record<DacStage, { state: DacState; note: string }>;
+  results: Record<DacStage, { state: DacState; note: string }>;
   granted: boolean;
   verdict: string;
 };
@@ -306,7 +308,7 @@ export const DAC_ACTORS: DacActor[] = [
     id: 'alice',
     label: 'Alice',
     detail: 'owner, UID 1000',
-    steps: {
+    results: {
       owner: { state: 'pass', note: "Match: fsuid 1000 == i_uid 1000, and the owner bits carry 'w' (rw-)." },
       group: { state: 'skip', note: 'Skipped — the owner already matched.' },
       other: { state: 'skip', note: 'Skipped.' },
@@ -319,7 +321,7 @@ export const DAC_ACTORS: DacActor[] = [
     id: 'bob',
     label: 'Bob',
     detail: 'in developers',
-    steps: {
+    results: {
       owner: { state: 'fail', note: 'No match: fsuid 1001 != 1000. Proceeding to the group check.' },
       group: { state: 'fail', note: "Match: fsgid is in developers — but the group bits are 'r--', with no write." },
       other: { state: 'skip', note: 'Skipped: once the group matches, the kernel cannot fall through to other.' },
@@ -332,7 +334,7 @@ export const DAC_ACTORS: DacActor[] = [
     id: 'carol',
     label: 'Carol',
     detail: 'other, UID 1002',
-    steps: {
+    results: {
       owner: { state: 'fail', note: 'No match: fsuid 1002 != 1000.' },
       group: { state: 'fail', note: 'No match: not in developers. Falling through to others.' },
       other: { state: 'fail', note: "The other bits are '---'. Access refused." },
@@ -345,7 +347,7 @@ export const DAC_ACTORS: DacActor[] = [
     id: 'root',
     label: 'Root',
     detail: 'UID 0, CAP_DAC_OVERRIDE',
-    steps: {
+    results: {
       owner: { state: 'fail', note: 'No natural owner match.' },
       group: { state: 'fail', note: 'No natural group match.' },
       other: { state: 'fail', note: 'The mode bits refuse access. Proceeding to the capability check.' },

@@ -6,15 +6,18 @@ import {
   faGraduationCap,
   faTerminal,
 } from '@fortawesome/free-solid-svg-icons';
-import StaleTimeline from '../../components/visuals/StaleTimeline';
+import Timeline from '../../components/visuals/Timeline';
 import NewgrpPlayer from '../../components/visuals/NewgrpPlayer';
 import ModeBits from '../../components/visuals/ModeBits';
-import DacFlow from '../../components/visuals/DacFlow';
+import Cascade from '../../components/visuals/Cascade';
 import CopyBlock from '../../components/visuals/CopyBlock';
 import {
   CRED_FIELDS,
+  DAC_ACTORS,
+  DAC_STAGES,
   LOOKUP_STAGES,
   SGID_COMPARISON,
+  STALE_GROUP_TIMELINE,
   VERIFY_SCRIPT,
 } from '../../lib/permissions';
 import { renderInline } from '../../lib/inline';
@@ -89,7 +92,10 @@ export default function LinuxPermissionsLab() {
         }
         lede="When an admin adds you to a group, your open terminal does not inherit it. Step through the lifecycle."
       >
-        <StaleTimeline />
+        <Timeline
+          title="Lifecycle of a stale group membership"
+          steps={STALE_GROUP_TIMELINE}
+        />
         <Callout tone="key">
           {renderInline(
             'Linux processes never poll `/etc/group`. Credentials are an immutable, reference-counted in-kernel object.',
@@ -202,7 +208,7 @@ export default function LinuxPermissionsLab() {
         }
         lede="Four actors attempt a write to a file owned by alice:developers, mode 0640 (-rw-r-----)."
       >
-        <DacFlow />
+        <Cascade checks={DAC_STAGES} subjects={DAC_ACTORS} />
         <Callout tone="warn">
           {renderInline(
             'Root’s override comes **last**. The kernel first checks whether the permission bits naturally permit access; only on refusal does it test for `CAP_DAC_OVERRIDE`.',

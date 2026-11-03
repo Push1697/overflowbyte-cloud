@@ -12,7 +12,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import NewgrpPlayer from '../../components/visuals/NewgrpPlayer';
 import ModeBits from '../../components/visuals/ModeBits';
-import DacFlow from '../../components/visuals/DacFlow';
+import Cascade from '../../components/visuals/Cascade';
+import { DAC_ACTORS, DAC_STAGES } from '../../lib/permissions';
 import { getPost, getPostSlugs } from '../../lib/posts';
 
 const LAB_HREF = '/visuals/linux-permissions';
@@ -169,7 +170,7 @@ export default async function BlogPostPage({
             <ModeBits />
 
             <h3>Run the DAC cascade</h3>
-            <DacFlow />
+            <Cascade checks={DAC_STAGES} subjects={DAC_ACTORS} />
           </div>
         </section>
       )}

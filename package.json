@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "medium:whoami": "node scripts/medium.mjs whoami",
     "medium:publish": "node scripts/medium.mjs publish",
+    "corpus": "node scripts/corpus.mjs",
     "hashnode:prep": "node scripts/hashnode-prep.mjs",
     "hashnode:verify": "node scripts/hashnode-verify.mjs",
     "hashnode:publish": "node scripts/hashnode-publish.mjs"
