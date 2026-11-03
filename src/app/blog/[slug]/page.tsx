@@ -10,6 +10,9 @@ import {
   faUpRightFromSquare,
   faWandMagicSparkles,
 } from '@fortawesome/free-solid-svg-icons';
+import NewgrpPlayer from '../../components/visuals/NewgrpPlayer';
+import ModeBits from '../../components/visuals/ModeBits';
+import DacFlow from '../../components/visuals/DacFlow';
 import { getPost, getPostSlugs } from '../../lib/posts';
 
 const LAB_HREF = '/visuals/linux-permissions';
@@ -50,6 +53,8 @@ export default async function BlogPostPage({
   const { frontmatter, content } = post;
   const canonical = frontmatter.canonical_url;
   const hasLab = slug.startsWith('01-');
+  // Flagship number comes from the filename prefix (01-…, 11-…).
+  const flagshipNum = slug.split('-')[0];
 
   return (
     <article className="shell section" style={{ maxWidth: '920px' }}>
@@ -65,9 +70,9 @@ export default async function BlogPostPage({
           )}
           <span className="badge badge-ok">
             <span className="live-dot" aria-hidden="true" />
-            Flagship #1
+            Flagship #{flagshipNum}
           </span>
-          <span className="meta">1 Nov 2026</span>
+          <span className="meta">{frontmatter.date ?? '1 Nov 2026'}</span>
         </div>
 
         <h1 style={{ fontSize: 'var(--step-5)' }}>{frontmatter.title}</h1>
@@ -133,36 +138,38 @@ export default async function BlogPostPage({
         </div>
       )}
 
+      {/* The widgets render inline as real components. This used to be an
+          iframe onto a standalone HTML file, which loaded a second copy of the
+          page's chrome inside a box and was invisible to search engines. */}
       {hasLab && (
-        <section style={{ marginTop: '2.5rem' }}>
+        <section className="section-tight">
           <div className="section-head" style={{ marginBottom: '1rem' }}>
             <div>
-              <h2 style={{ fontSize: 'var(--step-2)' }}>Interactive companion sandbox</h2>
+              <h2 style={{ fontSize: 'var(--step-2)' }}>Interactive companion</h2>
               <p>
-                Step the <code>newgrp</code> syscall player, simulate the DAC flowchart, and
-                toggle the 16-bit <code>i_mode</code> grid.
+                The three instruments this article argues from, running right here. No embed,
+                no second page.
               </p>
             </div>
-            <a className="btn btn-primary btn-sm" href={LAB_HREF}>
+            <Link className="btn btn-secondary btn-sm" href={LAB_HREF}>
               <FontAwesomeIcon icon={faWandMagicSparkles} className="fa-ico" />
-              Full screen
-            </a>
+              All eight sections
+            </Link>
           </div>
 
-          <div className="pane">
-            <div className="pane-bar">
-              <span className="pane-bar-label">{LAB_HREF}</span>
-              <a className="action-link" href={LAB_HREF}>
-                Open
-                <FontAwesomeIcon icon={faUpRightFromSquare} className="fa-ico" />
-              </a>
-            </div>
-            <iframe
-              className="pane-frame"
-              src={LAB_HREF}
-              title="Linux permissions visual explainer"
-              loading="lazy"
-            />
+          <div className="inline-lab">
+            <h3>
+              Step the <code>newgrp</code> syscall sequence
+            </h3>
+            <NewgrpPlayer />
+
+            <h3>
+              Toggle the 16 bits of <code>i_mode</code>
+            </h3>
+            <ModeBits />
+
+            <h3>Run the DAC cascade</h3>
+            <DacFlow />
           </div>
         </section>
       )}

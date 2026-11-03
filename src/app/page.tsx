@@ -12,6 +12,9 @@ import {
   faWandMagicSparkles,
 } from '@fortawesome/free-solid-svg-icons';
 import HeroTrace from './components/HeroTrace';
+import SystemBar from './components/SystemBar';
+import HexWordmark from './components/HexWordmark';
+import ByteBuffer from './components/ByteBuffer';
 import { getPostSlugs } from './lib/posts';
 import { DECKS } from './lib/questions';
 import { LABS } from './lib/labs';
@@ -72,7 +75,9 @@ export default function HomePage() {
       <section className="hero">
         <div className="hero-aura" aria-hidden="true" />
         <div className="shell">
-          <div className="hero-grid">
+          <SystemBar />
+
+          <div className="hero-grid" style={{ marginTop: 'clamp(1.5rem, 4vw, 2.5rem)' }}>
             <div className="hero-copy">
               <p className="eyebrow">
                 <FontAwesomeIcon icon={faTerminal} className="fa-ico" />
@@ -87,10 +92,12 @@ export default function HomePage() {
                 yourself.
               </p>
               <div className="cluster hero-actions">
-                <a className="btn btn-primary btn-lg" href={LAB_HREF}>
+                {/* A real route now, not a static HTML file, so it navigates
+                    client-side like everything else. */}
+                <Link className="btn btn-primary btn-lg" href={LAB_HREF}>
                   Launch the visual lab
                   <FontAwesomeIcon icon={faArrowRight} className="fa-ico" />
-                </a>
+                </Link>
                 <Link className="btn btn-secondary btn-lg" href="/learn">
                   <FontAwesomeIcon icon={faGraduationCap} className="fa-ico" />
                   Practice & labs
@@ -119,6 +126,40 @@ export default function HomePage() {
               <dd>8</dd>
             </div>
           </dl>
+        </div>
+      </section>
+
+      {/* The proof bench: the thesis is operable before it is argued. */}
+      <section className="shell section" id="proof-bench" aria-labelledby="bench-heading">
+        <hr className="rule" />
+
+        <div className="section-head reveal">
+          <div>
+            <p className="eyebrow">Dispatches from the engine room</p>
+            <h2 id="bench-heading">Eight bytes. Write the ninth.</h2>
+            <p>
+              The name is the bug. Type past the end of the buffer and watch what the hardware
+              will happily let you do.
+            </p>
+          </div>
+        </div>
+
+        <div className="grid grid-2 reveal">
+          <div className="card card-pad">
+            <ByteBuffer />
+          </div>
+
+          <div className="card card-pad card-quiet">
+            <p className="eyebrow" style={{ marginBottom: '0.9rem' }}>
+              The same idea, at rest
+            </p>
+            <HexWordmark />
+            <p className="text-muted" style={{ fontSize: 'var(--step--1)', marginTop: '1rem' }}>
+              Offset, bytes, ASCII — the hex is computed from the letters beside it, so this is a
+              real dump rather than a picture of one. Everything on this site is built to the same
+              rule: if a claim can be shown running, it is.
+            </p>
+          </div>
         </div>
       </section>
 

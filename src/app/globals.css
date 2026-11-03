@@ -8,32 +8,37 @@
 :root {
   color-scheme: dark;
 
-  /* Surfaces: a real elevation ladder instead of one translucent grey. */
-  --bg: #080b12;
-  --bg-sunken: #05070c;
-  --surface-1: #0d1220;
-  --surface-2: #121a2b;
-  --surface-3: #18233a;
+  /* Surfaces: deep silicon, not navy. A real elevation ladder, kept neutral so
+     the amber and phosphor accents are the only chromatic events on the page. */
+  --bg: #090b0e;
+  --bg-sunken: #06070a;
+  --surface-1: #0d1117;
+  --surface-2: #141a21;
+  --surface-3: #1c232c;
 
-  --text: #f2f6fc;
-  --text-soft: #b8c4d8;
-  --text-muted: #8493aa;
-  --text-faint: #5e6c83;
+  --text: #ededed;
+  --text-soft: #c9d1d9;
+  --text-muted: #8b949e;
+  --text-faint: #6b7480;
 
   --line: rgb(255 255 255 / 0.08);
   --line-strong: rgb(255 255 255 / 0.15);
+  /* Circuit traces: the divider colour, warmer than a plain white hairline. */
+  --trace-line-c: rgb(245 158 11 / 0.22);
 
-  /* One primary accent. Everything else is semantic only. */
-  --accent: #4cc2f5;
-  --accent-bright: #8bd9ff;
-  --accent-ink: #04121c;
-  --accent-glow: rgb(76 194 245 / 0.30);
-  --accent-wash: rgb(76 194 245 / 0.10);
-  --accent-line: rgb(76 194 245 / 0.34);
+  /* The accent is the brand's own event: overflow. High-voltage safety amber,
+     deliberately not the cyan/violet pair every AI-era template ships with. */
+  --accent: #f59e0b;
+  --accent-bright: #fbbf24;
+  --accent-ink: #1a1203;
+  --accent-glow: rgb(245 158 11 / 0.28);
+  --accent-wash: rgb(245 158 11 / 0.10);
+  --accent-line: rgb(245 158 11 / 0.34);
 
-  --ok: #43d6a0;
-  --warn: #f3b53f;
-  --info: #a78bfa;
+  --ok: #10b981; /* terminal phosphor */
+  --warn: #f59e0b;
+  --info: #38bdf8; /* cache blue */
+  --crit: #e11d48; /* kernel panic */
 
   /* Fluid type scale, 360px -> 1240px. No media queries needed. */
   --step--1: clamp(0.80rem, 0.78rem + 0.10vw, 0.86rem);
@@ -129,8 +134,7 @@ a {
 }
 
 img,
-svg,
-iframe {
+svg {
   display: block;
   max-width: 100%;
 }
@@ -806,16 +810,6 @@ button {
   font-family: var(--font-mono), monospace;
 }
 
-/* Aspect-ratio instead of a fixed pixel height so embeds work on phones. */
-.pane-frame {
-  width: 100%;
-  border: none;
-  display: block;
-  background: var(--bg-sunken);
-  aspect-ratio: var(--pane-ratio, 16 / 11);
-  min-height: var(--pane-min, 460px);
-}
-
 /* ----------------------------------------------------------------- prose -- */
 /* Article body rendered from markdown. */
 .prose {
@@ -1182,11 +1176,6 @@ button {
 
   .hero-actions .btn {
     width: 100%;
-  }
-
-  .pane-frame {
-    --pane-ratio: 3 / 4;
-    --pane-min: 420px;
   }
 
   .prose pre {
@@ -1749,3 +1738,804 @@ button {
     transition: none !important;
   }
 }
+
+/* ==========================================================================
+   Visual lab + brand artefacts
+   Material metaphor: a rack-mounted terminal. Dividers are circuit traces,
+   section numbers are stencilled, state is phosphor / amber / panic crimson.
+   Nothing here uses a two-hue neon gradient.
+   ========================================================================== */
+
+/* ------------------------------------------------------- circuit divider -- */
+/* A 1px trace with a solder pad at each end, instead of a plain <hr>. */
+.rule {
+  position: relative;
+  height: 1px;
+  border: 0;
+  margin-block: clamp(2rem, 5vw, 3.25rem);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--trace-line-c) 12%,
+    var(--trace-line-c) 88%,
+    transparent
+  );
+}
+
+.rule::before,
+.rule::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  border: 1px solid var(--accent-line);
+  background: var(--bg);
+  transform: translateY(-50%);
+}
+
+.rule::before {
+  left: 8%;
+}
+.rule::after {
+  right: 8%;
+}
+
+/* ------------------------------------------------------------ status bar -- */
+/* The strip that tells you the machine is up, in the language of a console. */
+.statusbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 1.1rem;
+  padding: 0.5rem 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--bg-sunken);
+  font-family: var(--font-mono), monospace;
+  font-size: var(--step--1);
+  color: var(--text-faint);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.statusbar-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  white-space: nowrap;
+}
+
+.statusbar-item b {
+  color: var(--text-soft);
+  font-weight: 600;
+}
+
+.statusbar-item.is-ok b {
+  color: var(--ok);
+}
+
+/* --------------------------------------------------------------- hexdump -- */
+/* The brand name as the kernel would show it: address, bytes, ASCII. */
+.hexdump {
+  display: grid;
+  gap: 0.15rem;
+  padding: clamp(0.85rem, 3vw, 1.25rem);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--bg-sunken);
+  font-family: var(--font-mono), monospace;
+  font-size: clamp(0.66rem, 0.44rem + 1.05vw, 0.95rem);
+  line-height: 1.75;
+  overflow-x: auto;
+}
+
+.hex-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0 clamp(0.6rem, 2vw, 1.4rem);
+  white-space: nowrap;
+}
+
+.hex-addr {
+  color: var(--text-faint);
+}
+
+.hex-bytes {
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
+}
+
+.hex-ascii {
+  color: var(--accent);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+/* ------------------------------------------------------------- RFC cards -- */
+/* Post cards read as system log entries, not as blog teasers. */
+.rfc-id {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono), monospace;
+  font-size: var(--step--1);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.rfc-meta {
+  display: grid;
+  gap: 0.2rem;
+  margin-top: 0.9rem;
+  font-family: var(--font-mono), monospace;
+  font-size: var(--step--1);
+  color: var(--text-faint);
+}
+
+.rfc-meta b {
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* ------------------------------------------------------- lab section shell */
+.viz {
+  margin-block: clamp(2.5rem, 6vw, 4rem);
+}
+
+.viz-head {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(0.75rem, 2vw, 1.1rem);
+  margin-bottom: 1.5rem;
+}
+
+/* Stencilled plate, like a number silkscreened onto a rack unit. */
+.viz-n {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border: 1px solid var(--accent-line);
+  border-radius: var(--r-sm);
+  background: var(--accent-wash);
+  color: var(--accent);
+  font-family: var(--font-mono), monospace;
+  font-size: var(--step-0);
+  font-weight: 700;
+}
+
+.viz-head h2 {
+  font-size: var(--step-2);
+  margin-bottom: 0.3rem;
+}
+
+.viz-lede {
+  color: var(--text-muted);
+  font-size: var(--step--1);
+  max-width: var(--measure);
+}
+
+/* --------------------------------------------------------------- callouts -- */
+.callout {
+  margin-top: 1.25rem;
+  padding: 0.85rem 1.1rem;
+  border-left: 2px solid var(--line-strong);
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  background: rgb(255 255 255 / 0.03);
+  color: var(--text-soft);
+  font-size: var(--step--1);
+}
+
+.callout.is-key {
+  border-left-color: var(--ok);
+}
+
+.callout.is-warn {
+  border-left-color: var(--accent);
+}
+
+.callout code {
+  color: var(--accent-bright);
+}
+
+/* -------------------------------------------------------------- timeline -- */
+.tl {
+  display: grid;
+  gap: 0.5rem;
+  list-style: none;
+}
+
+.tl-hit {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--surface-1);
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color var(--dur-feedback) var(--ease-out),
+    background var(--dur-feedback) var(--ease-out),
+    transform var(--dur-feedback) var(--ease-out);
+}
+
+.tl-hit:hover {
+  border-color: var(--line-strong);
+  transform: translateX(2px);
+}
+
+.tl-hit:active {
+  transform: translateX(0) scale(0.995);
+}
+
+.tl-step.is-active .tl-hit {
+  border-color: var(--accent-line);
+  background: var(--accent-wash);
+}
+
+.tl-node {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 1.7rem;
+  height: 1.7rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  background: var(--bg-sunken);
+  font-family: var(--font-mono), monospace;
+  font-size: var(--step--1);
+  color: var(--text-muted);
+  transition:
+    border-color var(--dur-feedback) var(--ease-out),
+    background-color var(--dur-feedback) var(--ease-out),
+    color var(--dur-feedback) var(--ease-out);
+}
+
+.tl-step.is-active .tl-node {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 700;
+}
+
+.tl-body {
+  display: grid;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.tl-note {
+  color: var(--text-muted);
+  font-size: var(--step--1);
+}
+
+/* ---------------------------------------------------------- step player -- */
+.player {
+  display: grid;
+  gap: 1rem;
+}
+
+.player-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.player-count {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  min-width: 0;
+  font-size: var(--step--1);
+  color: var(--text-muted);
+}
+
+.player-title {
+  font-family: var(--font-mono), monospace;
+  color: var(--accent);
+  overflow-wrap: anywhere;
+}
+
+.player-track {
+  display: flex;
+  gap: 4px;
+}
+
+.player-tick {
+  flex: 1;
+  height: 3px;
+  border-radius: var(--r-pill);
+  background: var(--line);
+  transition: background var(--dur-move) var(--ease-out);
+}
+
+.player-tick.is-done {
+  background: var(--accent);
+}
+
+.player-desc {
+  color: var(--text-soft);
+  font-size: var(--step--1);
+  max-width: var(--measure);
+  min-height: 3lh;
+}
+
+/* ------------------------------------------------------------- lab tables -- */
+.cred-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--step--1);
+}
+
+.cred-table th,
+.cred-table td {
+  padding: 0.6rem 0.8rem;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.cred-table thead th {
+  background: var(--bg-sunken);
+  color: var(--text-faint);
+  font-family: var(--font-mono), monospace;
+  font-size: var(--step--1);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.cred-table tbody th {
+  color: var(--text);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.cred-table tr.is-emphasis {
+  background: var(--accent-wash);
+}
+
+.cred-table tr.is-emphasis th code {
+  color: var(--accent-bright);
+}
+
+/* Privilege that was raised reads as panic; a value that settled reads as ok. */
+.cred-raised {
+  color: var(--crit);
+  font-weight: 700;
+}
+
+.cred-changed {
+  color: var(--ok);
+  font-weight: 700;
+}
+
+/* --------------------------------------------------------- path lookup --- */
+.lookup {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.lookup-arrow {
+  text-align: center;
+  font-family: var(--font-mono), monospace;
+  font-size: var(--step--1);
+  color: var(--text-faint);
+}
+
+.lookup-stage {
+  display: grid;
+  gap: 0.3rem;
+  padding: 0.9rem 1.1rem;
+  border: 1px solid var(--line);
+  border-left-width: 2px;
+  border-radius: var(--r-md);
+  background: var(--surface-1);
+}
+
+.lookup-stage p {
+  color: var(--text-muted);
+  font-size: var(--step--1);
+}
+
+.lookup-stage.is-info {
+  border-left-color: var(--info);
+}
+.lookup-stage.is-accent {
+  border-left-color: var(--accent);
+}
+.lookup-stage.is-ok {
+  border-left-color: var(--ok);
+}
+
+/* ------------------------------------------------------------- bit grid -- */
+.bits-wrap {
+  display: grid;
+  gap: 1.1rem;
+}
+
+.bits {
+  display: grid;
+  grid-template-columns: repeat(16, minmax(0, 1fr));
+  gap: 3px;
+}
+
+.bit {
+  display: grid;
+  gap: 2px;
+  padding: 0.5rem 0.15rem;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--surface-1);
+  color: var(--text-faint);
+  font-family: var(--font-mono), monospace;
+  cursor: pointer;
+  transition:
+    border-color var(--dur-feedback) var(--ease-out),
+    background var(--dur-feedback) var(--ease-out),
+    color var(--dur-feedback) var(--ease-out);
+}
+
+.bit:hover {
+  border-color: var(--line-strong);
+  background: var(--surface-2);
+}
+
+.bit:active {
+  transform: scale(0.96);
+}
+
+.bit.is-on {
+  border-color: var(--accent-line);
+  background: var(--accent-wash);
+  color: var(--accent);
+}
+
+.bit-name {
+  font-size: 0.56rem;
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+.bit-val {
+  font-size: var(--step-0);
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* ------------------------------------------------------------ DAC flow --- */
+.flow-wrap {
+  display: grid;
+  gap: 1.1rem;
+}
+
+.flow-actor-detail {
+  margin-left: 0.4rem;
+  font-family: var(--font-mono), monospace;
+  font-size: 0.72em;
+  font-weight: 400;
+  opacity: 0.75;
+}
+
+.flow {
+  display: grid;
+  gap: 0.5rem;
+  list-style: none;
+  counter-reset: none;
+}
+
+.flow-step {
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--line);
+  border-left-width: 2px;
+  border-left-color: var(--line-strong);
+  border-radius: var(--r-md);
+  background: var(--surface-1);
+  transition:
+    border-left-color var(--dur-move) var(--ease-out),
+    opacity var(--dur-move) var(--ease-out);
+}
+
+.flow-step.is-pass {
+  border-left-color: var(--ok);
+}
+
+.flow-step.is-fail {
+  border-left-color: var(--crit);
+}
+
+/* A skipped branch is dimmed rather than hidden: the reader still needs to
+   see that the kernel never evaluated it. */
+.flow-step.is-skip {
+  opacity: 0.45;
+}
+
+.flow-head {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.3rem;
+}
+
+.flow-index {
+  display: grid;
+  place-items: center;
+  width: 1.3rem;
+  height: 1.3rem;
+  border-radius: var(--r-sm);
+  background: var(--surface-3);
+  font-family: var(--font-mono), monospace;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.flow-test {
+  font-size: 0.78em;
+  color: var(--text-faint);
+  overflow-wrap: anywhere;
+}
+
+.flow-note {
+  color: var(--text-muted);
+  font-size: var(--step--1);
+}
+
+.flow-verdict {
+  padding: 0.85rem 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--bg-sunken);
+  font-family: var(--font-mono), monospace;
+  font-size: var(--step-0);
+  font-weight: 700;
+  text-align: center;
+}
+
+.flow-verdict.is-ok {
+  border-color: rgb(16 185 129 / 0.4);
+  color: var(--ok);
+}
+
+.flow-verdict.is-bad {
+  border-color: rgb(225 29 72 / 0.4);
+  color: var(--crit);
+}
+
+/* ---------------------------------------------------------- comparison --- */
+.comp {
+  display: grid;
+  gap: 0.6rem;
+  align-content: start;
+  padding: 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--surface-1);
+}
+
+.comp.is-ok {
+  border-color: rgb(16 185 129 / 0.35);
+}
+
+.comp-sub,
+.comp-out {
+  color: var(--text-muted);
+  font-size: var(--step--1);
+}
+
+.comp-mark {
+  font-weight: 700;
+}
+
+.comp-mark.is-ok {
+  color: var(--ok);
+}
+
+.comp-mark.is-bad {
+  color: var(--crit);
+}
+
+/* --------------------------------------------------- lab inside an article */
+/* The widgets sit in the article body, so they need their own rhythm back —
+   .prose styling stops at the wrapper. */
+.inline-lab {
+  display: grid;
+  gap: 2rem;
+  padding: clamp(1rem, 3vw, 1.5rem);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--bg-sunken);
+}
+
+.inline-lab h3 {
+  font-size: var(--step-1);
+  margin-bottom: -0.75rem;
+}
+
+.inline-lab h3 code {
+  color: var(--accent-bright);
+}
+
+/* ------------------------------------------------------- proof bench ----- */
+/* Type into a fixed-width buffer and watch it overflow. The brand's thesis,
+   operable in about three seconds. */
+.bench {
+  display: grid;
+  gap: 1rem;
+}
+
+.bench-label {
+  font-size: var(--step--1);
+  color: var(--text-muted);
+}
+
+.bench-label .mono {
+  color: var(--accent);
+}
+
+.bench-input {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-sm);
+  background: var(--bg-sunken);
+  color: var(--text);
+  font-family: var(--font-mono), monospace;
+  font-size: var(--step-0);
+}
+
+.bench-input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.buf {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(3.1rem, 1fr));
+  gap: 4px;
+}
+
+.buf-cell {
+  display: grid;
+  gap: 2px;
+  padding: 0.5rem 0.2rem;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  background: var(--surface-1);
+  font-family: var(--font-mono), monospace;
+  text-align: center;
+  transition:
+    border-color var(--dur-feedback) var(--ease-out),
+    background var(--dur-feedback) var(--ease-out);
+}
+
+.buf-cell.is-filled {
+  border-color: rgb(16 185 129 / 0.45);
+  background: rgb(16 185 129 / 0.10);
+  color: var(--ok);
+}
+
+/* Past capacity the cell is no longer ours to write to. */
+.buf-cell.is-over {
+  border-color: rgb(225 29 72 / 0.55);
+  background: rgb(225 29 72 / 0.12);
+  color: var(--crit);
+  animation: bench-panic 420ms var(--ease-out);
+}
+
+.buf-byte {
+  font-size: var(--step--1);
+  font-weight: 700;
+}
+
+.buf-char {
+  font-size: 0.62rem;
+  color: var(--text-faint);
+}
+
+.bench-readout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.2rem;
+  font-family: var(--font-mono), monospace;
+  font-size: var(--step--1);
+  color: var(--text-muted);
+}
+
+.bench-readout b {
+  color: var(--text-soft);
+}
+
+.bench-panic {
+  display: grid;
+  gap: 0.5rem;
+  padding: 0.9rem 1.1rem;
+  border: 1px solid rgb(225 29 72 / 0.45);
+  border-left-width: 2px;
+  border-radius: var(--r-md);
+  background: rgb(225 29 72 / 0.08);
+  color: var(--text-soft);
+  font-size: var(--step--1);
+}
+
+.bench-panic strong {
+  font-family: var(--font-mono), monospace;
+  color: var(--crit);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+@keyframes bench-panic {
+  0% {
+    transform: translateY(0);
+  }
+  35% {
+    transform: translateY(-3px);
+  }
+  70% {
+    transform: translateY(2px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* ----------------------------------------------------------- responsive -- */
+@media (max-width: 720px) {
+  /* 16 columns of bits do not fit a phone; two rows of eight match how the
+     value is read in bytes anyway. */
+  .bits {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+  }
+
+  .viz-n {
+    width: 2.1rem;
+    height: 2.1rem;
+    font-size: var(--step--1);
+  }
+
+  .player-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .player-count {
+    order: -1;
+    justify-content: center;
+  }
+
+  .hex-row {
+    grid-template-columns: auto 1fr;
+  }
+
+  .hex-ascii {
+    grid-column: 2;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tl-hit,
+  .bit,
+  .flow-step,
+  .player-tick,
+  .buf-cell {
+    transition-duration: 1ms;
+  }
+
+  .buf-cell.is-over {
+    animation: none;
+  }
+}
+

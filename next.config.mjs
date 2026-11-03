@@ -1,31 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  async rewrites() {
-    return [
-      {
-        source: '/visuals/linux-permissions',
-        destination: '/visuals/linux-permissions-visual.html',
-      },
-    ];
-  },
-  async headers() {
-    return [
-      {
-        source: '/visuals/:path*',
-        headers: [
-          {
-            key: 'Content-Security-Policy',
-            value: "frame-ancestors 'self' https://overflowbyte.cloud https://*.overflowbyte.cloud https://blog.overflowbyte.cloud https://learning.overflowbyte.cloud https://*.hashnode.dev https://*.medium.com",
-          },
-          {
-            key: 'Access-Control-Allow-Origin',
-            value: '*',
-          },
-        ],
-      },
-    ];
-  },
 };
+
+/* The rewrite and the permissive frame-ancestors / CORS headers that used to
+   live here existed only to serve the visual lab as a standalone HTML file that
+   other sites embedded in an iframe. The lab is now a real route rendered from
+   React components at /visuals/linux-permissions, so none of that is needed —
+   and nothing has to be allowed to frame us. */
 
 export default nextConfig;
