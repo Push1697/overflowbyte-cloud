@@ -22,3 +22,8 @@ Thumbs.db
 
 # TypeScript incremental build cache
 tsconfig.tsbuildinfo
+
+# Payload CMS: local database and its snapshots. Uploaded images in
+# public/media/ ARE committed: Vercel builds from git.
+payload.db*
+backups/

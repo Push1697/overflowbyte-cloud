@@ -1,6 +1,13 @@
+import { withPayload } from '@payloadcms/next/withPayload';
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  experimental: {
+    // Two root layouts, (site) and (payload), so unmatched URLs need a 404
+    // page that brings its own <html>: src/app/global-not-found.tsx.
+    globalNotFound: true,
+  },
 };
 
 /* The rewrite and the permissive frame-ancestors / CORS headers that used to
@@ -9,4 +16,4 @@ const nextConfig = {
    React components at /visuals/linux-permissions, so none of that is needed —
    and nothing has to be allowed to frame us. */
 
-export default nextConfig;
+export default withPayload(nextConfig);

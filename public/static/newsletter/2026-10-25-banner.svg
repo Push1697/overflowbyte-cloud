@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" font-family="Inter, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif">
+  <defs>
+    <radialGradient id="glow" cx="85%" cy="15%" r="60%"><stop offset="0" stop-color="#f39c4a" stop-opacity="0.28"/><stop offset="1" stop-color="#f39c4a" stop-opacity="0"/></radialGradient>
+    <radialGradient id="glow2" cx="10%" cy="100%" r="55%"><stop offset="0" stop-color="#6366f1" stop-opacity="0.25"/><stop offset="1" stop-color="#6366f1" stop-opacity="0"/></radialGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#ffffff" stroke-opacity="0.04"/></pattern>
+  </defs>
+  <rect width="1200" height="630" fill="#0d1117"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <rect width="1200" height="630" fill="url(#glow2)"/>
+  <!-- the logo's three bars, as a brand mark -->
+  <g transform="translate(80 80)">
+    <rect width="88" height="14" rx="7" fill="#f39c4a"/>
+    <rect y="26" width="60" height="14" rx="7" fill="#a5b4fc"/>
+    <rect y="50" width="60" height="14" rx="7" fill="#6366f1"/>
+    <rect x="76" y="50" width="14" height="14" rx="3" fill="#5ee1ff"/>
+  </g>
+  <text x="196" y="112" fill="#ededed" font-size="26" font-weight="700" letter-spacing="1">OVERFLOWBYTE <tspan fill="#f39c4a">WEEKLY</tspan></text>
+  <text x="196" y="142" fill="#8b949e" font-size="20">Issue #7 · Oct 19–25, 2026</text>
+  <text x="80" y="270" fill="#ededed" font-size="60" font-weight="800" letter-spacing="-1.5">Self-healing pipelines,</text>
+  <text x="80" y="344" fill="#ededed" font-size="60" font-weight="800" letter-spacing="-1.5">stricter containers,</text>
+  <text x="80" y="418" fill="#ededed" font-size="60" font-weight="800" letter-spacing="-1.5">nuclear-powered regions</text>
+  <g transform="translate(80 470)"><rect width="102.5" height="44" rx="22" fill="#f39c4a" fill-opacity="0.12" stroke="#f39c4a" stroke-opacity="0.55"/><text x="51.25" y="29" text-anchor="middle" fill="#f39c4a" font-size="20" font-weight="600">AIOps</text></g><g transform="translate(196.5 470)"><rect width="165" height="44" rx="22" fill="#a5b4fc" fill-opacity="0.12" stroke="#a5b4fc" stroke-opacity="0.55"/><text x="82.5" y="29" text-anchor="middle" fill="#a5b4fc" font-size="20" font-weight="600">Kubernetes</text></g><g transform="translate(375.5 470)"><rect width="140" height="44" rx="22" fill="#5ee1ff" fill-opacity="0.12" stroke="#5ee1ff" stroke-opacity="0.55"/><text x="70" y="29" text-anchor="middle" fill="#5ee1ff" font-size="20" font-weight="600">AppArmor</text></g><g transform="translate(529.5 470)"><rect width="127.5" height="44" rx="22" fill="#10b981" fill-opacity="0.12" stroke="#10b981" stroke-opacity="0.55"/><text x="63.75" y="29" text-anchor="middle" fill="#10b981" font-size="20" font-weight="600">systemd</text></g><g transform="translate(671 470)"><rect width="115" height="44" rx="22" fill="#f39c4a" fill-opacity="0.12" stroke="#f39c4a" stroke-opacity="0.55"/><text x="57.5" y="29" text-anchor="middle" fill="#f39c4a" font-size="20" font-weight="600">FinOps</text></g>
+  <rect y="618" width="1200" height="12" fill="#f39c4a"/>
+</svg>
