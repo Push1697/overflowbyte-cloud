@@ -10,7 +10,6 @@ build/
 *.bak
 
 # Environment and secrets
-.env*
 !.env.example
 
 # Vercel CLI
@@ -27,3 +26,4 @@ tsconfig.tsbuildinfo
 # public/media/ ARE committed: Vercel builds from git.
 payload.db*
 backups/
+config.bat
