@@ -1,0 +1,18 @@
+# Keeps local-only files out of `vercel deploy` uploads. Git deploys only see
+# committed files anyway; this guards the CLI path, which uploads the folder.
+
+# Secrets and the local CMS database (admin user, sessions)
+.env*
+payload.db*
+backups/
+
+# Local tooling and agent state
+.agents/
+.claude/
+.vscode/
+
+# Build leftovers and scratch files
+.next/
+dist/
+*.bak
+*.tsbuildinfo
