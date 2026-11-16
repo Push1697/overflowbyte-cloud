@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faFlaskVial,
   faGraduationCap,
   faLayerGroup,
-  faUpRightFromSquare,
+  faArrowRight,
 } from '@fortawesome/free-solid-svg-icons';
 import Flashcards from '../components/Flashcards';
 import LabCard from '../components/LabCard';
@@ -108,19 +109,14 @@ export default function LearnPage() {
               Want the full lab curriculum?
             </h2>
             <p className="text-muted" style={{ fontSize: 'var(--step--1)' }}>
-              40+ RHCSA and RHCE drills, cheat sheets and EX294 mocks live in the learning
-              vault.
+              40+ RHCSA and RHCE drills, cheat sheets and EX294 mocks live in the
+              notes.
             </p>
           </div>
-          <a
-            className="btn btn-secondary"
-            href="https://learning.overflowbyte.tech"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Open the vault
-            <FontAwesomeIcon icon={faUpRightFromSquare} className="fa-ico" />
-          </a>
+          <Link className="btn btn-secondary" href="/notes">
+            Open the notes
+            <FontAwesomeIcon icon={faArrowRight} className="fa-ico" />
+          </Link>
         </div>
       </aside>
     </div>

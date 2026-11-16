@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faBars,
+  faBookOpen,
   faEnvelopeOpenText,
   faGraduationCap,
   faLayerGroup,
@@ -26,6 +27,7 @@ const LAB_HREF = '/visuals/linux-permissions';
 const INTERNAL_LINKS = [
   { href: '/blog', label: 'Articles', icon: faLayerGroup },
   { href: '/learn', label: 'Learn', icon: faGraduationCap },
+  { href: '/notes', label: 'Notes', icon: faBookOpen },
   { href: '/newsletter', label: 'Newsletter', icon: faEnvelopeOpenText },
   { href: '/about', label: 'About', icon: faUser },
 ];

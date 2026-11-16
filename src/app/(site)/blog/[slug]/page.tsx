@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faArrowLeft,
   faGraduationCap,
+  faArrowRight,
   faUpRightFromSquare,
   faWandMagicSparkles,
 } from '@fortawesome/free-solid-svg-icons';
@@ -229,15 +230,10 @@ export default async function BlogPostPage({
                 Test yourself
               </Link>
             )}
-            <a
-              className="btn btn-secondary"
-              href="https://learning.overflowbyte.tech"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <Link className="btn btn-secondary" href="/notes">
               Learning notes
-              <FontAwesomeIcon icon={faUpRightFromSquare} className="fa-ico" />
-            </a>
+              <FontAwesomeIcon icon={faArrowRight} className="fa-ico" />
+            </Link>
           </div>
         </div>
       </aside>
