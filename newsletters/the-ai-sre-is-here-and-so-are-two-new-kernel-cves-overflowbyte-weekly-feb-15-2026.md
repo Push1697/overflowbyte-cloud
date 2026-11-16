@@ -4,9 +4,8 @@ subtitle: "Explore the evolving role of AI in infrastructure, new Linux kernel C
 tags: ["weekly-dev-journal","newsletter","tech-digest","technology","ai-sre"]
 slug: "the-ai-sre-is-here-and-so-are-two-new-kernel-cves-overflowbyte-weekly-feb-15-2026"
 series: "OverflowByte Weekly"
-canonical_url: "https://blog.overflowbyte.cloud/the-ai-sre-is-here-and-so-are-two-new-kernel-cves-overflowbyte-weekly-feb-15-2026"
 date: "14 Feb 2026"
-cover: "https://cdn.hashnode.com/res/hashnode/image/upload/v1771362098899/baf2cf52-c83e-4031-ac84-b11dc47123ee.jpeg"
+cover: "/static/archive/baf2cf52-c83e-4031-ac84-b11dc47123ee.webp"
 source: "hashnode"
 ---
 

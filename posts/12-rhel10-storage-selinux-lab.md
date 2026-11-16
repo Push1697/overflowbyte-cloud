@@ -4,7 +4,6 @@ subtitle: "A complete hands-on guide and interactive lab for RHCSA (EX200) and R
 tags: ["rhel","rhcsa","rhce","lvm","selinux"]
 slug: "rhel10-storage-selinux-lab"
 series: "Red Hat Certification"
-canonical_url: "https://blog.overflowbyte.cloud/rhel10-storage-selinux-lab"
 date: "3 Nov 2026"
 ---
 

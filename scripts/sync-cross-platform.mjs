@@ -1,19 +1,12 @@
 #!/usr/bin/env node
 /*
- * Cross-platform sync: mirrors everything published on Hashnode
- * (blog.overflowbyte.cloud) and Medium into local markdown, so it renders
- * natively on this site — never in an iframe.
+ * Cross-platform sync: mirrors Medium stories into local markdown, so they
+ * render natively on this site — never in an iframe. (The Hashnode half was
+ * removed in Nov 2026: that blog is retired and its posts live in posts/.)
  *
  *   node scripts/sync-cross-platform.mjs              sync everything
  *   node scripts/sync-cross-platform.mjs --dry-run    show what would be written
- *   node scripts/sync-cross-platform.mjs --source hashnode|medium
  *   SYNC_FORCE=1 node scripts/sync-cross-platform.mjs re-fetch already-synced files
- *
- * Hashnode: the sitemap lists every post, and Hashnode serves each post's
- * original markdown at <post-url>.md, so posts arrive word for word. The free
- * GraphQL API was retired in May 2026, so it is not used. RSS only supplies
- * dates and descriptions. Posts in NEWSLETTER_SERIES (or titled "weekly …")
- * go to newsletters/, everything else to posts/.
  *
  * Medium: only the RSS feed is public, so its HTML is converted to markdown.
  * Stories whose title matches something already synced are skipped as
@@ -31,11 +24,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const POSTS_DIR = path.join(ROOT, 'posts');
 const NEWSLETTERS_DIR = path.join(ROOT, 'newsletters');
 
-const HASHNODE = 'https://blog.overflowbyte.cloud';
 const MEDIUM_FEED = 'https://overflowbyte.medium.com/feed';
-const NEWSLETTER_SERIES = ['weeklytechupdates'];
-const NEWSLETTER_TITLE = /\bweekly\b|\bweek\b/i;
-const NOT_POSTS = new Set(['archive', 'newsletter', 'search', 'members', 'badges']);
 
 const dryRun = process.argv.includes('--dry-run');
 const force = process.env.SYNC_FORCE === '1';
@@ -88,26 +77,7 @@ function rssItems(xml) {
   }));
 }
 
-function metaContent(html, prop) {
-  const m =
-    html.match(new RegExp(`<meta[^>]+(?:property|name)="${prop}"[^>]+content="([^"]*)"`, 'i')) ||
-    html.match(new RegExp(`<meta[^>]+content="([^"]*)"[^>]+(?:property|name)="${prop}"`, 'i'));
-  return m ? decodeEntities(m[1]) : '';
-}
-
 /* ---------------------------------------------------- markdown cleaning */
-
-/** Hashnode markdown is already markdown; only its extensions need undoing. */
-function cleanHashnodeMarkdown(md, title) {
-  let s = md.replace(/\r\n/g, '\n');
-  // The page renders the title itself.
-  s = s.replace(/^\s*#\s+.*\n+/, (line) => (sameTitle(line.replace(/^\s*#\s+/, ''), title) ? '' : line));
-  // ![alt](url align="center") -> ![alt](url)
-  s = s.replace(/(!\[[^\]]*\]\()(\S+?)\s+align="[^"]*"\)/g, '$1$2)');
-  // %[https://…] embeds become plain links instead of iframes.
-  s = s.replace(/^%\[(\S+?)\]\s*$/gm, '[$1]($1)');
-  return stripUnsafeHtml(s).trim();
-}
 
 function stripUnsafeHtml(s) {
   return s
@@ -255,62 +225,6 @@ function shouldWrite(local, { file, url, title }) {
   return true;
 }
 
-/* --------------------------------------------------------------- hashnode */
-
-async function syncHashnode(local) {
-  const sitemap = await fetchText(`${HASHNODE}/sitemap.xml`);
-  const slugs = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)]
-    .map(([, loc]) => new URL(loc).pathname.replace(/^\/|\/$/g, ''))
-    .filter((p) => p && !p.includes('/') && !NOT_POSTS.has(p));
-
-  const rss = new Map(rssItems(await fetchText(`${HASHNODE}/rss.xml`)).map((i) => [new URL(i.link).pathname.slice(1), i]));
-
-  const newsletterSlugs = new Set();
-  for (const series of NEWSLETTER_SERIES) {
-    const html = await fetchText(`${HASHNODE}/series/${series}`);
-    for (const [, s] of html.matchAll(/href="\/([a-z0-9-]+)"/g)) newsletterSlugs.add(s);
-  }
-
-  let n = 0;
-  for (const slug of slugs) {
-    const url = `${HASHNODE}/${slug}`;
-    const item = rss.get(slug);
-    const md = await fetchText(`${url}.md`);
-    let title = item?.title || (md.match(/^\s*#\s+(.+)$/m)?.[1] ?? slug);
-    let description = item?.description ?? '';
-    let date = item?.pubDate ?? '';
-    let cover = item?.cover ?? '';
-    // Older posts fall off the 20-item RSS feed; read their page meta instead.
-    if (!item) {
-      const page = await fetchText(url);
-      title = metaContent(page, 'og:title') || title;
-      description = metaContent(page, 'og:description');
-      date = metaContent(page, 'article:published_time') || page.match(/"datePublished":"([^"]+)"/)?.[1] || '';
-      cover = metaContent(page, 'og:image');
-    }
-
-    const isNewsletter = newsletterSlugs.has(slug) || NEWSLETTER_TITLE.test(title);
-    const file = path.join(isNewsletter ? NEWSLETTERS_DIR : POSTS_DIR, `${slug}.md`);
-    if (!shouldWrite(local, { file, url, title })) continue;
-
-    const fm = frontmatter({
-      title,
-      subtitle: description.replace(/\s+/g, ' ').trim(),
-      tags: cleanTags(item?.categories ?? []),
-      slug,
-      series: isNewsletter ? 'OverflowByte Weekly' : undefined,
-      canonical_url: url,
-      date: displayDate(date),
-      cover,
-      source: 'hashnode',
-    });
-    write(file, `${fm}\n${cleanHashnodeMarkdown(md, title)}\n`);
-    local.push({ file, title, canonical: url, synced: true });
-    n++;
-  }
-  return n;
-}
-
 /* ----------------------------------------------------------------- medium */
 
 async function syncMedium(local) {
@@ -318,7 +232,7 @@ async function syncMedium(local) {
   for (const item of rssItems(await fetchText(MEDIUM_FEED))) {
     if (!item.title || !item.link) continue;
     const url = item.link.split('?')[0];
-    // Cross-posts of something already here (from Hashnode or hand-written).
+    // Cross-posts of something already here (imported or hand-written).
     if (local.some((f) => !f.file.includes(`medium-`) && sameTitle(f.title, item.title))) continue;
 
     const tail = new URL(url).pathname.split('/').pop() ?? '';
@@ -349,7 +263,6 @@ async function syncMedium(local) {
 
 const local = loadLocal();
 let total = 0;
-// Hashnode first: it is the primary blog, so Medium cross-posts dedupe against it.
-if (!only || only === 'hashnode') total += await syncHashnode(local);
-if (!only || only === 'medium') total += await syncMedium(local);
+if (only && only !== 'medium') throw new Error(`unknown --source ${only}; only "medium" is left`);
+total += await syncMedium(local);
 console.log(`${dryRun ? '[dry-run] ' : ''}done — ${total} file(s) ${dryRun ? 'would be ' : ''}written.`);

@@ -3,9 +3,8 @@ title: "Discovering the Power Behind Popular Linux GUI Applications"
 subtitle: "Explore how popular Linux GUI applications like GIMP, LibreOffice, GNOME System Monitor, Cheese, and Shotwell rely on powerful command-line tools…"
 tags: ["linux","linux-basics","system-administration"]
 slug: "discovering-the-power-behind-popular-linux-gui-applications"
-canonical_url: "https://blog.overflowbyte.cloud/discovering-the-power-behind-popular-linux-gui-applications"
 date: "22 Oct 2024"
-cover: "https://cdn.hashnode.com/res/hashnode/image/upload/v1729623511992/2c6c1f81-1234-400f-881b-ef2b68345fe6.webp"
+cover: "/static/archive/2c6c1f81-1234-400f-881b-ef2b68345fe6.webp"
 source: "hashnode"
 ---
 
@@ -53,7 +52,7 @@ To open the **GNOME System Monitor**, you can run:
 gnome-system-monitor
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1729622893451/599971f4-6c6e-423d-aab6-d0c045a67657.png)
+![](/static/archive/599971f4-6c6e-423d-aab6-d0c045a67657.webp)
 
 ### Underlying Command
 
@@ -82,7 +81,7 @@ libreoffice --writer /path/to/document.docx
 libreoffice --calc /path/to/spreadsheet.xlsx
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1729623073773/f142795c-d308-47fc-9ada-c5a7f9d760b7.png)
+![](/static/archive/f142795c-d308-47fc-9ada-c5a7f9d760b7.webp)
 
 ### Underlying Command
 

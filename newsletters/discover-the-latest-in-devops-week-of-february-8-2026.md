@@ -4,9 +4,8 @@ subtitle: "Stay updated with the latest in DevOps for February 2026, including A
 tags: ["weekly-dev-journal","newsletter"]
 slug: "discover-the-latest-in-devops-week-of-february-8-2026"
 series: "OverflowByte Weekly"
-canonical_url: "https://blog.overflowbyte.cloud/discover-the-latest-in-devops-week-of-february-8-2026"
 date: "8 Feb 2026"
-cover: "https://cdn.hashnode.com/res/hashnode/image/upload/v1770543253669/0dd265db-252d-45ff-845e-1f37bc6286a2.png"
+cover: "/static/archive/0dd265db-252d-45ff-845e-1f37bc6286a2.webp"
 source: "hashnode"
 ---
 

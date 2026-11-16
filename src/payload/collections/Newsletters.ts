@@ -3,7 +3,7 @@ import { articleFields, removeMarkdownAfterDelete, writeMarkdownAfterChange } fr
 
 /**
  * Weekly issues, mirrored to newsletters/*.md and rendered at /newsletter.
- * Synced from blog.overflowbyte.cloud by scripts/sync-cross-platform.mjs, or
+ * Older issues were imported from the retired Hashnode blog; new ones are
  * written here directly.
  */
 export const Newsletters: CollectionConfig = {

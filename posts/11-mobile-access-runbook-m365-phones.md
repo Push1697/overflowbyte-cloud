@@ -4,7 +4,6 @@ subtitle: "How to make Microsoft 365 work on Android and iPhone only after the p
 tags: ["intune","entra-id","mdm","microsoft-365","security"]
 slug: "mobile-access-runbook-m365-phones"
 series: "Cloud & Identity"
-canonical_url: "https://blog.overflowbyte.cloud/mobile-access-runbook-m365-phones"
 date: "3 Nov 2026"
 ---
 

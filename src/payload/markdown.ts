@@ -199,18 +199,18 @@ export function articleFields(collection: Collection): Field[] {
     {
       name: 'canonicalUrl',
       type: 'text',
-      admin: { position: 'sidebar', description: 'Where the original lives (Hashnode/Medium), for SEO.' },
+      admin: { position: 'sidebar', description: 'Only for stories that began elsewhere (Medium). Leave empty: the post is canonical here.' },
     },
     {
       name: 'publishSlug',
       type: 'text',
-      admin: { position: 'sidebar', description: 'Slug used when publishing to Hashnode/Medium.' },
+      admin: { position: 'sidebar', description: 'Slug used when publishing to Medium.' },
     },
     {
       name: 'source',
       type: 'select',
       options: [
-        { label: 'Hashnode (synced)', value: 'hashnode' },
+        { label: 'Hashnode archive (imported)', value: 'hashnode' },
         { label: 'Medium (synced)', value: 'medium' },
       ],
       admin: {

@@ -4,7 +4,6 @@ subtitle: "Single-fault drills are too kind: you are told what is wrong and that
 tags: ["linux","sre","troubleshooting","incidents"]
 slug: "i-broke-two-servers-on-purpose"
 series: "Incident Drills"
-canonical_url: "https://blog.overflowbyte.cloud/i-broke-two-servers-on-purpose"
 date: "13 Dec 2026"
 ---
 

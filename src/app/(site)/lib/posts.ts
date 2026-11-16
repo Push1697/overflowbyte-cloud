@@ -12,7 +12,7 @@ export type PostFrontmatter = {
   tags?: string[];
   canonical_url?: string;
   date?: string;
-  /** Set by scripts/sync-cross-platform.mjs on posts mirrored from elsewhere. */
+  /** Where an archive post began: 'hashnode' (imported once, now hosted here) or 'medium' (synced). */
   source?: 'hashnode' | 'medium';
   /** Set by the CMS for unpublished drafts, which the site never shows. */
   draft?: boolean;
@@ -65,7 +65,7 @@ export function getPost(slug: string): Post | null {
   return { slug, frontmatter: data as PostFrontmatter, content };
 }
 
-/** Posts mirrored from Hashnode and Medium, newest first. */
+/** Archive posts (imported from Hashnode, or mirrored from Medium), newest first. */
 export function getArchivePosts(): Post[] {
   return getPostSlugs()
     .map(getPost)

@@ -8,7 +8,7 @@ import { coverImage, toTime } from '../lib/posts';
 export const metadata: Metadata = {
   title: 'Weekly newsletter — OverflowByte',
   description:
-    'Every weekly newsletter published on blog.overflowbyte.cloud, synced here as real articles — no iframes, no embeds.',
+    'Every weekly OverflowByte newsletter, published here as real articles — no iframes, no embeds.',
 };
 
 export default function NewsletterIndexPage() {
@@ -29,19 +29,16 @@ export default function NewsletterIndexPage() {
           The weekly dispatch
         </h1>
         <p className="lede">
-          Everything published as a newsletter on Hashnode, pulled in by{' '}
-          <code>npm run sync:cross-platform</code> and rendered here as plain articles —
-          readable in day or night mode, searchable, and never inside a frame.
+          Every weekly issue, written in <code>newsletters/</code> and rendered here as plain
+          articles — readable in day or night mode, searchable, and never inside a frame.
         </p>
       </header>
 
       {items.length === 0 ? (
         <div className="card card-pad card-quiet">
           <p className="text-muted">
-            No newsletters synced yet. Run <code>npm run sync:cross-platform</code> to pull the
-            weekly issues from blog.overflowbyte.cloud into <code>newsletters/</code>, then
-            rebuild. The same script also mirrors new Hashnode and Medium posts into{' '}
-            <code>posts/</code> automatically.
+            No newsletters yet. Add a markdown file to <code>newsletters/</code> (or create one in
+            the CMS), then rebuild.
           </p>
         </div>
       ) : (

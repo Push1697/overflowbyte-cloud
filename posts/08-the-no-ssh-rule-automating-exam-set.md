@@ -4,7 +4,6 @@ subtitle: "The week that joins the two certifications - every manual RHCSA lab r
 tags: ["ansible","rhce","ex294","automation"]
 slug: "the-no-ssh-rule-automating-exam-set"
 series: "Ansible & RHCE"
-canonical_url: "https://blog.overflowbyte.cloud/the-no-ssh-rule-automating-exam-set"
 date: "7 Feb 2027"
 ---
 

@@ -3,9 +3,8 @@ title: "Simple Ways to Install VLC on Linux (Ubuntu, Fedora, Centos & More)"
 subtitle: "Learn five easy methods to install VLC on Linux, including Ubuntu, Fedora, and more, for seamless media playback"
 tags: ["linux","vlc","open-source","computer-science"]
 slug: "simple-ways-to-install-vlc-on-linux-ubuntu-fedora-centos-more"
-canonical_url: "https://blog.overflowbyte.cloud/simple-ways-to-install-vlc-on-linux-ubuntu-fedora-centos-more"
 date: "26 Oct 2024"
-cover: "https://cdn.hashnode.com/res/hashnode/image/upload/v1729963412725/393db82d-058c-4dcd-b230-dab7a53daa34.jpeg"
+cover: "/static/archive/393db82d-058c-4dcd-b230-dab7a53daa34.webp"
 source: "hashnode"
 ---
 

@@ -3,9 +3,8 @@ title: "Learn YAML Fast: Your First Step to DevOps Mastery"
 subtitle: "Master YAML syntax, Docker Compose, and Kubernetes manifests with this comprehensive guide for aspiring DevOps engineers"
 tags: ["yaml","devops","devops-articles","general-programming","basics"]
 slug: "learn-yaml-fast-your-first-step-to-devops-mastery"
-canonical_url: "https://blog.overflowbyte.cloud/learn-yaml-fast-your-first-step-to-devops-mastery"
 date: "6 Nov 2025"
-cover: "https://cdn.hashnode.com/res/hashnode/image/upload/v1763017864876/76c3171b-ca2a-4942-bddf-70bdcc9c2fe1.png"
+cover: "/static/archive/76c3171b-ca2a-4942-bddf-70bdcc9c2fe1.webp"
 source: "hashnode"
 ---
 

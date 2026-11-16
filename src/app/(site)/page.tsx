@@ -311,7 +311,7 @@ export default function HomePage() {
           <div>
             <h2>Flagship articles</h2>
             <p>
-              Long-form deep-dives, syndicated across Hashnode, Medium and this reader.
+              Long-form deep-dives, published here and syndicated to Medium.
             </p>
           </div>
           <Link className="action-link" href="/blog">
@@ -384,7 +384,7 @@ export default function HomePage() {
                 </Link>
                 <a
                   className="btn btn-secondary"
-                  href="https://pushpendra.overflowbyte.cloud"
+                  href="https://pushpendra.overflowbyte.tech"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

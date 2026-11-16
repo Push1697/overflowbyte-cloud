@@ -4,7 +4,6 @@ subtitle: "CVE-2026-109618, CVE-2026-109619 (PHP2Shell) and CVE-2026-111497 (Nod
 tags: ["security","rce","php","nodejs"]
 slug: "your-code-is-clean-attackers-still-got-a-shell"
 series: "Security & Exploitation"
-canonical_url: "https://blog.overflowbyte.cloud/your-code-is-clean-attackers-still-got-a-shell"
 date: "15 Nov 2026"
 ---
 
@@ -300,4 +299,4 @@ Many teams attempted quick configuration band-aids. Understanding why they fail:
 7. **CERT-EU Alert** — *Critical Runtime Vulnerabilities in Web Application Infrastructure*
 
 
-*Authored by [Pushpendra Dev](https://pushpendra.overflowbyte.cloud) · Infrastructure System Engineer at [OverflowByte](https://www.youtube.com/@overflowbyte)*
+*Authored by [Pushpendra Dev](https://pushpendra.overflowbyte.tech) · Infrastructure System Engineer at [OverflowByte](https://www.youtube.com/@overflowbyte)*

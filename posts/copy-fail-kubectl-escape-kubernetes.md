@@ -3,15 +3,14 @@ title: "How a 732-Byte Python Script Can Escape Your Kubernetes Cluster — Copy
 subtitle: "Learn how the kubectl cp command can be weaponised using path traversal to escape Kubernetes clusters. Covers CVE-2019-11246, real exploit code, and…"
 tags: ["kubernetes","security","devops","linux","cve","containers"]
 slug: "copy-fail-kubectl-escape-kubernetes"
-canonical_url: "https://blog.overflowbyte.cloud/copy-fail-kubectl-escape-kubernetes"
 date: "11 May 2026"
-cover: "https://cdn.hashnode.com/uploads/covers/6087f0a6aaea092e0faa6232/a49209aa-99ff-42a3-9d8c-89585ffcac6b.png"
+cover: "/static/archive/a49209aa-99ff-42a3-9d8c-89585ffcac6b.webp"
 source: "hashnode"
 ---
 
 * * *
 
-> **This is a deep-dive standalone post.** If you first heard about Copy Fail in our [OverflowByte Weekly — Cloud Broke, Kernels Got Exploited, and AI Took Over the Pipeline (May 4–10, 2026)](https://blog.overflowbyte.cloud/overflowbyte-weekly-cloud-broke-kernels-got-exploited-and-ai-took-over-the-pipeline-may-4-10-2026), this is where we go all the way in.
+> **This is a deep-dive standalone post.** If you first heard about Copy Fail in our [OverflowByte Weekly — Cloud Broke, Kernels Got Exploited, and AI Took Over the Pipeline (May 4–10, 2026)](/newsletter/overflowbyte-weekly-cloud-broke-kernels-got-exploited-and-ai-took-over-the-pipeline-may-4-10-2026), this is where we go all the way in.
 
 * * *
 
@@ -71,7 +70,7 @@ The client doesn't validate the archive. It doesn't check whether filenames cont
 
 This is the trust assumption that Copy Fail exploits.
 
-> **Read next:** If you're unfamiliar with how tar archives work and what those commands actually do at the filesystem level, our post [How to Extract (Unzip) tar.xz Files — A Complete Beginner's Guide](https://blog.overflowbyte.cloud/how-to-extract-unzip-tar-xz-file-a-complete-beginner-s-guide) is a solid primer before going further.
+> **Read next:** If you're unfamiliar with how tar archives work and what those commands actually do at the filesystem level, our post [How to Extract (Unzip) tar.xz Files — A Complete Beginner's Guide](/blog/how-to-extract-unzip-tar-xz-file-a-complete-beginner-s-guide) is a solid primer before going further.
 
 * * *
 
@@ -183,7 +182,7 @@ CMD ["python3", "server.py"]
 
 In a pull request diff with 200+ lines across a dozen files, the `COPY malicious_tar.py /usr/bin/tar` line can genuinely get missed. Especially if the reviewer isn't specifically scanning for binary replacements. Especially if the build is already "trusted" because it's running through your CI pipeline.
 
-> **This is why CI/CD pipeline security matters as much as pipeline functionality.** If you're building out your pipeline and want to understand what a solid, secure CI/CD setup looks like from the ground up, we covered that thoroughly in [Beginner's Guide to Building a Professional CI/CD Pipeline from Scratch](https://blog.overflowbyte.cloud/beginners-guide-to-building-a-professional-cicd-pipeline-from-scratch). The image scanning and signing sections are directly relevant here.
+> **This is why CI/CD pipeline security matters as much as pipeline functionality.** If you're building out your pipeline and want to understand what a solid, secure CI/CD setup looks like from the ground up, we covered that thoroughly in [Beginner's Guide to Building a Professional CI/CD Pipeline from Scratch](/blog/beginners-guide-to-building-a-professional-cicd-pipeline-from-scratch). The image scanning and signing sections are directly relevant here.
 
 * * *
 
@@ -574,7 +573,7 @@ This same pattern appears in:
 
 The defensive habit to build is asking: *what are we implicitly trusting here, and who controls the other end of that trust?* For `kubectl cp`, the answer was "the container's tar output" and "whoever controls the container image." Once you see it that way, the vulnerability is obvious. The hard part is asking the question before the CVE drops.
 
-> **Related reading:** This same question — who controls the credentials, and what can they reach? — is what makes AWS IAM so important to get right. We covered the fundamentals in [Managing AWS IAM Users Made Easy: Tips on Creation, Administration, and Removal](https://blog.overflowbyte.cloud/managing-aws-iam-users-made-easy-tips-on-creation-administration-and-removal). IAM mistakes compound with container escape scenarios: if the pod that exploited your developer had access to assume an IAM role, the blast radius just grew significantly.
+> **Related reading:** This same question — who controls the credentials, and what can they reach? — is what makes AWS IAM so important to get right. We covered the fundamentals in [Managing AWS IAM Users Made Easy: Tips on Creation, Administration, and Removal](/blog/managing-aws-iam-users-made-easy-tips-on-creation-administration-and-removal). IAM mistakes compound with container escape scenarios: if the pod that exploited your developer had access to assume an IAM role, the blast radius just grew significantly.
 
 * * *
 
@@ -623,9 +622,9 @@ The defensive habit to build is asking: *what are we implicitly trusting here, a
 
 ## Stay Current
 
-We track CVEs like this every week in the [OverflowByte Weekly](https://blog.overflowbyte.cloud/series/weeklytechupdates). Copy Fail was first flagged in our [May 4–10, 2026 edition](https://blog.overflowbyte.cloud/overflowbyte-weekly-cloud-broke-kernels-got-exploited-and-ai-took-over-the-pipeline-may-4-10-2026) alongside DirtyFrag and Pack2TheRoot. Subscribe to stay ahead of the next one before it hits your cluster.
+We track CVEs like this every week in the [OverflowByte Weekly](/newsletter). Copy Fail was first flagged in our [May 4–10, 2026 edition](/newsletter/overflowbyte-weekly-cloud-broke-kernels-got-exploited-and-ai-took-over-the-pipeline-may-4-10-2026) alongside DirtyFrag and Pack2TheRoot. Subscribe to stay ahead of the next one before it hits your cluster.
 
-If you found this useful, [the Linux for DevOps series](https://blog.overflowbyte.cloud/series/linux-for-devops) has more deep dives on the tooling that underpins everything covered here — including `tar`, `ssh`, and the file permission model that makes these escapes possible.
+If you found this useful, [the Linux for DevOps series](/blog) has more deep dives on the tooling that underpins everything covered here — including `tar`, `ssh`, and the file permission model that makes these escapes possible.
 
 * * *
 

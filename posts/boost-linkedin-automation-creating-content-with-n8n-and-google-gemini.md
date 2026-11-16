@@ -3,7 +3,6 @@ title: "Boost LinkedIn Automation: Creating Content with n8n and Google Gemini"
 subtitle: "Automate LinkedIn content creation using n8n, Google Gemini, and a human-in-the-loop workflow for consistent, high-quality posts effortlessly"
 tags: ["general-programming","n8n","n8n-automation","ai-automation"]
 slug: "boost-linkedin-automation-creating-content-with-n8n-and-google-gemini"
-canonical_url: "https://blog.overflowbyte.cloud/boost-linkedin-automation-creating-content-with-n8n-and-google-gemini"
 date: "8 Feb 2026"
 source: "hashnode"
 ---
@@ -58,7 +57,7 @@ graph TD
 
 Here's what the actual workflow looks like in n8n:
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1770532209957/798cffe2-499e-45ca-93fa-11bfdfc4027d.png)
+![](/static/archive/798cffe2-499e-45ca-93fa-11bfdfc4027d.webp)
 
 The workflow is organized into 4 distinct sections (marked by sticky notes):
 

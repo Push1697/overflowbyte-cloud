@@ -5,7 +5,7 @@
  * cannot drift from the letters beside them — the point of the thing is that
  * it is a real dump, not a picture of one.
  */
-const LINES = ['OVERFLOW', 'BYTE.CLOUD'];
+const LINES = ['OVERFLOW', 'BYTE.TECH'];
 
 const WIDTH = 8;
 
@@ -39,7 +39,7 @@ function rows() {
 
 export default function HexWordmark() {
   return (
-    <div className="hexdump" role="img" aria-label="OVERFLOWBYTE.CLOUD as a hex dump">
+    <div className="hexdump" role="img" aria-label="OVERFLOWBYTE.TECH as a hex dump">
       {rows().map((row) => (
         <div key={row.addr} className="hex-row">
           <span className="hex-addr">{row.addr}</span>

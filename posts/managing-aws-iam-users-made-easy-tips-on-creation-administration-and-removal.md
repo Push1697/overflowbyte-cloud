@@ -3,9 +3,8 @@ title: "Managing AWS IAM Users Made Easy: Tips on Creation, Administration, and 
 subtitle: "Learn to manage AWS IAM users effectively with easy-to-follow steps for creation, administration, and removal, plus best security practices"
 tags: ["aws","iam","identity-management","cloud-computing"]
 slug: "managing-aws-iam-users-made-easy-tips-on-creation-administration-and-removal"
-canonical_url: "https://blog.overflowbyte.cloud/managing-aws-iam-users-made-easy-tips-on-creation-administration-and-removal"
 date: "18 Dec 2025"
-cover: "https://cdn.hashnode.com/res/hashnode/image/upload/v1766044078951/53dcd5bf-7b66-4b2f-b0c3-fe25e049e5f1.jpeg"
+cover: "/static/archive/53dcd5bf-7b66-4b2f-b0c3-fe25e049e5f1.webp"
 source: "hashnode"
 ---
 

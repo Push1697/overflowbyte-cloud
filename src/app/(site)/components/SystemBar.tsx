@@ -6,7 +6,7 @@
  * decoration this site is supposed to argue against.
  */
 export default function SystemBar({ items }: { items?: { label: string; value: string }[] }) {
-  const fields = items ?? [{ label: 'host', value: 'overflowbyte.cloud' }];
+  const fields = items ?? [{ label: 'host', value: 'overflowbyte.tech' }];
 
   return (
     <div className="statusbar">

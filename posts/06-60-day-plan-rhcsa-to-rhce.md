@@ -4,7 +4,6 @@ subtitle: "A requirement-driven lab curriculum that takes you from core RHEL adm
 tags: ["rhcsa","rhce","ansible","certification"]
 slug: "60-day-plan-rhcsa-to-rhce"
 series: "Red Hat Certification"
-canonical_url: "https://blog.overflowbyte.cloud/60-day-plan-rhcsa-to-rhce"
 date: "10 Jan 2027"
 ---
 

@@ -4,7 +4,6 @@ subtitle: "Kernel credentials, newgrp internals, in-memory Inodes, and the exact
 tags: ["linux", "kernel", "devops", "security", "sysadmin"]
 slug: "how-linux-decides-who-can-open-a-file"
 series: "Linux Internals"
-canonical_url: "https://blog.overflowbyte.cloud/how-linux-decides-who-can-open-a-file"
 ---
 
 # How Linux Decides Who Can Open a File (A Visual Deep Dive)
@@ -220,6 +219,6 @@ exit
 
 ---
 
-*Interactive visual models, the 16-bit live calculator, and step-by-step state animations are available on our [Live Interactive Visual Lab on OverflowByte](https://overflowbyte.cloud/visuals/linux-permissions).*
+*Interactive visual models, the 16-bit live calculator, and step-by-step state animations are available on our [Live Interactive Visual Lab on OverflowByte](https://overflowbyte.tech/visuals/linux-permissions).*
 
-*Full lab setups, EX294 exam drills, and low-level Linux administration guides live in my [Learning Notes](https://learning.overflowbyte.cloud) →*
+*Full lab setups, EX294 exam drills, and low-level Linux administration guides live in my [Learning Notes](https://learning.overflowbyte.tech) →*

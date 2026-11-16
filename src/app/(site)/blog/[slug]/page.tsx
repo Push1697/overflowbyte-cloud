@@ -49,7 +49,8 @@ export async function generateMetadata({
   return {
     title,
     description: subtitle,
-    alternates: canonical ? { canonical } : undefined,
+    // Posts live here now; only stories that began on Medium point elsewhere.
+    alternates: { canonical: canonical ?? `/blog/${slug}` },
     openGraph: { title, description: subtitle, type: 'article' },
   };
 }
@@ -71,7 +72,7 @@ export default async function BlogPostPage({
   // Flagship number comes from the filename prefix (01-…, 11-…); synced
   // archive posts have no prefix and are labelled by where they came from.
   const flagshipNum = /^\d{2}-/.test(slug) ? slug.slice(0, 2) : null;
-  const origin = frontmatter.source === 'medium' ? 'From Medium' : 'From the Hashnode archive';
+  const origin = frontmatter.source === 'medium' ? 'From Medium' : 'From the archive';
   // Data-driven diagrams attached to this post, if any.
   const visuals = POST_VIZ[slug] ?? [];
 
@@ -118,46 +119,19 @@ export default async function BlogPostPage({
       </header>
 
       {canonical && (
-        <div
-          className="card card-pad card-quiet"
-          style={{ marginTop: '2rem', padding: '1rem 1.25rem' }}
-        >
-          <div
-            className="cluster"
-            style={{ justifyContent: 'space-between', ['--cluster-gap' as string]: '0.75rem' }}
-          >
-            <p className="text-muted" style={{ fontSize: 'var(--step--1)' }}>
-              Canonical home:{' '}
-              <a
-                href={canonical}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: 'var(--accent)', textDecoration: 'underline' }}
-              >
-                blog.overflowbyte.cloud
-              </a>
-            </p>
-            <div className="cluster" style={{ ['--cluster-gap' as string]: '0.5rem' }}>
-              <a
-                className="btn btn-secondary btn-sm"
-                href={canonical}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Hashnode
-                <FontAwesomeIcon icon={faUpRightFromSquare} className="fa-ico" />
-              </a>
-              <a
-                className="btn btn-secondary btn-sm"
-                href="https://overflowbyte.medium.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Medium
-                <FontAwesomeIcon icon={faUpRightFromSquare} className="fa-ico" />
-              </a>
-            </div>
-          </div>
+        <div className="card card-pad card-quiet" style={{ marginTop: '2rem', padding: '1rem 1.25rem' }}>
+          <p className="text-muted" style={{ fontSize: 'var(--step--1)' }}>
+            Originally published on{' '}
+            <a
+              href={canonical}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: 'var(--accent)', textDecoration: 'underline' }}
+            >
+              {new URL(canonical).hostname}
+              <FontAwesomeIcon icon={faUpRightFromSquare} className="fa-ico" />
+            </a>
+          </p>
         </div>
       )}
 
@@ -257,7 +231,7 @@ export default async function BlogPostPage({
             )}
             <a
               className="btn btn-secondary"
-              href="https://learning.overflowbyte.cloud"
+              href="https://learning.overflowbyte.tech"
               target="_blank"
               rel="noopener noreferrer"
             >

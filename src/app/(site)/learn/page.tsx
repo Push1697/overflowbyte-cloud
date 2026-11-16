@@ -114,7 +114,7 @@ export default function LearnPage() {
           </div>
           <a
             className="btn btn-secondary"
-            href="https://learning.overflowbyte.cloud"
+            href="https://learning.overflowbyte.tech"
             target="_blank"
             rel="noopener noreferrer"
           >

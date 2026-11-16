@@ -25,7 +25,7 @@ export async function generateMetadata({
   return {
     title: title ?? slug,
     description: subtitle,
-    alternates: canonical ? { canonical } : undefined,
+    alternates: { canonical: canonical ?? `/newsletter/${slug}` },
     openGraph: { title, description: subtitle, type: 'article' },
   };
 }
@@ -53,7 +53,9 @@ export default async function NewsletterIssuePage({
         <div className="cluster" style={{ marginBottom: '1rem' }}>
           <span className="badge badge-accent">{frontmatter.series ?? 'Weekly Newsletter'}</span>
           {frontmatter.date && <span className="meta">{frontmatter.date}</span>}
-          {frontmatter.source && <span className="badge badge-neutral">via {frontmatter.source}</span>}
+          {frontmatter.source && frontmatter.source !== 'hashnode' && (
+            <span className="badge badge-neutral">via {frontmatter.source}</span>
+          )}
         </div>
 
         <h1 style={{ fontSize: 'var(--step-5)' }}>{frontmatter.title ?? slug}</h1>
@@ -78,14 +80,14 @@ export default async function NewsletterIssuePage({
       {canonical && (
         <div className="card card-pad card-quiet" style={{ marginTop: '2rem', padding: '1rem 1.25rem' }}>
           <p className="text-muted" style={{ fontSize: 'var(--step--1)' }}>
-            Originally published:{' '}
+            Originally published on{' '}
             <a
               href={canonical}
               target="_blank"
               rel="noopener noreferrer"
               style={{ color: 'var(--accent)', textDecoration: 'underline' }}
             >
-              blog.overflowbyte.cloud
+              {new URL(canonical).hostname}
               <FontAwesomeIcon icon={faUpRightFromSquare} className="fa-ico" />
             </a>
           </p>

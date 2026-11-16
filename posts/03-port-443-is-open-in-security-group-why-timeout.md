@@ -4,7 +4,6 @@ subtitle: "NACLs versus security groups on AWS: where each sits in the packet pa
 tags: ["aws","networking","vpc","security"]
 slug: "port-443-is-open-in-security-group-why-timeout"
 series: "Cloud Networking"
-canonical_url: "https://blog.overflowbyte.cloud/port-443-is-open-in-security-group-why-timeout"
 date: "29 Nov 2026"
 ---
 

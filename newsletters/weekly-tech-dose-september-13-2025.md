@@ -4,9 +4,8 @@ subtitle: "Stay ahead with Google Cloud updates, Windows Server 2025 release, an
 tags: ["weekly-tech-updates","general-programming","securityawareness","security","cloud-computing"]
 slug: "weekly-tech-dose-september-13-2025"
 series: "OverflowByte Weekly"
-canonical_url: "https://blog.overflowbyte.cloud/weekly-tech-dose-september-13-2025"
 date: "12 Sept 2025"
-cover: "https://cdn.hashnode.com/res/hashnode/image/upload/v1763015763501/a0584d85-79d2-40a6-b3d4-5d3327cf38ad.png"
+cover: "/static/archive/a0584d85-79d2-40a6-b3d4-5d3327cf38ad.webp"
 source: "hashnode"
 ---
 

@@ -3,9 +3,8 @@ title: "Resolving IP Conflicts in Talos Kubernetes: A Step-by-Step Guide"
 subtitle: "Learn how to resolve IP conflicts in Talos Kubernetes labs with this detailed, step-by-step troubleshooting guide"
 tags: ["kubernetes","containers","talos-linux","virtual-machine","linux-for-beginners","docker"]
 slug: "resolving-ip-conflicts-in-talos-kubernetes-a-step-by-step-guide"
-canonical_url: "https://blog.overflowbyte.cloud/resolving-ip-conflicts-in-talos-kubernetes-a-step-by-step-guide"
 date: "27 Nov 2025"
-cover: "https://cdn.hashnode.com/res/hashnode/image/upload/v1764489249066/a3e0a0e6-ea4e-4f42-a6ec-98886c0a9bfa.png"
+cover: "/static/archive/a3e0a0e6-ea4e-4f42-a6ec-98886c0a9bfa.webp"
 source: "hashnode"
 ---
 

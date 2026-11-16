@@ -4,7 +4,6 @@ subtitle: "Seven requirement-driven Ansible labs - inventory and config, ad-hoc 
 tags: ["ansible","yaml","architecture"]
 slug: "ansible-variable-precedence-drawn"
 series: "Ansible & RHCE"
-canonical_url: "https://blog.overflowbyte.cloud/ansible-variable-precedence-drawn"
 date: "21 Feb 2027"
 ---
 

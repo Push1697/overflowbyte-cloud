@@ -38,7 +38,7 @@ Options:
   --status <draft|public|unlisted>  Publish status (default: draft)
   --title <title>                   Override post title
   --tags <tag1,tag2>                Comma-separated tags (max 5)
-  --canonical <url>                 Canonical URL pointing to original source (e.g. Hashnode)
+  --canonical <url>                 Canonical URL pointing to original source (the article on www.overflowbyte.tech)
 
 Environment:
   MEDIUM_TOKEN: Your Medium Integration Token from Medium > Settings > Integration Tokens

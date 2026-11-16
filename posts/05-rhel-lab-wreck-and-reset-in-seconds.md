@@ -4,7 +4,6 @@ subtitle: "Build a three-node RHEL lab on KVM/libvirt with thin qcow2 overlays, 
 tags: ["rhel","kvm","cloud-init","virtualization"]
 slug: "rhel-lab-wreck-and-reset-in-seconds"
 series: "Linux & Virtualization"
-canonical_url: "https://blog.overflowbyte.cloud/rhel-lab-wreck-and-reset-in-seconds"
 date: "27 Dec 2026"
 ---
 

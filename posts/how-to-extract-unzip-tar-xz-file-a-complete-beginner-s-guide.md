@@ -3,15 +3,14 @@ title: "How to Extract (Unzip) tar.xz File: A Complete Beginner's Guide"
 subtitle: "Learn how to extract a tar.xz file easily on Linux, Windows, and macOS. A complete beginner-to-intermediate guide with real-world examples, commands."
 tags: ["linux","linux-commands","beginnersguide","tutorial","linux-basics"]
 slug: "how-to-extract-unzip-tar-xz-file-a-complete-beginner-s-guide"
-canonical_url: "https://blog.overflowbyte.cloud/how-to-extract-unzip-tar-xz-file-a-complete-beginner-s-guide"
 date: "1 Mar 2026"
-cover: "https://cdn.hashnode.com/uploads/covers/6087f0a6aaea092e0faa6232/03404fc4-d37f-4f52-b1bc-954d9fe2308f.png"
+cover: "/static/archive/03404fc4-d37f-4f52-b1bc-954d9fe2308f.webp"
 source: "hashnode"
 ---
 
-If you've spent any time working with Linux, downloading open-source software, managing remote servers securely (such as [allowing SSH Root Login](https://blog.overflowbyte.cloud/how-to-allow-ssh-root-login-on-linux-securely-real-world-use-cases-best-practices)), or dealing with [server backups](https://markdowntorichtext.com/articles/server-backups-guide), chances are you've encountered a `.tar.xz` [file](https://markdowntorichtext.com/articles/what-is-tar-xz). At first glance, it might look like just another compressed folder, but how exactly do you open it?
+If you've spent any time working with Linux, downloading open-source software, managing remote servers securely (such as [allowing SSH Root Login](/blog/how-to-allow-ssh-root-login-on-linux-securely-real-world-use-cases-best-practices)), or dealing with [server backups](https://markdowntorichtext.com/articles/server-backups-guide), chances are you've encountered a `.tar.xz` [file](https://markdowntorichtext.com/articles/what-is-tar-xz). At first glance, it might look like just another compressed folder, but how exactly do you open it?
 
-If you are wondering how to extract a `tar.xz` file safely and efficiently using the terminal or [graphical tools](https://blog.overflowbyte.cloud/discovering-the-power-behind-popular-linux-gui-applications), you are in the right place. This comprehensive guide will walk you through everything you need to know about the `tar.xz` format, the [essential Linux commands](https://markdowntorichtext.com/articles/tar-command-guide), and how to [troubleshoot common extraction errors](https://markdowntorichtext.com/articles/troubleshoot-archives). Let's dive in and demystify the process of working with these highly compressed archives!
+If you are wondering how to extract a `tar.xz` file safely and efficiently using the terminal or [graphical tools](/blog/discovering-the-power-behind-popular-linux-gui-applications), you are in the right place. This comprehensive guide will walk you through everything you need to know about the `tar.xz` format, the [essential Linux commands](https://markdowntorichtext.com/articles/tar-command-guide), and how to [troubleshoot common extraction errors](https://markdowntorichtext.com/articles/troubleshoot-archives). Let's dive in and demystify the process of working with these highly compressed archives!
 
 * * *
 
@@ -21,7 +20,7 @@ If you find this guide useful, you might also like:
     
 *   [Install and use xz on Linux](https://markdowntorichtext.com/articles/install-xz-and-usage) — how to install `xz` and use its options.
     
-*   [Discovering the Power Behind Popular Linux GUI Applications](https://blog.overflowbyte.cloud/discovering-the-power-behind-popular-linux-gui-applications) — explore graphical alternatives for extraction.
+*   [Discovering the Power Behind Popular Linux GUI Applications](/blog/discovering-the-power-behind-popular-linux-gui-applications) — explore graphical alternatives for extraction.
     
 *   [Troubleshooting archive extraction errors](https://markdowntorichtext.com/articles/troubleshoot-archives) — fixes for common problems.
     
@@ -46,9 +45,9 @@ Over the years, Linux users relied heavily on `.tar.gz` (gzip compression) and `
 
 You will frequently see `.tar.xz` files when:
 
-*   **Downloading Software Source Code:** Unlike [installing precompiled tools via apt](https://blog.overflowbyte.cloud/simple-ways-to-install-vlc-on-linux-ubuntu-fedora-centos-more), major open-source projects (like the Linux Kernel, Python, and Node.js) distribute their source code in `.tar.xz` format.
+*   **Downloading Software Source Code:** Unlike [installing precompiled tools via apt](/blog/simple-ways-to-install-vlc-on-linux-ubuntu-fedora-centos-more), major open-source projects (like the Linux Kernel, Python, and Node.js) distribute their source code in `.tar.xz` format.
     
-*   **Automated Workflows**: When setting up a [professional CI/CD pipeline](https://blog.overflowbyte.cloud/beginners-guide-to-building-a-professional-cicd-pipeline-from-scratch), pipeline agents regularly download `.tar.xz` toolchains for caching and build environments.
+*   **Automated Workflows**: When setting up a [professional CI/CD pipeline](/blog/beginners-guide-to-building-a-professional-cicd-pipeline-from-scratch), pipeline agents regularly download `.tar.xz` toolchains for caching and build environments.
     
 *   **Creating Backups:** System administrators prefer tar.xz when backing up large directories where disk space is a primary concern.
     
@@ -192,7 +191,7 @@ If you are extracting a massive multi-gigabyte backup, the terminal might sit bl
 pv archive.tar.xz | tar -xJ
 ```
 
-*Pro tip: If your extraction is slowing down because of heavy disk writes, you can profile your system's disk load utilizing great monitoring tools like* [*iotop*](https://blog.overflowbyte.cloud/a-beginner-guide-for-iotop-to-processes-on-your-hard-disks)*.*
+*Pro tip: If your extraction is slowing down because of heavy disk writes, you can profile your system's disk load utilizing great monitoring tools like* [*iotop*](/blog/a-beginner-guide-for-iotop-to-processes-on-your-hard-disks)*.*
 
 ## **5\. Extracting tar.xz on Different Platforms**
 
@@ -200,7 +199,7 @@ While Linux handles `tar` files natively, you might find yourself needing to ope
 
 ### **Linux (CLI and GUI Methods)**
 
-As covered above, the standard `tar -xf filename.tar.xz` in your terminal is the preferred and fastest method. Many desktop environments support right-click extraction — see our roundup of [GUI tools for Linux workflows](https://blog.overflowbyte.cloud/discovering-the-power-behind-popular-linux-gui-applications) for details.
+As covered above, the standard `tar -xf filename.tar.xz` in your terminal is the preferred and fastest method. Many desktop environments support right-click extraction — see our roundup of [GUI tools for Linux workflows](/blog/discovering-the-power-behind-popular-linux-gui-applications) for details.
 
 ### **Windows**
 

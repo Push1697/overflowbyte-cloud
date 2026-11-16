@@ -16,7 +16,7 @@ import {
   faWandMagicSparkles,
   faXmark,
 } from '@fortawesome/free-solid-svg-icons';
-import { faHashnode, faMedium } from '@fortawesome/free-brands-svg-icons';
+import { faMedium } from '@fortawesome/free-brands-svg-icons';
 
 /* The visual lab is a static HTML file served through a rewrite, so it is
    linked with a plain anchor. A next/link would try an RSC fetch first and
@@ -31,7 +31,6 @@ const INTERNAL_LINKS = [
 ];
 
 const EXTERNAL_LINKS = [
-  { href: 'https://blog.overflowbyte.cloud', label: 'Hashnode', icon: faHashnode },
   { href: 'https://overflowbyte.medium.com/', label: 'Medium', icon: faMedium },
 ];
 

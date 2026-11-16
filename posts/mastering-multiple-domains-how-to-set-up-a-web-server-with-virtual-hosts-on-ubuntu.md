@@ -3,9 +3,8 @@ title: "Mastering Multiple Domains: How to Set Up a Web Server with Virtual Host
 subtitle: "A virtual host is a single server that can power and deploy multiple websites on one machine. It allows multiple domains or subdomains to share the same IP"
 tags: ["linux-basics","linux","virtual-machine","webserver","apache","system-administration"]
 slug: "mastering-multiple-domains-how-to-set-up-a-web-server-with-virtual-hosts-on-ubuntu"
-canonical_url: "https://blog.overflowbyte.cloud/mastering-multiple-domains-how-to-set-up-a-web-server-with-virtual-hosts-on-ubuntu"
 date: "26 Aug 2024"
-cover: "https://cdn.hashnode.com/res/hashnode/image/upload/v1724695880251/2f8b420c-3477-4790-8e8f-0006645b29a1.png"
+cover: "/static/archive/2f8b420c-3477-4790-8e8f-0006645b29a1.webp"
 source: "hashnode"
 ---
 

@@ -5,8 +5,8 @@ import { Analytics } from '@vercel/analytics/next';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
-import { faGithub, faMedium, faHashnode } from '@fortawesome/free-brands-svg-icons';
+import { faNewspaper, faUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
+import { faGithub, faMedium } from '@fortawesome/free-brands-svg-icons';
 import './globals.css';
 import SiteHeader from './components/SiteHeader';
 import AmbientLayer from './components/AmbientLayer';
@@ -31,7 +31,7 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.overflowbyte.cloud'),
+  metadataBase: new URL('https://www.overflowbyte.tech'),
   title: 'OverflowByte — Systems Architecture, Linux Internals & Visual Engineering Lab',
   description:
     'Interactive architecture playgrounds, Linux kernel explainers, hands-on labs, and deep technical write-ups by Pushpendra.',
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     title: 'OverflowByte — Systems Architecture & Visual Engineering Lab',
     description:
       'Interactive architecture playgrounds, Linux kernel explainers, hands-on labs and systems deep-dives.',
-    url: 'https://www.overflowbyte.cloud',
+    url: 'https://www.overflowbyte.tech',
     siteName: 'OverflowByte',
     images: [
       {
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
 };
 
 const CHANNELS = [
-  { href: 'https://blog.overflowbyte.cloud', label: 'Blog & newsletter', icon: faHashnode, external: true },
+  { href: '/blog', label: 'Blog & newsletter', icon: faNewspaper, external: false },
   { href: 'https://overflowbyte.medium.com/', label: 'Syndication', icon: faMedium, external: true },
   { href: 'https://github.com/Push1697', label: 'Source & projects', icon: faGithub, external: true },
 ];
@@ -164,7 +164,7 @@ export default function RootLayout({
                   <li>
                     <a
                       className="footer-link"
-                      href="https://learning.overflowbyte.cloud"
+                      href="https://learning.overflowbyte.tech"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -185,7 +185,7 @@ export default function RootLayout({
                 </p>
                 <a
                   className="btn btn-secondary btn-sm"
-                  href="https://pushpendra.overflowbyte.cloud"
+                  href="https://pushpendra.overflowbyte.tech"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

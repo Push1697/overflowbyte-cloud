@@ -3,9 +3,8 @@ title: "The Comprehensive Guide to Deploying n8n in Production: A Docker Deploym
 subtitle: "Learn how to deploy n8n in production using Docker, PostgreSQL, and Caddy to automate workflows securely and efficiently for your business"
 tags: ["n8n","docker","deployment","docker-compose","linux","docker-network"]
 slug: "the-comprehensive-guide-to-deploying-n8n-in-production-a-docker-deployment-journey"
-canonical_url: "https://blog.overflowbyte.cloud/the-comprehensive-guide-to-deploying-n8n-in-production-a-docker-deployment-journey"
 date: "17 Nov 2025"
-cover: "https://cdn.hashnode.com/res/hashnode/image/upload/v1763392454133/bf7a00c4-2a9b-4ced-8f2f-7e2fcfa4b54f.png"
+cover: "/static/archive/bf7a00c4-2a9b-4ced-8f2f-7e2fcfa4b54f.webp"
 source: "hashnode"
 ---
 

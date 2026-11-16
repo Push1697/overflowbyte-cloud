@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHashnode, faMedium } from '@fortawesome/free-brands-svg-icons';
+import { faMedium } from '@fortawesome/free-brands-svg-icons';
 import {
   faArrowRight,
   faBoxArchive,
@@ -29,7 +29,6 @@ type Flagship = {
   series: string;
   tags: string[];
   desc: string;
-  hashnodeUrl?: string;
   mediumUrl?: string;
   labHref?: string;
   /** Flashcard deck on /learn that covers this article. */
@@ -45,7 +44,6 @@ const FLAGSHIPS: Flagship[] = [
     series: 'Linux Internals',
     tags: ['linux', 'kernel', 'devops', 'security'],
     desc: 'Tracing process credentials from task_struct to struct cred, the six-step newgrp syscall sequence, and in-memory inode resolution.',
-    hashnodeUrl: 'https://blog.overflowbyte.cloud/how-linux-decides-who-can-open-a-file',
     mediumUrl: 'https://overflowbyte.medium.com/',
     labHref: LAB_HREF,
     deckSlug: 'linux-permissions',
@@ -67,7 +65,6 @@ const FLAGSHIPS: Flagship[] = [
     series: 'Cloud Networking',
     tags: ['aws', 'networking', 'vpc', 'security'],
     desc: 'NACLs versus security groups on AWS: packet path, stateful versus stateless return traffic, and ephemeral port drop rules.',
-    hashnodeUrl: 'https://blog.overflowbyte.cloud/port-443-is-open-in-security-group-why-timeout',
     mediumUrl: 'https://overflowbyte.medium.com/',
     deckSlug: 'aws-nacl-security-groups',
   },
@@ -142,7 +139,6 @@ const FLAGSHIPS: Flagship[] = [
     series: 'Cloud & Identity',
     tags: ['intune', 'entra-id', 'mdm', 'security'],
     desc: 'Enroll phones in Intune first, gate Microsoft 365 on compliance with report-only Conditional Access, then lock copy-paste inside the work profile and Office apps.',
-    hashnodeUrl: 'https://blog.overflowbyte.cloud/mobile-access-runbook-m365-phones',
     mediumUrl: 'https://overflowbyte.medium.com/',
     deckSlug: 'm365-device-lock',
   },
@@ -154,7 +150,6 @@ const FLAGSHIPS: Flagship[] = [
     series: 'Red Hat Certification',
     tags: ['rhel', 'rhcsa', 'rhce', 'lvm', 'selinux'],
     desc: 'LVM provisioning, SUID/SGID/sticky semantics, POSIX ACLs and persistent SELinux policy — an end-to-end hands-on lab with exact commands for EX200 and EX294.',
-    hashnodeUrl: 'https://blog.overflowbyte.cloud/rhel10-storage-selinux-lab',
     mediumUrl: 'https://overflowbyte.medium.com/',
     deckSlug: 'rhel10-storage-selinux',
   },
@@ -174,8 +169,8 @@ export default function BlogIndexPage() {
           Technical deep-dives
         </h1>
         <p className="lede">
-          Twelve flagship engineering stories, syndicated across Hashnode as the primary blog,
-          Medium for reach, and this interactive reader.
+          Twelve flagship engineering stories. They live here, in this interactive reader, and are
+          syndicated to Medium for reach.
         </p>
       </header>
 
@@ -237,17 +232,6 @@ export default function BlogIndexPage() {
                     Read article
                     <FontAwesomeIcon icon={faArrowRight} className="fa-ico" />
                   </Link>
-                  {post.hashnodeUrl && (
-                    <a
-                      className="btn btn-ghost btn-sm"
-                      href={post.hashnodeUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      Hashnode
-                      <FontAwesomeIcon icon={faUpRightFromSquare} className="fa-ico" />
-                    </a>
-                  )}
                   {post.mediumUrl && (
                     <a
                       className="btn btn-ghost btn-sm"
@@ -292,7 +276,7 @@ export default function BlogIndexPage() {
               Everything else I&apos;ve written
             </h2>
             <p className="text-muted">
-              Mirrored word for word from Hashnode and Medium by{' '}
+              Older posts, now hosted here, plus my Medium stories mirrored by{' '}
               <code>npm run sync:cross-platform</code>. Weekly issues live under the{' '}
               <Link className="action-link" href="/newsletter">
                 newsletter
@@ -306,8 +290,8 @@ export default function BlogIndexPage() {
               <article key={slug} className="card card-pad card-interactive reveal">
                 <div className="cluster" style={{ justifyContent: 'space-between', marginBottom: '0.75rem' }}>
                   <span className="badge badge-neutral">
-                    <FontAwesomeIcon icon={fm.source === 'medium' ? faMedium : faHashnode} className="fa-ico" />
-                    {fm.source === 'medium' ? 'Medium' : 'Hashnode'}
+                    <FontAwesomeIcon icon={fm.source === 'medium' ? faMedium : faBoxArchive} className="fa-ico" />
+                    {fm.source === 'medium' ? 'Medium' : 'Archive'}
                   </span>
                   {fm.date && (
                     <span className="meta">

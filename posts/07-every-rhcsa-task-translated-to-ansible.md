@@ -4,7 +4,6 @@ subtitle: "Every RHCSA task mapped to its manual command, its Ansible module and
 tags: ["ansible","rhcsa","automation","devops"]
 slug: "every-rhcsa-task-translated-to-ansible"
 series: "Ansible & RHCE"
-canonical_url: "https://blog.overflowbyte.cloud/every-rhcsa-task-translated-to-ansible"
 date: "24 Jan 2027"
 ---
 

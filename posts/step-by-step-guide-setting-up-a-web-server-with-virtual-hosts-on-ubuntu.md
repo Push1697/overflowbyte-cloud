@@ -3,9 +3,8 @@ title: "Step-by-Step Guide: Setting Up a Web Server with Virtual Hosts on Ubuntu
 subtitle: "Learn to set up Apache Virtual Hosts on Ubuntu to host multiple websites effectively with this comprehensive step-by-step guide"
 tags: ["ubuntu","server","webserver","hosting","apache","linux-for-beginners"]
 slug: "step-by-step-guide-setting-up-a-web-server-with-virtual-hosts-on-ubuntu"
-canonical_url: "https://blog.overflowbyte.cloud/step-by-step-guide-setting-up-a-web-server-with-virtual-hosts-on-ubuntu"
 date: "30 Sept 2025"
-cover: "https://cdn.hashnode.com/res/hashnode/image/stock/unsplash/xbEVM6oJ1Fs/upload/0e1cec1ebea9bffcdfa89803bbec8e8c.jpeg"
+cover: "/static/archive/0e1cec1ebea9bffcdfa89803bbec8e8c.webp"
 source: "hashnode"
 ---
 
@@ -305,7 +304,7 @@ Setting up production-ready web infrastructure can be complex. If you need profe
 * **Migration from other providers**
     
 
-**I'm here to help!** Reach out to me at **overflowbyte.tech@yahoo.com** or visit my portfolio at [pushpendra.overflowbyte.cloud](http://pushpendra.overflowbyte.cloud)
+**I'm here to help!** Reach out to me at **overflowbyte.cloud@yahoo.com** or visit my portfolio at [pushpendra.overflowbyte.tech](http://pushpendra.overflowbyte.tech)
 
 With experience in server administration and cloud infrastructure, I specialize in building reliable, scalable hosting solutions for businesses.
 

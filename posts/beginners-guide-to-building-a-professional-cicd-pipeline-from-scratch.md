@@ -3,9 +3,8 @@ title: "Beginner's Guide to Building a Professional CI/CD Pipeline from Scratch"
 subtitle: "Learn the fundamentals of building a CI/CD pipeline using GitHub Actions, Docker, and AWS for Node.js apps in this comprehensive beginner's guide"
 tags: ["ci-cd","aws","node.js","node","pipeline"]
 slug: "beginners-guide-to-building-a-professional-cicd-pipeline-from-scratch"
-canonical_url: "https://blog.overflowbyte.cloud/beginners-guide-to-building-a-professional-cicd-pipeline-from-scratch"
 date: "16 Feb 2026"
-cover: "https://cdn.hashnode.com/res/hashnode/image/upload/v1771259845009/3d0e553f-3b95-4e94-bbb3-f8a4bc4bd67e.png"
+cover: "/static/archive/3d0e553f-3b95-4e94-bbb3-f8a4bc4bd67e.webp"
 source: "hashnode"
 ---
 

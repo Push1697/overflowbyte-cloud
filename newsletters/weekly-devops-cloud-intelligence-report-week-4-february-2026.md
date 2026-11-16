@@ -4,9 +4,8 @@ subtitle: "DevOps weekly updates for Feb 23–Mar 1 2026: AWS EKS open-source ag
 tags: ["devops-weekly-updates","kubernetes-updates-2026","linux-security-updates","cloud-computing-news","cloud-computing","weekly-dev-journal"]
 slug: "weekly-devops-cloud-intelligence-report-week-4-february-2026"
 series: "OverflowByte Weekly"
-canonical_url: "https://blog.overflowbyte.cloud/weekly-devops-cloud-intelligence-report-week-4-february-2026"
 date: "1 Mar 2026"
-cover: "https://cdn.hashnode.com/uploads/covers/6087f0a6aaea092e0faa6232/5ef699f6-96a9-43af-93fb-f41b2583defe.png"
+cover: "/static/archive/5ef699f6-96a9-43af-93fb-f41b2583defe.webp"
 source: "hashnode"
 ---
 

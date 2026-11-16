@@ -2,9 +2,8 @@
 title: "A Beginner guide to \"iotop\" to for checking your Hard Disks"
 subtitle: "iotop watches I/O usage information output by the Linux kernel (requires 2.6.20 or later) and displays a table of current I/O usage by processes or threads"
 slug: "a-beginner-guide-for-iotop-to-processes-on-your-hard-disks"
-canonical_url: "https://blog.overflowbyte.cloud/a-beginner-guide-for-iotop-to-processes-on-your-hard-disks"
 date: "26 Aug 2024"
-cover: "https://cdn.hashnode.com/res/hashnode/image/upload/v1724696080842/ea702305-a6cd-45de-b0a1-38e61f4660bb.png"
+cover: "/static/archive/ea702305-a6cd-45de-b0a1-38e61f4660bb.webp"
 source: "hashnode"
 ---
 
@@ -54,7 +53,7 @@ sudo iotop
 
 This will display a list of processes along with their disk I/O statistics. The default output includes several important columns which you can see in the image:
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1724687841673/a720c88c-245d-4a0a-b3a7-9b972ec61019.png)
+![](/static/archive/a720c88c-245d-4a0a-b3a7-9b972ec61019.webp)
 
 * **PID**: The Process ID.
     
@@ -86,7 +85,7 @@ You can navigate within `iotop` using simple commands:
 sudo iotop -u username
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1724688365914/e81c1c91-523a-47ca-9780-729d9d89efb9.png)
+![](/static/archive/e81c1c91-523a-47ca-9780-729d9d89efb9.webp)
 
 Or to monitor a specific process:
 
@@ -96,7 +95,7 @@ sudo iotop -p PID
 sudo iotop -p 3372
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1724688634037/1c71a82e-2370-48cd-ac72-4e9064c4cf22.png)
+![](/static/archive/1c71a82e-2370-48cd-ac72-4e9064c4cf22.webp)
 
 **2\. Batch Mode for Logging:** Running `iotop` in batch mode allows you to log disk I/O activity for later analysis. This is particularly useful for long-term monitoring or troubleshooting:
 
@@ -122,7 +121,7 @@ Display values in kilobytes instead of the default megabytes with `-k`:
 sudo iotop -k
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1724688783077/bb552c7a-e0c8-42d5-9692-6c497f82803b.png)
+![](/static/archive/bb552c7a-e0c8-42d5-9692-6c497f82803b.webp)
 
 To suppress some lines of header. this will suppress the lines of header.
 
@@ -131,7 +130,7 @@ sudo iotop -q
 # This will now suppress some line of header in the output.
 ```
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1724688928923/07d19875-bdfb-45e3-9437-73737eb22dbe.png)
+![](/static/archive/07d19875-bdfb-45e3-9437-73737eb22dbe.webp)
 
 **4\. Combining with Other Tools:** For a more automated approach, you can combine `iotop` with `cron` to run at regular intervals, or use `grep` to filter the output for specific patterns:
 

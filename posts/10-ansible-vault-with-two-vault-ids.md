@@ -4,7 +4,6 @@ subtitle: "Jinja2 templates driven by facts, decomposing a monolithic playbook i
 tags: ["ansible","security","vault","ci-cd"]
 slug: "ansible-vault-with-two-vault-ids"
 series: "Ansible & RHCE"
-canonical_url: "https://blog.overflowbyte.cloud/ansible-vault-with-two-vault-ids"
 date: "7 Mar 2027"
 ---
 

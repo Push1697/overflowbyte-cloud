@@ -8,12 +8,13 @@ import {
   faEye,
   faFileArrowDown,
   faNetworkWired,
+  faNewspaper,
   faServer,
   faShieldHalved,
   faTerminal,
   faUpRightFromSquare,
 } from '@fortawesome/free-solid-svg-icons';
-import { faGithub, faHashnode, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 
 export const metadata: Metadata = {
   title: 'About Pushpendra — OverflowByte',
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
     'Infrastructure systems engineer working across FortiGate SD-WAN, AWS, Kubernetes and Linux internals — and writing the visual explainers behind OverflowByte.',
 };
 
-const PORTFOLIO = 'https://pushpendra.overflowbyte.cloud';
+const PORTFOLIO = 'https://pushpendra.overflowbyte.tech';
 
 /* Figures mirrored from the portfolio. Kept as plain data here rather than
    embedded in an iframe, which rendered a whole second site inside a box. */
@@ -198,15 +199,10 @@ export default function AboutPage() {
           Ten flagship deep-dives, each with an interactive lab and a flashcard set.
         </p>
         <div className="cluster" style={{ justifyContent: 'center' }}>
-          <a
-            className="btn btn-primary"
-            href="https://blog.overflowbyte.cloud"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <FontAwesomeIcon icon={faHashnode} className="fa-ico" />
-            Subscribe on Hashnode
-          </a>
+          <Link className="btn btn-primary" href="/newsletter">
+            <FontAwesomeIcon icon={faNewspaper} className="fa-ico" />
+            Read the newsletter
+          </Link>
           <Link className="btn btn-secondary" href="/blog">
             Read the series
             <FontAwesomeIcon icon={faArrowRight} className="fa-ico" />
