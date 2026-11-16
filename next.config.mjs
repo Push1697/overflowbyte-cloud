@@ -16,7 +16,12 @@ const nextConfig = {
     const SITE = 'https://www.overflowbyte.tech';
     const learning = [{ type: 'host', value: 'learning.overflowbyte.tech' }];
     const blog = [{ type: 'host', value: 'blog.overflowbyte.tech' }];
+    const portfolio = [{ type: 'host', value: 'pushpendra.overflowbyte.tech' }];
     return [
+      { source: '/pushpendra-resume.pdf', has: portfolio, destination: `${SITE}/pushpendra-resume.pdf`, permanent: true },
+      { source: '/blog/:path*', has: portfolio, destination: `${SITE}/blog`, permanent: true },
+      { source: '/learning/:path*', has: portfolio, destination: `${SITE}/about#learning`, permanent: true },
+      { source: '/:path*', has: portfolio, destination: `${SITE}/about`, permanent: true },
       { source: '/blog/:slug', has: learning, destination: `${SITE}/notes/:slug`, permanent: true },
       { source: '/:path*', has: learning, destination: `${SITE}/notes`, permanent: true },
       { source: '/newsletter', has: blog, destination: `${SITE}/newsletter`, permanent: true },

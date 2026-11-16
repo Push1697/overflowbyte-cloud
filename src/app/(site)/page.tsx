@@ -8,7 +8,6 @@ import {
   faNetworkWired,
   faShieldHalved,
   faTerminal,
-  faUpRightFromSquare,
   faWandMagicSparkles,
 } from '@fortawesome/free-solid-svg-icons';
 import HeroTrace from './components/HeroTrace';
@@ -382,14 +381,8 @@ export default function HomePage() {
                   About & portfolio
                   <FontAwesomeIcon icon={faArrowRight} className="fa-ico" />
                 </Link>
-                <a
-                  className="btn btn-secondary"
-                  href="https://pushpendra.overflowbyte.tech"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Full resume
-                  <FontAwesomeIcon icon={faUpRightFromSquare} className="fa-ico" />
+                <a className="btn btn-secondary" href="/pushpendra-resume.pdf" download>
+                  Download resume
                 </a>
               </div>
             </div>

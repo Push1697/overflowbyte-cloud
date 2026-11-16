@@ -5,7 +5,7 @@ import { Analytics } from '@vercel/analytics/next';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBookOpen, faNewspaper, faUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
+import { faBookOpen, faNewspaper } from '@fortawesome/free-solid-svg-icons';
 import { faGithub, faMedium } from '@fortawesome/free-brands-svg-icons';
 import './globals.css';
 import SiteHeader from './components/SiteHeader';
@@ -178,15 +178,9 @@ export default function RootLayout({
                 >
                   Built by Pushpendra — infrastructure systems engineer.
                 </p>
-                <a
-                  className="btn btn-secondary btn-sm"
-                  href="https://pushpendra.overflowbyte.tech"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <Link className="btn btn-secondary btn-sm" href="/about">
                   Portfolio
-                  <FontAwesomeIcon icon={faUpRightFromSquare} className="fa-ico" />
-                </a>
+                </Link>
               </div>
             </div>
 
