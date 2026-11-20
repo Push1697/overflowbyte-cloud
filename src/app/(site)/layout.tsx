@@ -90,6 +90,20 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${sans.variable} ${mono.variable}`}
     >
+      <head>
+        {/* Google-only tags */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtm.js?id=G-VLNSD6K5HE"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());`,
+          }}
+        />
+      </head>
       <body>
         {/* Applies the saved (or system) theme before first paint so day
             mode never flashes dark. Mirrors into the header toggle. */}
