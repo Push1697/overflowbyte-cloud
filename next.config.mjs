@@ -7,6 +7,7 @@ const nextConfig = {
     // Two root layouts, (site) and (payload), so unmatched URLs need a 404
     // page that brings its own <html>: src/app/global-not-found.tsx.
     globalNotFound: true,
+    agentUpgrade: 'security',
   },
   // The blog (Hashnode) and the learning garden (Quartz) used to be separate
   // sites on their own subdomains. Their content lives here now, so old links
