@@ -7,6 +7,23 @@ series: "Red Hat Certification"
 date: "3 Nov 2026"
 ---
 
+<div class="overflowbyte-threat-banner" style="position: relative; margin: 1.5rem 0; padding: 1.25rem 1.5rem; border-radius: 12px; background: linear-gradient(135deg, rgba(99, 102, 241, 0.12) 0%, rgba(15, 23, 42, 0.6) 100%); border: 1px solid rgba(99, 102, 241, 0.35); box-shadow: 0 0 30px rgba(99, 102, 241, 0.15);">
+  <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
+    <div style="display: flex; align-items: center; gap: 0.75rem;">
+      <span style="position: relative; display: flex; height: 12px; width: 12px;">
+        <span style="animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite; position: absolute; display: inline-flex; height: 100%; width: 100%; border-radius: 9999px; background-color: #22C55E; opacity: 0.75;"></span>
+        <span style="position: relative; display: inline-flex; border-radius: 9999px; height: 12px; width: 12px; background-color: #22C55E;"></span>
+      </span>
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 700; color: #a5b4fc; letter-spacing: 0.08em; text-transform: uppercase;">
+        INTERACTIVE RHEL 10 LAB · LVM PROVISIONING, ACLS & PERSISTENT SELINUX
+      </span>
+    </div>
+    <a href="/static/rhel10-storage-selinux-lab.html" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.9rem; font-size: 0.82rem; font-weight: 600; color: #5ce1ff; background: rgba(92, 225, 255, 0.12); border: 1px solid rgba(92, 225, 255, 0.3); border-radius: 6px; text-decoration: none;">
+      <span>Open Fullscreen Experience ↗</span>
+    </a>
+  </div>
+</div>
+
 # Mastering Enterprise Storage, Advanced Security (SUID/SGID/ACLs), and SELinux in RHEL 10
 
 *A complete hands-on guide and interactive lab for RHCSA (EX200) and RHCE (EX294) candidates.*
