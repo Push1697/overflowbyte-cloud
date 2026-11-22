@@ -7,12 +7,6 @@ series: "Red Hat Certification"
 date: "3 Nov 2026"
 ---
 
-    <a href="/static/rhel10-storage-selinux-lab.html" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.9rem; font-size: 0.82rem; font-weight: 600; color: #5ce1ff; background: rgba(92, 225, 255, 0.12); border: 1px solid rgba(92, 225, 255, 0.3); border-radius: 6px; text-decoration: none;">
-      <span>Open Fullscreen Experience ↗</span>
-    </a>
-  </div>
-</div>
-
 # Mastering Enterprise Storage, Advanced Security (SUID/SGID/ACLs), and SELinux in RHEL 10
 
 *A complete hands-on guide and interactive lab for RHCSA (EX200) and RHCE (EX294) candidates.*

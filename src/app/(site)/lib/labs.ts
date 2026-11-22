@@ -6,6 +6,9 @@ import { NEW_LABS as ANSIBLE_VAULT_LABS } from './labs/ansible-vault-two-ids';
 import { NEW_LABS as INCIDENT_DRILLS_LABS } from './labs/incident-drills';
 import { NEW_LABS as RUNTIME_RCE_LABS } from './labs/runtime-rce-zero-day';
 import { NEW_LABS as KVM_OVERLAY_LABS } from './labs/kvm-overlay-lab';
+import { NEW_LABS as RHCSA_RHCE_LABS } from './labs/rhcsa-rhce-60-day';
+import { NEW_LABS as RHCSA_ANSIBLE_MAP_LABS } from './labs/rhcsa-to-ansible-map';
+import { NEW_LABS as NO_SSH_LABS } from './labs/no-ssh-automation';
 
 export type Lab = {
   id: string;
@@ -127,6 +130,9 @@ sudo chmod 2775 /srv/devops`,
   ...INCIDENT_DRILLS_LABS,
   ...RUNTIME_RCE_LABS,
   ...KVM_OVERLAY_LABS,
+  ...RHCSA_RHCE_LABS,
+  ...RHCSA_ANSIBLE_MAP_LABS,
+  ...NO_SSH_LABS,
 ];
 
 export function getLab(id: string): Lab | null {

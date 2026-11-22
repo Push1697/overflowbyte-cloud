@@ -7,12 +7,6 @@ series: "Red Hat Certification"
 date: "10 Jan 2027"
 ---
 
-    <a href="/static/60-day-plan-rhcsa-to-rhce.html" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.9rem; font-size: 0.82rem; font-weight: 600; color: #5ce1ff; background: rgba(92, 225, 255, 0.12); border: 1px solid rgba(92, 225, 255, 0.3); border-radius: 6px; text-decoration: none;">
-      <span>Open Fullscreen Experience ↗</span>
-    </a>
-  </div>
-</div>
-
 # RHCSA to RHCE - A 60-Day Lab Curriculum
 
 Most certification plans are a list of topics and a list of videos. This one is a

@@ -7,12 +7,6 @@ series: "Cloud Networking"
 date: "29 Nov 2026"
 ---
 
-    <a href="/static/port-443-is-open-in-security-group-why-timeout.html" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.9rem; font-size: 0.82rem; font-weight: 600; color: #5ce1ff; background: rgba(92, 225, 255, 0.12); border: 1px solid rgba(92, 225, 255, 0.3); border-radius: 6px; text-decoration: none;">
-      <span>Open Fullscreen Experience ↗</span>
-    </a>
-  </div>
-</div>
-
 # Port 443 is open in the security group. Why does it still time out?
 
 You've worked with AWS for a while, so you've probably seen some version of this ticket:

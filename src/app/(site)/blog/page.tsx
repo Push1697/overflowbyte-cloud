@@ -97,7 +97,7 @@ const FLAGSHIPS: Flagship[] = [
     series: 'Red Hat Certification',
     tags: ['rhcsa', 'rhce', 'ansible', 'certification'],
     desc: 'A week-by-week roadmap and hands-on milestones for Linux administration and Ansible automation.',
-    deckSlug: 'rhel10-storage-selinux',
+    deckSlug: 'rhcsa-rhce-60-day',
   },
   {
     num: 7,
@@ -107,7 +107,7 @@ const FLAGSHIPS: Flagship[] = [
     series: 'Ansible & RHCE',
     tags: ['ansible', 'rhcsa', 'automation', 'devops'],
     desc: 'The definitive matrix: manual command, Ansible module, collection, and idempotency verification.',
-    deckSlug: 'ansible-variable-precedence',
+    deckSlug: 'rhcsa-to-ansible-map',
   },
   {
     num: 8,
@@ -117,7 +117,7 @@ const FLAGSHIPS: Flagship[] = [
     series: 'Ansible & RHCE',
     tags: ['ansible', 'rhce', 'ex294', 'automation'],
     desc: 'Automating complete RHCSA topologies without manual SSH, through a revert, run and verify loop.',
-    deckSlug: 'ansible-variable-precedence',
+    deckSlug: 'no-ssh-automation',
   },
   {
     num: 9,

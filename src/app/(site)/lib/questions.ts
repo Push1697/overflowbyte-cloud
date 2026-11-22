@@ -6,6 +6,9 @@ import { DECK as ANSIBLE_VAULT_DECK } from './decks/ansible-vault-two-ids';
 import { DECK as INCIDENT_DRILLS_DECK } from './decks/incident-drills';
 import { DECK as RUNTIME_RCE_DECK } from './decks/runtime-rce-zero-day';
 import { DECK as KVM_OVERLAY_DECK } from './decks/kvm-overlay-lab';
+import { DECK as RHCSA_RHCE_DECK } from './decks/rhcsa-rhce-60-day';
+import { DECK as RHCSA_ANSIBLE_MAP_DECK } from './decks/rhcsa-to-ansible-map';
+import { DECK as NO_SSH_DECK } from './decks/no-ssh-automation';
 
 export type Card = {
   id: string;
@@ -120,6 +123,9 @@ export const DECKS: Deck[] = [
   INCIDENT_DRILLS_DECK,
   RUNTIME_RCE_DECK,
   KVM_OVERLAY_DECK,
+  RHCSA_RHCE_DECK,
+  RHCSA_ANSIBLE_MAP_DECK,
+  NO_SSH_DECK,
 ];
 
 export function getDeck(slug: string): Deck | null {

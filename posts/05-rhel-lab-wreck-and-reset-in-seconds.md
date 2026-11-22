@@ -7,12 +7,6 @@ series: "Linux & Virtualization"
 date: "27 Dec 2026"
 ---
 
-    <a href="/static/rhel-lab-wreck-and-reset-in-seconds.html" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.9rem; font-size: 0.82rem; font-weight: 600; color: #5ce1ff; background: rgba(92, 225, 255, 0.12); border: 1px solid rgba(92, 225, 255, 0.3); border-radius: 6px; text-decoration: none;">
-      <span>Open Fullscreen Experience ↗</span>
-    </a>
-  </div>
-</div>
-
 # Building a Three-Node RHEL Lab on KVM
 
 Three nodes on one Linux box, running **real RHEL** from the no-cost Red Hat

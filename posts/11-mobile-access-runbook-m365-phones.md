@@ -7,12 +7,6 @@ series: "Cloud & Identity"
 date: "3 Nov 2026"
 ---
 
-    <a href="/static/mobile-access-runbook-m365-phones.html" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.9rem; font-size: 0.82rem; font-weight: 600; color: #5ce1ff; background: rgba(92, 225, 255, 0.12); border: 1px solid rgba(92, 225, 255, 0.3); border-radius: 6px; text-decoration: none;">
-      <span>Open Fullscreen Experience ↗</span>
-    </a>
-  </div>
-</div>
-
 # The Mobile Access Runbook: Company Portal, Work Profile and the Copy-Paste Block
 
 **Tenant:** `contoso.com` · **Tenant ID:** `00000000-0000-0000-0000-000000000000` · **Pilot user:** Maya Chen (`maya.chen@contoso.com`) · **Last updated:** 27 Oct 2026

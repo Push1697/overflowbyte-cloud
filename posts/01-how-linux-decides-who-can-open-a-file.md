@@ -6,12 +6,6 @@ slug: "how-linux-decides-who-can-open-a-file"
 series: "Linux Internals"
 ---
 
-    <a href="/static/how-linux-decides-who-can-open-a-file.html" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.9rem; font-size: 0.82rem; font-weight: 600; color: #5ce1ff; background: rgba(92, 225, 255, 0.12); border: 1px solid rgba(92, 225, 255, 0.3); border-radius: 6px; text-decoration: none;">
-      <span>Open Fullscreen Experience ↗</span>
-    </a>
-  </div>
-</div>
-
 # How Linux Decides Who Can Open a File (A Visual Deep Dive)
 
 You add a developer to a new group:
