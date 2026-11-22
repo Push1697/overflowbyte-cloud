@@ -1,5 +1,4 @@
 import type { Visual } from '../visuals';
-import { assertCascadeComplete } from '../visuals';
 
 export const VISUALS: Visual[] = [
   {

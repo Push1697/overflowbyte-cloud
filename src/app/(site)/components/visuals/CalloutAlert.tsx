@@ -41,7 +41,8 @@ export default function CalloutAlert({ children }: { children: React.ReactNode }
       const firstText = pChildren[0];
 
       if (typeof firstText === 'string') {
-        const match = firstText.match(/^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*(.*)/i);
+        // [\s\S] so text on the lines after the marker is kept, not dropped.
+        const match = firstText.match(/^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*([\s\S]*)/i);
         if (match) {
           const typeKey = match[1].toLowerCase() as AlertType;
           if (ALERT_CONFIG[typeKey]) {
@@ -64,7 +65,7 @@ export default function CalloutAlert({ children }: { children: React.ReactNode }
   if (alertType) {
     const config = ALERT_CONFIG[alertType];
     return (
-      <aside className={`prose-alert ${config.tone}`} role="alert">
+      <aside className={`prose-alert ${config.tone}`} role="note">
         <div className="prose-alert-head">
           <FontAwesomeIcon icon={config.icon} className="fa-ico" />
           <span>{config.label}</span>

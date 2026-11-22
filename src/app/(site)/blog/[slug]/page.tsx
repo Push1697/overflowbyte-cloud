@@ -33,6 +33,8 @@ import { POST_VISUALS as RHCSA_RHCE_POST_VISUALS } from '../../lib/visuals/rhcsa
 import { POST_VISUALS as ANSIBLE_MAP_POST_VISUALS } from '../../lib/visuals/rhcsa-to-ansible-map';
 import { POST_VISUALS as NO_SSH_POST_VISUALS } from '../../lib/visuals/no-ssh-automation';
 import { getPost, getPostSlugs } from '../../lib/posts';
+import { videosFor } from '../../lib/youtube';
+import VideoSection from '../../components/VideoSection';
 
 /** All post-scoped visuals, keyed by blog slug. */
 const POST_VIZ: Record<string, Visual[]> = {
@@ -105,6 +107,8 @@ export default async function BlogPostPage({
   const flagshipNum = /^\d{2}-/.test(slug) ? slug.slice(0, 2) : null;
   const origin = frontmatter.source === 'medium' ? 'From Medium' : 'From the archive';
   const visuals = POST_VIZ[slug] ?? [];
+  const videos = videosFor('blog', slug);
+  const canonicalHost = canonical && URL.canParse(canonical) ? new URL(canonical).hostname : null;
 
   return (
     <article className="shell section blog-article-shell" style={{ maxWidth: '940px' }}>
@@ -139,12 +143,7 @@ export default async function BlogPostPage({
         {frontmatter.subtitle && (
           <p
             className="lede"
-            style={{
-              marginTop: '1.25rem',
-              color: '#94a3b8',
-              fontSize: '1.2rem',
-              lineHeight: 1.6,
-            }}
+            style={{ marginTop: '1.25rem', fontSize: '1.2rem', lineHeight: 1.6 }}
           >
             {frontmatter.subtitle}
           </p>
@@ -161,7 +160,7 @@ export default async function BlogPostPage({
         ) : null}
       </header>
 
-      {canonical && (
+      {canonical && canonicalHost && (
         <div className="card card-pad card-quiet" style={{ marginTop: '2rem', padding: '1rem 1.25rem' }}>
           <p className="text-muted" style={{ fontSize: 'var(--step--1)' }}>
             Originally published on{' '}
@@ -171,27 +170,18 @@ export default async function BlogPostPage({
               rel="noopener noreferrer"
               style={{ color: 'var(--accent)', textDecoration: 'underline' }}
             >
-              {new URL(canonical).hostname}
+              {canonicalHost}
               <FontAwesomeIcon icon={faUpRightFromSquare} className="fa-ico" />
             </a>
           </p>
         </div>
       )}
 
+      <VideoSection videos={videos} />
+
       {/* Interactive Architecture Lab & System Models */}
       {visuals.length > 0 && (
-        <section
-          className="section-tight"
-          style={{
-            marginTop: '2.5rem',
-            marginBottom: '1rem',
-            padding: '1.5rem',
-            background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(15, 23, 42, 0.6) 100%)',
-            border: '1px solid rgba(99, 102, 241, 0.2)',
-            borderRadius: '16px',
-            boxShadow: '0 8px 30px rgba(0, 0, 0, 0.3)',
-          }}
-        >
+        <section className="section-tight article-lab-panel">
           <div className="section-head" style={{ marginBottom: '1.25rem' }}>
             <div>
               <div className="cluster" style={{ marginBottom: '0.4rem' }}>
@@ -219,16 +209,7 @@ export default async function BlogPostPage({
 
       {/* Flagship #01 Dedicated Kernel Instruments */}
       {hasLab && (
-        <section
-          className="section-tight"
-          style={{
-            marginTop: '2rem',
-            padding: '1.5rem',
-            background: 'linear-gradient(135deg, rgba(34, 197, 94, 0.04) 0%, rgba(15, 23, 42, 0.6) 100%)',
-            border: '1px solid rgba(34, 197, 94, 0.2)',
-            borderRadius: '16px',
-          }}
-        >
+        <section className="section-tight article-lab-panel is-kernel">
           <div className="section-head" style={{ marginBottom: '1.25rem' }}>
             <div>
               <div className="cluster" style={{ marginBottom: '0.4rem' }}>
@@ -278,8 +259,8 @@ export default async function BlogPostPage({
             ),
             // GitHub alert callout card parsing (> [!NOTE], [!TIP], [!IMPORTANT], [!WARNING], [!CAUTION])
             blockquote: CalloutAlert,
-            // macOS/Linux Terminal window with copy button & JetBrains Mono syntax
-            code: TerminalCodeBlock,
+            // Fenced blocks become terminal windows; inline code stays inline.
+            pre: ({ children }) => <TerminalCodeBlock>{children}</TerminalCodeBlock>,
             // The <h1> already renders in the page header above.
             h1: () => null,
           }}

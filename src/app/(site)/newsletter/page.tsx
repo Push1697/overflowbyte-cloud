@@ -1,14 +1,18 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight, faCalendar, faEnvelopeOpenText } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight, faCalendar, faEnvelopeOpenText, faRss } from '@fortawesome/free-solid-svg-icons';
+import { faYoutube } from '@fortawesome/free-brands-svg-icons';
 import { getNewsletterSlugs, getNewsletter } from '../lib/newsletters';
 import { coverImage, toTime } from '../lib/posts';
+import { latestVideos, YOUTUBE_CHANNEL } from '../lib/youtube';
+import VideoSection from '../components/VideoSection';
 
 export const metadata: Metadata = {
   title: 'Weekly newsletter — OverflowByte',
   description:
-    'Every weekly OverflowByte newsletter, published here as real articles — no iframes, no embeds.',
+    'OverflowByte Weekly: the DevOps, cloud, Linux and security news that mattered each week, with commands and diagrams.',
+  alternates: { types: { 'application/rss+xml': '/newsletter/rss.xml' } },
 };
 
 export default function NewsletterIndexPage() {
@@ -29,9 +33,19 @@ export default function NewsletterIndexPage() {
           The weekly dispatch
         </h1>
         <p className="lede">
-          Every weekly issue, written in <code>newsletters/</code> and rendered here as plain
-          articles — readable in day or night mode, searchable, and never inside a frame.
+          The DevOps, cloud, Linux and security news that mattered this week — with the commands,
+          configs and diagrams to act on it. One issue every week.
         </p>
+        <div className="cluster" style={{ marginTop: '1.5rem' }}>
+          <a className="btn btn-primary btn-sm" href="/newsletter/rss.xml">
+            <FontAwesomeIcon icon={faRss} className="fa-ico" />
+            Subscribe via RSS
+          </a>
+          <a className="btn btn-secondary btn-sm" href={YOUTUBE_CHANNEL} target="_blank" rel="noopener noreferrer">
+            <FontAwesomeIcon icon={faYoutube} className="fa-ico" />
+            Watch on YouTube
+          </a>
+        </div>
       </header>
 
       {items.length === 0 ? (
@@ -43,7 +57,7 @@ export default function NewsletterIndexPage() {
         </div>
       ) : (
         <div className="grid deck-grid" style={{ gap: 'clamp(1.5rem, 3vw, 2rem)' }}>
-          {items.map((n) => {
+          {items.map((n, i) => {
             const cover = coverImage(n.frontmatter, n.content);
             const href = `/newsletter/${n.slug}`;
             return (
@@ -54,6 +68,7 @@ export default function NewsletterIndexPage() {
                 <div className="story-body">
                   <div className="cluster" style={{ marginBottom: '0.9rem' }}>
                     <span className="badge badge-accent">{n.frontmatter.series ?? 'Weekly Newsletter'}</span>
+                    {i === 0 && <span className="badge badge-ok">Latest issue</span>}
                     {n.frontmatter.draft && <span className="badge badge-warn">Draft · dev only</span>}
                     {n.frontmatter.date && (
                       <span className="meta">
@@ -95,6 +110,10 @@ export default function NewsletterIndexPage() {
           })}
         </div>
       )}
+
+      <div style={{ marginTop: 'clamp(3rem, 6vw, 4.5rem)' }}>
+        <VideoSection videos={latestVideos(3)} heading="Latest on the OverflowByte channel" />
+      </div>
     </div>
   );
 }

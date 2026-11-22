@@ -6,7 +6,7 @@ import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBookOpen, faNewspaper } from '@fortawesome/free-solid-svg-icons';
-import { faGithub, faMedium } from '@fortawesome/free-brands-svg-icons';
+import { faGithub, faMedium, faYoutube } from '@fortawesome/free-brands-svg-icons';
 import './globals.css';
 import SiteHeader from './components/SiteHeader';
 import AmbientLayer from './components/AmbientLayer';
@@ -63,12 +63,26 @@ export const metadata: Metadata = {
       'Interactive architecture playgrounds, Linux kernel explainers, hands-on labs and systems deep-dives.',
     images: ['/assets/logo/overflowbyte_lockup.png'],
   },
+  alternates: {
+    types: { 'application/rss+xml': '/newsletter/rss.xml' },
+  },
+  /* Search console ownership tags, read at build time from the Vercel
+     environment so codes can change without a commit. Yahoo search runs on
+     Bing, so Bing Webmaster Tools covers it. */
+  verification: {
+    google: process.env.GOOGLE_SITE_VERIFICATION || undefined,
+    yandex: process.env.YANDEX_VERIFICATION || undefined,
+    other: process.env.BING_SITE_VERIFICATION
+      ? { 'msvalidate.01': process.env.BING_SITE_VERIFICATION }
+      : undefined,
+  },
 };
 
 const CHANNELS = [
   { href: '/blog', label: 'Blog & newsletter', icon: faNewspaper, external: false },
   { href: 'https://overflowbyte.medium.com/', label: 'Syndication', icon: faMedium, external: true },
   { href: 'https://github.com/Push1697', label: 'Source & projects', icon: faGithub, external: true },
+  { href: 'https://www.youtube.com/@overflowbyte', label: 'Video explainers', icon: faYoutube, external: true },
 ];
 
 const EXPLORE = [
@@ -91,16 +105,15 @@ export default function RootLayout({
       className={`${sans.variable} ${mono.variable}`}
     >
       <head>
-        {/* Google-only tags */}
-        <script
-          async
-          src="https://www.googletagmanager.com/gtm.js?id=G-VLNSD6K5HE"
-        />
+        {/* Google Analytics 4. A G- measurement ID loads gtag.js and needs a
+            config call; gtm.js is only for GTM- container IDs. */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-VLNSD6K5HE" />
         <script
           dangerouslySetInnerHTML={{
             __html: `window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());`,
+gtag('js', new Date());
+gtag('config', 'G-VLNSD6K5HE');`,
           }}
         />
       </head>

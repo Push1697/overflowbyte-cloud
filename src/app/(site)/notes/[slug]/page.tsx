@@ -8,6 +8,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import Mermaid from '../../components/visuals/Mermaid';
 import { getNote, getNoteSlugs, getSeries } from '../../lib/notes';
+import { videosFor } from '../../lib/youtube';
+import VideoSection from '../../components/VideoSection';
 
 export function generateStaticParams() {
   return getNoteSlugs().map((slug) => ({ slug }));
@@ -79,6 +81,8 @@ export default async function NotePage({ params }: { params: Promise<{ slug: str
           </div>
         ) : null}
       </header>
+
+      <VideoSection videos={videosFor('notes', slug)} />
 
       <div className="prose" style={{ marginTop: '3rem' }}>
         <Markdown

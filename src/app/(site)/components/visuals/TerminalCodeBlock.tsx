@@ -5,31 +5,27 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faCopy, faTerminal } from '@fortawesome/free-solid-svg-icons';
 import Mermaid from './Mermaid';
 
-interface TerminalCodeBlockProps {
-  className?: string;
-  children?: React.ReactNode;
-}
+type CodeProps = { className?: string; children?: React.ReactNode };
 
-export default function TerminalCodeBlock({ className, children }: TerminalCodeBlockProps) {
+/**
+ * Renders a fenced code block as a terminal window. Wired up as the markdown
+ * `pre` renderer, so it only ever sees block code; inline `code` keeps the
+ * default element and never ends up as a <div> inside a <p>.
+ */
+export default function TerminalCodeBlock({ children }: { children?: React.ReactNode }) {
   const [copied, setCopied] = useState(false);
 
-  const codeString = String(children ?? '').replace(/\n$/, '');
+  const code = React.Children.toArray(children).find(React.isValidElement) as
+    | React.ReactElement<CodeProps>
+    | undefined;
+  const className = code?.props.className ?? '';
+  const codeString = String(code?.props.children ?? '').replace(/\n$/, '');
 
-  // Handle Mermaid diagrams
-  if (/language-mermaid/.test(className ?? '')) {
+  if (/language-mermaid/.test(className)) {
     return <Mermaid chart={codeString} />;
   }
 
-  // Extract language from className (e.g. "language-bash" -> "bash")
-  const langMatch = className?.match(/language-([a-zA-Z0-9_-]+)/);
-  const lang = langMatch ? langMatch[1] : '';
-
-  // Single-line inline code vs multi-line block
-  const isMultiLine = codeString.includes('\n') || codeString.length > 55;
-
-  if (!isMultiLine && !className) {
-    return <code className="inline-code">{children}</code>;
-  }
+  const lang = className.match(/language-([a-zA-Z0-9_-]+)/)?.[1] ?? '';
 
   const handleCopy = async () => {
     try {
@@ -37,7 +33,7 @@ export default function TerminalCodeBlock({ className, children }: TerminalCodeB
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {
-      // Fallback
+      // Clipboard access denied (insecure context or permissions); nothing to do.
     }
   };
 
@@ -48,27 +44,27 @@ export default function TerminalCodeBlock({ className, children }: TerminalCodeB
           <span className="terminal-dot terminal-dot-r" aria-hidden="true" />
           <span className="terminal-dot terminal-dot-y" aria-hidden="true" />
           <span className="terminal-dot terminal-dot-g" aria-hidden="true" />
-          {lang ? (
-            <span className="terminal-card-lang">{lang}</span>
-          ) : (
-            <span className="terminal-card-lang">
-              <FontAwesomeIcon icon={faTerminal} style={{ marginRight: '4px', opacity: 0.6 }} />
-              console
-            </span>
-          )}
+          <span className="terminal-card-lang">
+            {lang || (
+              <>
+                <FontAwesomeIcon icon={faTerminal} style={{ marginRight: '4px', opacity: 0.6 }} />
+                console
+              </>
+            )}
+          </span>
         </div>
         <button
           type="button"
           className="btn btn-ghost btn-sm terminal-copy-btn"
           onClick={handleCopy}
-          aria-label="Copy code to clipboard"
+          aria-label={copied ? 'Copied' : 'Copy code to clipboard'}
         >
           <FontAwesomeIcon icon={copied ? faCheck : faCopy} className="fa-ico" />
-          <span>{copied ? 'Copied!' : 'Copy'}</span>
+          <span aria-live="polite">{copied ? 'Copied!' : 'Copy'}</span>
         </button>
       </div>
       <pre className="terminal-card-pre">
-        <code className={className}>{codeString}</code>
+        <code className={className || undefined}>{codeString}</code>
       </pre>
     </div>
   );

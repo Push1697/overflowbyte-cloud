@@ -8,6 +8,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
 import Mermaid from '../../components/visuals/Mermaid';
 import { getNewsletter, getNewsletterSlugs } from '../../lib/newsletters';
+import { videosFor } from '../../lib/youtube';
+import VideoSection from '../../components/VideoSection';
 
 export function generateStaticParams() {
   return getNewsletterSlugs().map((slug) => ({ slug }));
@@ -77,7 +79,7 @@ export default async function NewsletterIssuePage({
         ) : null}
       </header>
 
-      {canonical && (
+      {canonical && URL.canParse(canonical) && (
         <div className="card card-pad card-quiet" style={{ marginTop: '2rem', padding: '1rem 1.25rem' }}>
           <p className="text-muted" style={{ fontSize: 'var(--step--1)' }}>
             Originally published on{' '}
@@ -93,6 +95,8 @@ export default async function NewsletterIssuePage({
           </p>
         </div>
       )}
+
+      <VideoSection videos={videosFor('newsletter', slug)} heading="New on the OverflowByte channel" />
 
       <div className="prose" style={{ marginTop: '3rem' }}>
         <Markdown
