@@ -9,38 +9,14 @@ date: "15 Nov 2026"
 
 # PHP2Shell and Node2Shell: The Runtime-Level RCE You Can't Code Around
 
-<div class="overflowbyte-threat-banner" style="position: relative; margin: 1.5rem 0; padding: 1.25rem 1.5rem; border-radius: 12px; background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(15, 23, 42, 0.6) 100%); border: 1px solid rgba(239, 68, 68, 0.35); box-shadow: 0 0 30px rgba(239, 68, 68, 0.15);">
-  <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem;">
-    <div style="display: flex; align-items: center; gap: 0.75rem;">
-      <span style="position: relative; display: flex; height: 12px; width: 12px;">
-        <span style="animation: ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite; position: absolute; display: inline-flex; height: 100%; width: 100%; border-radius: 9999px; background-color: #ef4444; opacity: 0.75;"></span>
-        <span style="position: relative; display: inline-flex; border-radius: 9999px; height: 12px; width: 12px; background-color: #dc2626;"></span>
-      </span>
-      <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 700; color: #fca5a5; letter-spacing: 0.08em; text-transform: uppercase;">
-        CRITICAL RUNTIME ZERO-DAY · CVSS 9.2 · EXPLOITED IN THE WILD
-      </span>
-    </div>
+
     <a href="/static/php2shell-node2shell.html" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.9rem; font-size: 0.82rem; font-weight: 600; color: #5ce1ff; background: rgba(92, 225, 255, 0.12); border: 1px solid rgba(92, 225, 255, 0.3); border-radius: 6px; text-decoration: none;">
       <span>Open Fullscreen Experience ↗</span>
     </a>
   </div>
 </div>
 
-<style>
-@keyframes ping {
-  75%, 100% {
-    transform: scale(2);
-    opacity: 0;
-  }
-}
-@keyframes pulseGlow {
-  0%, 100% { box-shadow: 0 0 20px rgba(99, 102, 241, 0.25); border-color: rgba(99, 102, 241, 0.4); }
-  50% { box-shadow: 0 0 35px rgba(92, 225, 255, 0.4); border-color: rgba(92, 225, 255, 0.6); }
-}
-.interactive-experience-wrapper {
-  animation: pulseGlow 4s ease-in-out infinite;
-}
-</style>
+
 
 <!-- Embedded Interactive Animated Blog Experience -->
 <div class="interactive-experience-wrapper" style="margin: 2rem 0; border-radius: 14px; overflow: hidden; background: #070b16; border: 1px solid rgba(99, 102, 241, 0.35); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);">

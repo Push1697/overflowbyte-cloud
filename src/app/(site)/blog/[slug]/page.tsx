@@ -11,12 +11,14 @@ import {
   faArrowRight,
   faUpRightFromSquare,
   faWandMagicSparkles,
+  faMicrochip,
 } from '@fortawesome/free-solid-svg-icons';
 import NewgrpPlayer from '../../components/visuals/NewgrpPlayer';
 import ModeBits from '../../components/visuals/ModeBits';
 import Cascade from '../../components/visuals/Cascade';
 import VisualBlock from '../../components/visuals/VisualBlock';
-import Mermaid from '../../components/visuals/Mermaid';
+import CalloutAlert from '../../components/visuals/CalloutAlert';
+import TerminalCodeBlock from '../../components/visuals/TerminalCodeBlock';
 import { DAC_ACTORS, DAC_STAGES } from '../../lib/permissions';
 import type { Visual } from '../../lib/visuals';
 import { POST_VISUALS as M365_POST_VISUALS } from '../../lib/visuals/m365-device-lock';
@@ -27,6 +29,9 @@ import { POST_VISUALS as ANSIBLE_VAULT_POST_VISUALS } from '../../lib/visuals/an
 import { POST_VISUALS as INCIDENT_DRILLS_POST_VISUALS } from '../../lib/visuals/incident-drills';
 import { POST_VISUALS as RUNTIME_RCE_POST_VISUALS } from '../../lib/visuals/runtime-rce-zero-day';
 import { POST_VISUALS as KVM_OVERLAY_POST_VISUALS } from '../../lib/visuals/kvm-overlay-lab';
+import { POST_VISUALS as RHCSA_RHCE_POST_VISUALS } from '../../lib/visuals/rhcsa-rhce-60-day';
+import { POST_VISUALS as ANSIBLE_MAP_POST_VISUALS } from '../../lib/visuals/rhcsa-to-ansible-map';
+import { POST_VISUALS as NO_SSH_POST_VISUALS } from '../../lib/visuals/no-ssh-automation';
 import { getPost, getPostSlugs } from '../../lib/posts';
 
 /** All post-scoped visuals, keyed by blog slug. */
@@ -39,6 +44,9 @@ const POST_VIZ: Record<string, Visual[]> = {
   ...INCIDENT_DRILLS_POST_VISUALS,
   ...RUNTIME_RCE_POST_VISUALS,
   ...KVM_OVERLAY_POST_VISUALS,
+  ...RHCSA_RHCE_POST_VISUALS,
+  ...ANSIBLE_MAP_POST_VISUALS,
+  ...NO_SSH_POST_VISUALS,
 };
 
 const FLAGSHIP_DECKS: Record<string, string> = {
@@ -75,7 +83,6 @@ export async function generateMetadata({
   return {
     title,
     description: subtitle,
-    // Posts live here now; only stories that began on Medium point elsewhere.
     alternates: { canonical: canonical ?? `/blog/${slug}` },
     openGraph: { title, description: subtitle, type: 'article' },
   };
@@ -89,22 +96,21 @@ export default async function BlogPostPage({
   const { slug } = await params;
   const post = getPost(slug);
 
-  // Previously every slug served article #1; unknown slugs now 404.
   if (!post) notFound();
 
   const { frontmatter, content } = post;
   const canonical = frontmatter.canonical_url;
   const hasLab = slug.startsWith('01-');
   const deckSlug = FLAGSHIP_DECKS[slug];
-  // Flagship number comes from the filename prefix (01-…, 11-…); synced
-  // archive posts have no prefix and are labelled by where they came from.
   const flagshipNum = /^\d{2}-/.test(slug) ? slug.slice(0, 2) : null;
   const origin = frontmatter.source === 'medium' ? 'From Medium' : 'From the archive';
-  // Data-driven diagrams attached to this post, if any.
   const visuals = POST_VIZ[slug] ?? [];
 
   return (
-    <article className="shell section" style={{ maxWidth: '920px' }}>
+    <article className="shell section blog-article-shell" style={{ maxWidth: '940px' }}>
+      {/* Ambient animated dot-grid & glow backdrop */}
+      <div className="blog-backdrop" aria-hidden="true" />
+
       <Link className="action-link" href="/blog" style={{ color: 'var(--text-muted)' }}>
         <FontAwesomeIcon icon={faArrowLeft} className="fa-ico" />
         Back to articles
@@ -118,7 +124,7 @@ export default async function BlogPostPage({
           {flagshipNum ? (
             <span className="badge badge-ok">
               <span className="live-dot" aria-hidden="true" />
-              Flagship #{flagshipNum}
+              Flagship #{flagshipNum} · Deep Dive
             </span>
           ) : (
             <span className="badge badge-neutral">{origin}</span>
@@ -126,10 +132,20 @@ export default async function BlogPostPage({
           {frontmatter.date && <span className="meta">{frontmatter.date}</span>}
         </div>
 
-        <h1 style={{ fontSize: 'var(--step-5)' }}>{frontmatter.title}</h1>
+        <h1 style={{ fontSize: 'clamp(2rem, 4.5vw, 3.2rem)', lineHeight: 1.15, fontWeight: 800 }}>
+          {frontmatter.title}
+        </h1>
 
         {frontmatter.subtitle && (
-          <p className="lede" style={{ marginTop: '1rem' }}>
+          <p
+            className="lede"
+            style={{
+              marginTop: '1.25rem',
+              color: '#94a3b8',
+              fontSize: '1.2rem',
+              lineHeight: 1.6,
+            }}
+          >
             {frontmatter.subtitle}
           </p>
         )}
@@ -162,33 +178,72 @@ export default async function BlogPostPage({
         </div>
       )}
 
+      {/* Interactive Architecture Lab & System Models */}
       {visuals.length > 0 && (
         <section
           className="section-tight"
-          style={{ marginTop: '2rem', display: 'grid', gap: '1.5rem' }}
+          style={{
+            marginTop: '2.5rem',
+            marginBottom: '1rem',
+            padding: '1.5rem',
+            background: 'linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(15, 23, 42, 0.6) 100%)',
+            border: '1px solid rgba(99, 102, 241, 0.2)',
+            borderRadius: '16px',
+            boxShadow: '0 8px 30px rgba(0, 0, 0, 0.3)',
+          }}
         >
-          {visuals.map((viz) => (
-            <VisualBlock key={viz.id} viz={viz} />
-          ))}
+          <div className="section-head" style={{ marginBottom: '1.25rem' }}>
+            <div>
+              <div className="cluster" style={{ marginBottom: '0.4rem' }}>
+                <span className="badge badge-accent">
+                  <FontAwesomeIcon icon={faMicrochip} style={{ marginRight: '5px' }} />
+                  Interactive Architecture Lab
+                </span>
+                <span className="badge badge-ok">{visuals.length} Visual Instruments</span>
+              </div>
+              <h2 style={{ fontSize: 'var(--step-2)', margin: 0, border: 'none', paddingTop: 0 }}>
+                Live System Models & Cascades
+              </h2>
+              <p className="text-muted" style={{ marginTop: '0.25rem', fontSize: '0.95rem' }}>
+                Interact with the state transitions, decision cascades, and architectural boundaries below.
+              </p>
+            </div>
+          </div>
+          <div style={{ display: 'grid', gap: '2rem' }}>
+            {visuals.map((viz) => (
+              <VisualBlock key={viz.id} viz={viz} />
+            ))}
+          </div>
         </section>
       )}
 
-      {/* The widgets render inline as real components. This used to be an
-          iframe onto a standalone HTML file, which loaded a second copy of the
-          page's chrome inside a box and was invisible to search engines. */}
+      {/* Flagship #01 Dedicated Kernel Instruments */}
       {hasLab && (
-        <section className="section-tight">
-          <div className="section-head" style={{ marginBottom: '1rem' }}>
+        <section
+          className="section-tight"
+          style={{
+            marginTop: '2rem',
+            padding: '1.5rem',
+            background: 'linear-gradient(135deg, rgba(34, 197, 94, 0.04) 0%, rgba(15, 23, 42, 0.6) 100%)',
+            border: '1px solid rgba(34, 197, 94, 0.2)',
+            borderRadius: '16px',
+          }}
+        >
+          <div className="section-head" style={{ marginBottom: '1.25rem' }}>
             <div>
-              <h2 style={{ fontSize: 'var(--step-2)' }}>Interactive companion</h2>
-              <p>
-                The three instruments this article argues from, running right here. No embed,
-                no second page.
+              <div className="cluster" style={{ marginBottom: '0.4rem' }}>
+                <span className="badge badge-ok">Linux Kernel Instruments</span>
+              </div>
+              <h2 style={{ fontSize: 'var(--step-2)', margin: 0, border: 'none', paddingTop: 0 }}>
+                Interactive Kernel Playground
+              </h2>
+              <p className="text-muted" style={{ marginTop: '0.25rem', fontSize: '0.95rem' }}>
+                Live instruments running right in this page: step the newgrp syscall sequence, toggle 16 i_mode bits, and evaluate the DAC cascade.
               </p>
             </div>
             <Link className="btn btn-secondary btn-sm" href={LAB_HREF}>
               <FontAwesomeIcon icon={faWandMagicSparkles} className="fa-ico" />
-              All eight sections
+              Full Lab (8 Sections)
             </Link>
           </div>
 
@@ -209,28 +264,22 @@ export default async function BlogPostPage({
         </section>
       )}
 
-      {/* Markdown is rendered to real HTML; it used to be dumped as
-          pre-wrap text, so readers saw literal ## and ** markers. */}
-      <div className="prose" style={{ marginTop: '3rem' }}>
+      {/* Main Technical Article Prose */}
+      <div className="prose" style={{ marginTop: '3.5rem' }}>
         <Markdown
           remarkPlugins={[remarkGfm]}
           rehypePlugins={[rehypeRaw]}
           components={{
-            // Wide tables scroll inside their own box instead of
-            // overflowing the page on a phone.
+            // High-contrast, clean-scrolling data tables
             table: ({ children, ...props }) => (
               <div className="table-scroll">
                 <table {...props}>{children}</table>
               </div>
             ),
-            // ```mermaid blocks render as real diagrams (client-side,
-            // theme-aware); anything else stays inline code.
-            code: ({ className, children }) => {
-              if (/language-mermaid/.test(className ?? '')) {
-                return <Mermaid chart={String(children).replace(/\n$/, '')} />;
-              }
-              return <code className={className}>{children}</code>;
-            },
+            // GitHub alert callout card parsing (> [!NOTE], [!TIP], [!IMPORTANT], [!WARNING], [!CAUTION])
+            blockquote: CalloutAlert,
+            // macOS/Linux Terminal window with copy button & JetBrains Mono syntax
+            code: TerminalCodeBlock,
             // The <h1> already renders in the page header above.
             h1: () => null,
           }}
@@ -239,14 +288,14 @@ export default async function BlogPostPage({
         </Markdown>
       </div>
 
-      <aside className="card card-pad card-quiet" style={{ marginTop: '3rem' }}>
+      <aside className="card card-pad card-quiet" style={{ marginTop: '4rem', padding: '1.75rem' }}>
         <div className="cluster" style={{ justifyContent: 'space-between' }}>
           <div>
             <h2 style={{ fontSize: 'var(--step-1)', marginBottom: '0.3rem' }}>
-              Want the hands-on lab commands?
+              Want the hands-on lab commands & flashcards?
             </h2>
             <p className="text-muted" style={{ fontSize: 'var(--step--1)' }}>
-              Reference notes, EX294 mocks and RHCSA drills live in the learning vault.
+              Interactive scenario cards, EX294 mock exams and production drills live in the learning garden.
             </p>
           </div>
           <div className="cluster">
