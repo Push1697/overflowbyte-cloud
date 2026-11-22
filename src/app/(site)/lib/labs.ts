@@ -1,6 +1,11 @@
 import { NEW_LABS as M365_DEVICE_LOCK_LABS } from './labs/m365-device-lock';
 import { NEW_LABS as RHEL10_STORAGE_SELINUX_LABS } from './labs/rhel10-storage-selinux';
 import { NEW_LABS as AWS_NACL_SG_LABS } from './labs/aws-nacl-security-groups';
+import { NEW_LABS as ANSIBLE_VAR_LABS } from './labs/ansible-variable-precedence';
+import { NEW_LABS as ANSIBLE_VAULT_LABS } from './labs/ansible-vault-two-ids';
+import { NEW_LABS as INCIDENT_DRILLS_LABS } from './labs/incident-drills';
+import { NEW_LABS as RUNTIME_RCE_LABS } from './labs/runtime-rce-zero-day';
+import { NEW_LABS as KVM_OVERLAY_LABS } from './labs/kvm-overlay-lab';
 
 export type Lab = {
   id: string;
@@ -117,6 +122,11 @@ sudo chmod 2775 /srv/devops`,
   ...M365_DEVICE_LOCK_LABS,
   ...RHEL10_STORAGE_SELINUX_LABS,
   ...AWS_NACL_SG_LABS,
+  ...ANSIBLE_VAR_LABS,
+  ...ANSIBLE_VAULT_LABS,
+  ...INCIDENT_DRILLS_LABS,
+  ...RUNTIME_RCE_LABS,
+  ...KVM_OVERLAY_LABS,
 ];
 
 export function getLab(id: string): Lab | null {

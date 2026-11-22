@@ -1,6 +1,11 @@
 import { DECK as M365_DEVICE_LOCK_DECK } from './decks/m365-device-lock';
 import { DECK as RHEL10_STORAGE_SELINUX_DECK } from './decks/rhel10-storage-selinux';
 import { DECK as AWS_NACL_SG_DECK } from './decks/aws-nacl-security-groups';
+import { DECK as ANSIBLE_VAR_DECK } from './decks/ansible-variable-precedence';
+import { DECK as ANSIBLE_VAULT_DECK } from './decks/ansible-vault-two-ids';
+import { DECK as INCIDENT_DRILLS_DECK } from './decks/incident-drills';
+import { DECK as RUNTIME_RCE_DECK } from './decks/runtime-rce-zero-day';
+import { DECK as KVM_OVERLAY_DECK } from './decks/kvm-overlay-lab';
 
 export type Card = {
   id: string;
@@ -110,6 +115,11 @@ export const DECKS: Deck[] = [
   M365_DEVICE_LOCK_DECK,
   RHEL10_STORAGE_SELINUX_DECK,
   AWS_NACL_SG_DECK,
+  ANSIBLE_VAR_DECK,
+  ANSIBLE_VAULT_DECK,
+  INCIDENT_DRILLS_DECK,
+  RUNTIME_RCE_DECK,
+  KVM_OVERLAY_DECK,
 ];
 
 export function getDeck(slug: string): Deck | null {

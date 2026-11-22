@@ -56,6 +56,7 @@ const FLAGSHIPS: Flagship[] = [
     series: 'Security & Exploitation',
     tags: ['security', 'rce', 'php', 'nodejs'],
     desc: 'PHP2Shell and Node2Shell attack flow: request-to-shell traversal, runtime boundaries, and where defensive controls actually belong.',
+    deckSlug: 'runtime-rce-zero-day',
   },
   {
     num: 3,
@@ -76,6 +77,7 @@ const FLAGSHIPS: Flagship[] = [
     series: 'Incident Drills',
     tags: ['linux', 'sre', 'troubleshooting', 'incidents'],
     desc: 'A production incident drill end to end: alert, decoy, root cause, fix timeline, and the undo-daemon trap.',
+    deckSlug: 'incident-drills',
   },
   {
     num: 5,
@@ -85,6 +87,7 @@ const FLAGSHIPS: Flagship[] = [
     series: 'Linux & Virtualization',
     tags: ['rhel', 'kvm', 'cloud-init', 'virtualization'],
     desc: 'Base image to thin qcow2 overlays to a snapshot tree, with instant cloud-init bootstrap on KVM.',
+    deckSlug: 'kvm-overlay-lab',
   },
   {
     num: 6,
@@ -94,6 +97,7 @@ const FLAGSHIPS: Flagship[] = [
     series: 'Red Hat Certification',
     tags: ['rhcsa', 'rhce', 'ansible', 'certification'],
     desc: 'A week-by-week roadmap and hands-on milestones for Linux administration and Ansible automation.',
+    deckSlug: 'rhel10-storage-selinux',
   },
   {
     num: 7,
@@ -103,6 +107,7 @@ const FLAGSHIPS: Flagship[] = [
     series: 'Ansible & RHCE',
     tags: ['ansible', 'rhcsa', 'automation', 'devops'],
     desc: 'The definitive matrix: manual command, Ansible module, collection, and idempotency verification.',
+    deckSlug: 'ansible-variable-precedence',
   },
   {
     num: 8,
@@ -112,6 +117,7 @@ const FLAGSHIPS: Flagship[] = [
     series: 'Ansible & RHCE',
     tags: ['ansible', 'rhce', 'ex294', 'automation'],
     desc: 'Automating complete RHCSA topologies without manual SSH, through a revert, run and verify loop.',
+    deckSlug: 'ansible-variable-precedence',
   },
   {
     num: 9,
@@ -121,6 +127,7 @@ const FLAGSHIPS: Flagship[] = [
     series: 'Ansible & RHCE',
     tags: ['ansible', 'yaml', 'architecture'],
     desc: 'The 22-level precedence ladder showing which variable wins, with a worked breakdown of surprising overrides.',
+    deckSlug: 'ansible-variable-precedence',
   },
   {
     num: 10,
@@ -130,6 +137,7 @@ const FLAGSHIPS: Flagship[] = [
     series: 'Ansible & RHCE',
     tags: ['ansible', 'security', 'vault', 'ci-cd'],
     desc: 'Mapping multiple vault IDs to files, with automated password scripts for unattended execution.',
+    deckSlug: 'ansible-vault-two-ids',
   },
   {
     num: 11,

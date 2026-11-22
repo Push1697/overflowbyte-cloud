@@ -22,6 +22,11 @@ import type { Visual } from '../../lib/visuals';
 import { POST_VISUALS as M365_POST_VISUALS } from '../../lib/visuals/m365-device-lock';
 import { POST_VISUALS as RHEL10_POST_VISUALS } from '../../lib/visuals/rhel10-storage-selinux';
 import { POST_VISUALS as AWS_NACL_POST_VISUALS } from '../../lib/visuals/aws-nacl-security-groups';
+import { POST_VISUALS as ANSIBLE_VAR_POST_VISUALS } from '../../lib/visuals/ansible-variable-precedence';
+import { POST_VISUALS as ANSIBLE_VAULT_POST_VISUALS } from '../../lib/visuals/ansible-vault-two-ids';
+import { POST_VISUALS as INCIDENT_DRILLS_POST_VISUALS } from '../../lib/visuals/incident-drills';
+import { POST_VISUALS as RUNTIME_RCE_POST_VISUALS } from '../../lib/visuals/runtime-rce-zero-day';
+import { POST_VISUALS as KVM_OVERLAY_POST_VISUALS } from '../../lib/visuals/kvm-overlay-lab';
 import { getPost, getPostSlugs } from '../../lib/posts';
 
 /** All post-scoped visuals, keyed by blog slug. */
@@ -29,6 +34,26 @@ const POST_VIZ: Record<string, Visual[]> = {
   ...M365_POST_VISUALS,
   ...RHEL10_POST_VISUALS,
   ...AWS_NACL_POST_VISUALS,
+  ...ANSIBLE_VAR_POST_VISUALS,
+  ...ANSIBLE_VAULT_POST_VISUALS,
+  ...INCIDENT_DRILLS_POST_VISUALS,
+  ...RUNTIME_RCE_POST_VISUALS,
+  ...KVM_OVERLAY_POST_VISUALS,
+};
+
+const FLAGSHIP_DECKS: Record<string, string> = {
+  '01-how-linux-decides-who-can-open-a-file': 'linux-permissions',
+  '02-your-code-is-clean-attackers-still-got-a-shell': 'runtime-rce-zero-day',
+  '03-port-443-is-open-in-security-group-why-timeout': 'aws-nacl-security-groups',
+  '04-i-broke-two-servers-on-purpose': 'incident-drills',
+  '05-rhel-lab-wreck-and-reset-in-seconds': 'kvm-overlay-lab',
+  '06-60-day-plan-rhcsa-to-rhce': 'rhel10-storage-selinux',
+  '07-every-rhcsa-task-translated-to-ansible': 'ansible-variable-precedence',
+  '08-the-no-ssh-rule-automating-exam-set': 'ansible-variable-precedence',
+  '09-ansible-variable-precedence-drawn': 'ansible-variable-precedence',
+  '10-ansible-vault-with-two-vault-ids': 'ansible-vault-two-ids',
+  '11-mobile-access-runbook-m365-phones': 'm365-device-lock',
+  '12-rhel10-storage-selinux-lab': 'rhel10-storage-selinux',
 };
 
 const LAB_HREF = '/visuals/linux-permissions';
@@ -70,6 +95,7 @@ export default async function BlogPostPage({
   const { frontmatter, content } = post;
   const canonical = frontmatter.canonical_url;
   const hasLab = slug.startsWith('01-');
+  const deckSlug = FLAGSHIP_DECKS[slug];
   // Flagship number comes from the filename prefix (01-…, 11-…); synced
   // archive posts have no prefix and are labelled by where they came from.
   const flagshipNum = /^\d{2}-/.test(slug) ? slug.slice(0, 2) : null;
@@ -224,12 +250,16 @@ export default async function BlogPostPage({
             </p>
           </div>
           <div className="cluster">
-            {hasLab && (
-              <Link className="btn btn-primary" href="/learn#linux-permissions">
+            {deckSlug && (
+              <Link className="btn btn-primary" href={`/learn#${deckSlug}`}>
                 <FontAwesomeIcon icon={faGraduationCap} className="fa-ico" />
-                Test yourself
+                Practice flashcards
               </Link>
             )}
+            <Link className="btn btn-secondary" href="/learn#labs">
+              Hands-on labs
+              <FontAwesomeIcon icon={faArrowRight} className="fa-ico" />
+            </Link>
             <Link className="btn btn-secondary" href="/notes">
               Learning notes
               <FontAwesomeIcon icon={faArrowRight} className="fa-ico" />
