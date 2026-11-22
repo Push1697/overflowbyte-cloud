@@ -181,7 +181,7 @@ export default async function BlogPostPage({
 
       {/* Interactive Architecture Lab & System Models */}
       {visuals.length > 0 && (
-        <section className="section-tight article-lab-panel">
+        <section id="lab" className="section-tight article-lab-panel" style={{ scrollMarginTop: 'calc(var(--header-h) + 1rem)' }}>
           <div className="section-head" style={{ marginBottom: '1.25rem' }}>
             <div>
               <div className="cluster" style={{ marginBottom: '0.4rem' }}>
