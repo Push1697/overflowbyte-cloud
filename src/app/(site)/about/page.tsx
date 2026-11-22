@@ -31,7 +31,7 @@ import { faGithub, faLinkedin } from '@fortawesome/free-brands-svg-icons';
    pushpendra.overflowbyte.tech; that subdomain now redirects here. */
 
 export const metadata: Metadata = {
-  title: 'Pushpendra Dev — Infrastructure System Engineer | OverflowByte',
+  title: 'Pushpendra Dev — System Administrator & Infrastructure Engineer | OverflowByte',
   description:
     'Portfolio of Pushpendra Dev: enterprise infrastructure, FortiGate SD-WAN, AWS, Kubernetes, Windows and Linux operations, monitoring and automation. Experience, projects, certifications and resume.',
   alternates: { canonical: '/about' },
@@ -69,9 +69,21 @@ const APPROACH = [
 
 const EXPERIENCE = [
   {
+    role: 'System Administrator',
+    company: 'Programmers.io',
+    period: 'Aug 2026 — Present',
+    location: 'Jaipur, Rajasthan',
+    points: [
+      'Administer enterprise Windows and Linux infrastructure, server environments, and IT operations',
+      'Manage access control, identity lifecycle, endpoint compliance, and system security posture',
+      'Proactively monitor infrastructure health, backup retention, and service availability',
+      'Handle L2/L3 system, virtualization, and cross-platform operational escalations',
+    ],
+  },
+  {
     role: 'Infrastructure System Engineer',
     company: 'The House of Shubhashish',
-    period: 'Apr 2026 — Present',
+    period: 'Apr 2026 — Aug 2026',
     location: 'Jaipur, Rajasthan',
     points: [
       'Contributed to end-to-end infrastructure implementation for a new 400+ seat office',
@@ -326,7 +338,7 @@ export default function AboutPage() {
             <h1 className="gradient-text" style={{ fontSize: 'var(--step-5)', margin: '0.75rem 0 0.25rem' }}>
               Pushpendra Dev
             </h1>
-            <p style={{ fontSize: 'var(--step-1)' }}>Infrastructure System Engineer</p>
+            <p style={{ fontSize: 'var(--step-1)' }}>System Administrator · Infrastructure Engineer</p>
           </div>
         </div>
 
