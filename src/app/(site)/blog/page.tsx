@@ -254,7 +254,7 @@ export default function BlogIndexPage() {
                   {post.deckSlug && (
                     <Link
                       className="btn btn-ghost btn-sm"
-                      href={`/learn#${post.deckSlug}`}
+                      href={`/learn/${post.deckSlug}`}
                     >
                       <FontAwesomeIcon icon={faGraduationCap} className="fa-ico" />
                       Test yourself

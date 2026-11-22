@@ -2,6 +2,7 @@ import type { MetadataRoute } from 'next';
 import { getPost, getPostSlugs, toTime } from './(site)/lib/posts';
 import { getNotes } from './(site)/lib/notes';
 import { getNewsletter, getNewsletterSlugs } from './(site)/lib/newsletters';
+import { DECKS } from './(site)/lib/questions';
 
 const SITE = 'https://www.overflowbyte.tech';
 
@@ -53,5 +54,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.5,
   }));
 
-  return [...pages, ...posts, ...newsletters, ...notes];
+  const decks = DECKS.map((d) => ({
+    url: `${SITE}/learn/${d.slug}`,
+    changeFrequency: 'monthly' as const,
+    priority: 0.5,
+  }));
+
+  return [...pages, ...posts, ...newsletters, ...notes, ...decks];
 }

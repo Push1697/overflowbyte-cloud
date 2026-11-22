@@ -34,6 +34,7 @@ import { POST_VISUALS as ANSIBLE_MAP_POST_VISUALS } from '../../lib/visuals/rhcs
 import { POST_VISUALS as NO_SSH_POST_VISUALS } from '../../lib/visuals/no-ssh-automation';
 import { getPost, getPostSlugs } from '../../lib/posts';
 import { videosFor } from '../../lib/youtube';
+import { DECK_FOR_POST } from '../../lib/learn-links';
 import VideoSection from '../../components/VideoSection';
 
 /** All post-scoped visuals, keyed by blog slug. */
@@ -49,21 +50,6 @@ const POST_VIZ: Record<string, Visual[]> = {
   ...RHCSA_RHCE_POST_VISUALS,
   ...ANSIBLE_MAP_POST_VISUALS,
   ...NO_SSH_POST_VISUALS,
-};
-
-const FLAGSHIP_DECKS: Record<string, string> = {
-  '01-how-linux-decides-who-can-open-a-file': 'linux-permissions',
-  '02-your-code-is-clean-attackers-still-got-a-shell': 'runtime-rce-zero-day',
-  '03-port-443-is-open-in-security-group-why-timeout': 'aws-nacl-security-groups',
-  '04-i-broke-two-servers-on-purpose': 'incident-drills',
-  '05-rhel-lab-wreck-and-reset-in-seconds': 'kvm-overlay-lab',
-  '06-60-day-plan-rhcsa-to-rhce': 'rhcsa-rhce-60-day',
-  '07-every-rhcsa-task-translated-to-ansible': 'rhcsa-to-ansible-map',
-  '08-the-no-ssh-rule-automating-exam-set': 'no-ssh-automation',
-  '09-ansible-variable-precedence-drawn': 'ansible-variable-precedence',
-  '10-ansible-vault-with-two-vault-ids': 'ansible-vault-two-ids',
-  '11-mobile-access-runbook-m365-phones': 'm365-device-lock',
-  '12-rhel10-storage-selinux-lab': 'rhel10-storage-selinux',
 };
 
 const LAB_HREF = '/visuals/linux-permissions';
@@ -103,7 +89,7 @@ export default async function BlogPostPage({
   const { frontmatter, content } = post;
   const canonical = frontmatter.canonical_url;
   const hasLab = slug.startsWith('01-');
-  const deckSlug = FLAGSHIP_DECKS[slug];
+  const deckSlug = DECK_FOR_POST[slug];
   const flagshipNum = /^\d{2}-/.test(slug) ? slug.slice(0, 2) : null;
   const origin = frontmatter.source === 'medium' ? 'From Medium' : 'From the archive';
   const visuals = POST_VIZ[slug] ?? [];
@@ -281,7 +267,7 @@ export default async function BlogPostPage({
           </div>
           <div className="cluster">
             {deckSlug && (
-              <Link className="btn btn-primary" href={`/learn#${deckSlug}`}>
+              <Link className="btn btn-primary" href={`/learn/${deckSlug}`}>
                 <FontAwesomeIcon icon={faGraduationCap} className="fa-ico" />
                 Practice flashcards
               </Link>
